@@ -33,7 +33,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>54744bca36134610b3000450</default_value>
+            <default_value>548ad108361346cc9d000214</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -43,7 +43,7 @@
         </parameter>
         <parameter>
             <name>page_size</name>
-            <default_value>3</default_value>
+            <default_value>20</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -58,7 +58,7 @@
         </parameter>
         <parameter>
             <name>token</name>
-            <default_value>Bearer entjq7c8n2tnu0cb4p760dgbt8xfoxd</default_value>
+            <default_value>Bearer b5wzpo339c3v1jeyddcdybtu06ihshv</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -196,7 +196,7 @@
       <successcondition>contains</successcondition>
       <successnumbercondition>equal</successnumbercondition>
       <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
+      <successwhenvarset>Y</successwhenvarset>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
