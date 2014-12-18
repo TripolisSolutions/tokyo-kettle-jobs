@@ -91,7 +91,7 @@
     <fields>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;total_files&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;s3&#x3a;&#x2f;&#x2f;s3&#x2f;tokyo-campaign-data&#x2f;tenantx&#x2f;contacts&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;_page_&#x5b;page_nr&#x5d;_of_2.gz&#x22;&#x7d;</variable>
+        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;s3&#x3a;&#x2f;&#x2f;s3&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.gz&#x22;&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -105,6 +105,18 @@
         <name>accept</name>
         <variable>application&#x2f;json</variable>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>token</name>
+        <variable>&#x24;&#x7b;token&#x7d;</variable>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -153,6 +165,10 @@
         <field>accept</field>
         <name>Accept</name>
         </header>
+      <header>
+        <field>token</field>
+        <name>Authorization</name>
+        </header>
       </headers>
     <parameters>
       </parameters>
@@ -164,7 +180,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>454</xloc>
-      <yloc>157</yloc>
+      <yloc>156</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
