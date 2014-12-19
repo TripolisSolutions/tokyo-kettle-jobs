@@ -127,7 +127,7 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>cd &#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#xa;&#x2f;home&#x2f;dev&#x2f;.rvm&#x2f;bin&#x2f;rvm ruby-1.9.3-p551&#x40;kettle do ruby  s3_download.rb &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;</script>
+      <script>cd &#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  s3_download.rb &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
