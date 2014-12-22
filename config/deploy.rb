@@ -3,6 +3,7 @@ lock '3.2.1'
 
 set :application, 'tokyo-kettle-jobs'
 set :repo_url, 'git@github.com:TripolisSolutions/tokyo-kettle-jobs.git'
+set :branch, 'trunk'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
