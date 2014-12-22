@@ -33,7 +33,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>548ad108361346cc9d000214</default_value>
+            <default_value/>
             <description/>
         </parameter>
         <parameter>
@@ -58,7 +58,7 @@
         </parameter>
         <parameter>
             <name>token</name>
-            <default_value>Bearer b5wzpo339c3v1jeyddcdybtu06ihshv</default_value>
+            <default_value/>
             <description/>
         </parameter>
     </parameters>
@@ -178,8 +178,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>353</xloc>
-      <yloc>238</yloc>
+      <xloc>373</xloc>
+      <yloc>200</yloc>
       </entry>
     <entry>
       <name>query present&#x3f;</name>
@@ -291,17 +291,17 @@
       <yloc>419</yloc>
       </entry>
     <entry>
-      <name>Success</name>
+      <name>All done.</name>
       <description/>
       <type>SUCCESS</type>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>842</xloc>
-      <yloc>116</yloc>
+      <xloc>923</xloc>
+      <yloc>117</yloc>
       </entry>
     <entry>
-      <name>Delete file</name>
+      <name>Delete local tempfile</name>
       <description/>
       <type>DELETE_FILE</type>
       <filename>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</filename>
@@ -309,8 +309,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>718</xloc>
-      <yloc>115</yloc>
+      <xloc>764</xloc>
+      <yloc>117</yloc>
       </entry>
   </entries>
   <hops>
@@ -388,7 +388,7 @@
     </hop>
     <hop>
       <from>call_success_endpoint</from>
-      <to>Delete file</to>
+      <to>Delete local tempfile</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -396,8 +396,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Delete file</from>
-      <to>Success</to>
+      <from>Delete local tempfile</from>
+      <to>All done.</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

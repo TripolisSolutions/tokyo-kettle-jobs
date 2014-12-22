@@ -74,11 +74,10 @@
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Json Input, extract page of contacts from response</from><to>S3 File Output</to><enabled>N</enabled> </hop>
-  <hop> <from>Read from Elasticsearch</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Json Input, extract page of contacts from response</to><enabled>Y</enabled> </hop>
-  <hop> <from>Json Input, extract page of contacts from response</from><to>Text file output</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Read from Elasticsearch</to><enabled>Y</enabled> </hop>
+  <hop> <from>Json Input, extract page of contacts from response</from><to>Write to log</to><enabled>N</enabled> </hop>
+  <hop> <from>Read from Elasticsearch</from><to>Json Input, extract page of contacts from response</to><enabled>Y</enabled> </hop>
+  <hop> <from>Json Input, extract page of contacts from response</from><to>Text file output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -143,7 +142,7 @@
       <field>
         <name>pages</name>
         <variable>&#x24;&#x7b;pages&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -190,9 +189,9 @@
     </file>
     <fields>
       <field>
-        <name>contacts_page</name>
-        <path>hits.hits</path>
-        <type>None</type>
+        <name>first_name</name>
+        <path>&#x24;..first_name</path>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -203,9 +202,9 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>contacts_in_page</name>
-        <path>hits.total</path>
-        <type>None</type>
+        <name>last_name</name>
+        <path>&#x24;..last_name</path>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -230,7 +229,7 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>342</xloc>
+      <xloc>343</xloc>
       <yloc>341</yloc>
       <draw>Y</draw>
       </GUI>
@@ -280,72 +279,6 @@
     </step>
 
   <step>
-    <name>S3 File Output</name>
-    <type>S3FileOutputPlugin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>Unix</format>
-    <compression>None</compression>
-    <encoding>UTF-8</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>contacts_page</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-      <access_key>Encrypted 414b4943f7d2ea875c91c6b49d29f85bffb0faeb</access_key>
-      <secret_key>Encrypted 48676e397047323165345a42427a6b45706977366b435560d7e8c589339ec5a289499c52f6beba8d</secret_key>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>676</xloc>
-      <yloc>262</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Text file output</name>
     <type>TextFileOutput</type>
     <description/>
@@ -364,7 +297,7 @@
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -382,14 +315,26 @@
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
+      <add_to_result_filenames>N</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
       <splitevery>0</splitevery>
     </file>
     <fields>
       <field>
-        <name>contacts_page</name>
+        <name>first_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>last_name</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -403,8 +348,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>699</xloc>
-      <yloc>503</yloc>
+      <xloc>721</xloc>
+      <yloc>341</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -429,8 +374,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>343</xloc>
-      <yloc>237</yloc>
+      <xloc>447</xloc>
+      <yloc>468</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
