@@ -22,3 +22,7 @@ import_contacts configuration
 3. Environment variables
   - export KETTLE_HOME=[/path/to/data-integration/folder]
   - export KETTLE_KITCHEN_CMD=\$KETTLE_HOME/kitchen.sh
+4. Add/update ~/.aws/credentials file
+[default]
+aws_access_key_id = AKIAJ3F6LWQFPMT4B3IQ
+aws_secret_access_key = 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
