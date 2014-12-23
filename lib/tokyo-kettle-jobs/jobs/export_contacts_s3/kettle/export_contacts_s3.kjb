@@ -33,7 +33,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value/>
+            <default_value>549953cf125cc31dc2000214</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -58,7 +58,7 @@
         </parameter>
         <parameter>
             <name>token</name>
-            <default_value/>
+            <default_value>Bearer nwymixk97o4sgie9xenwwid87uuplyn</default_value>
             <description/>
         </parameter>
     </parameters>

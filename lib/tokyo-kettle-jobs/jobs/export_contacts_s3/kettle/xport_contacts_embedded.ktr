@@ -75,9 +75,9 @@
   </notepads>
   <order>
   <hop> <from>Get Variables</from><to>Read from Elasticsearch</to><enabled>Y</enabled> </hop>
-  <hop> <from>Json Input, extract page of contacts from response</from><to>Write to log</to><enabled>N</enabled> </hop>
-  <hop> <from>Read from Elasticsearch</from><to>Json Input, extract page of contacts from response</to><enabled>Y</enabled> </hop>
   <hop> <from>Json Input, extract page of contacts from response</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Read from Elasticsearch</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>Json Input, extract page of contacts from response</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -129,7 +129,7 @@
       </field>
       <field>
         <name>group_definition</name>
-        <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x22;_source&#x22;&#x3a; &#x7b; &#x22;include&#x22;&#x3a; &#x5b; &#x22;gender&#x22;,&#x22;first_name&#x22;, &#x22;last_name&#x22;,&#x22;channels.channel_id&#x22; &#x5d; &#x7d;&#x7d;</variable>
+        <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x22;_source&#x22;&#x3a; &#x7b; &#x22;include&#x22;&#x3a; &#x5b; &#x22;_id&#x22;,&#x22;channels&#x22; &#x5d; &#x7d;&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -189,8 +189,8 @@
     </file>
     <fields>
       <field>
-        <name>first_name</name>
-        <path>&#x24;..first_name</path>
+        <name>id</name>
+        <path>&#x24;..hits.&#x2a;._source._id</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -199,11 +199,11 @@
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
+        <repeat>Y</repeat>
       </field>
       <field>
-        <name>last_name</name>
-        <path>&#x24;..last_name</path>
+        <name>primary_channel</name>
+        <path>&#x24;..hits.&#x2a;._source.channels&#x5b;0&#x5d;.value</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -212,7 +212,7 @@
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
+        <repeat>Y</repeat>
       </field>
     </fields>
     <limit>0</limit>
@@ -229,7 +229,7 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>343</xloc>
+      <xloc>344</xloc>
       <yloc>341</yloc>
       <draw>Y</draw>
       </GUI>
@@ -322,7 +322,7 @@
     </file>
     <fields>
       <field>
-        <name>first_name</name>
+        <name>id</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -334,7 +334,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>last_name</name>
+        <name>primary_channel</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -374,8 +374,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>447</xloc>
-      <yloc>468</yloc>
+      <xloc>261</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
