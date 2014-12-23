@@ -33,7 +33,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>54744bca36134610b3000450</default_value>
+            <default_value/>
             <description/>
         </parameter>
         <parameter>
@@ -43,7 +43,7 @@
         </parameter>
         <parameter>
             <name>page_size</name>
-            <default_value>3</default_value>
+            <default_value>10</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -58,7 +58,7 @@
         </parameter>
         <parameter>
             <name>token</name>
-            <default_value>Bearer entjq7c8n2tnu0cb4p760dgbt8xfoxd</default_value>
+            <default_value/>
             <description/>
         </parameter>
     </parameters>
@@ -178,8 +178,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>353</xloc>
-      <yloc>238</yloc>
+      <xloc>373</xloc>
+      <yloc>200</yloc>
       </entry>
     <entry>
       <name>query present&#x3f;</name>
@@ -196,7 +196,7 @@
       <successcondition>contains</successcondition>
       <successnumbercondition>equal</successnumbercondition>
       <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
+      <successwhenvarset>Y</successwhenvarset>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -291,14 +291,26 @@
       <yloc>419</yloc>
       </entry>
     <entry>
-      <name>Success</name>
+      <name>All done.</name>
       <description/>
       <type>SUCCESS</type>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>842</xloc>
-      <yloc>116</yloc>
+      <xloc>923</xloc>
+      <yloc>117</yloc>
+      </entry>
+    <entry>
+      <name>Delete local tempfile</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <filename>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>764</xloc>
+      <yloc>117</yloc>
       </entry>
   </entries>
   <hops>
@@ -366,15 +378,6 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>call_success_endpoint</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Export page</from>
       <to>call_success_endpoint</to>
       <from_nr>0</from_nr>
@@ -382,6 +385,24 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>call_success_endpoint</from>
+      <to>Delete local tempfile</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local tempfile</from>
+      <to>All done.</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
