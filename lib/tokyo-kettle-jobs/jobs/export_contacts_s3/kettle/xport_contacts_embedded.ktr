@@ -129,7 +129,7 @@
       </field>
       <field>
         <name>group_definition</name>
-        <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x22;_source&#x22;&#x3a; &#x7b; &#x22;include&#x22;&#x3a; &#x5b; &#x22;_id&#x22;,&#x22;channels&#x22; &#x5d; &#x7d;&#x7d;</variable>
+        <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x24;&#x7b;filter&#x7d;,&#x22;_source&#x22;&#x3a; &#x7b; &#x22;include&#x22;&#x3a; &#x5b; &#x22;_id&#x22;,&#x22;channels&#x22; &#x5d; &#x7d;&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -154,7 +154,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>75</xloc>
+      <xloc>74</xloc>
       <yloc>126</yloc>
       <draw>Y</draw>
       </GUI>
@@ -199,7 +199,7 @@
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>Y</repeat>
+        <repeat>N</repeat>
       </field>
       <field>
         <name>primary_channel</name>
@@ -212,7 +212,7 @@
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>Y</repeat>
+        <repeat>N</repeat>
       </field>
     </fields>
     <limit>0</limit>
@@ -230,7 +230,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>344</xloc>
-      <yloc>341</yloc>
+      <yloc>342</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

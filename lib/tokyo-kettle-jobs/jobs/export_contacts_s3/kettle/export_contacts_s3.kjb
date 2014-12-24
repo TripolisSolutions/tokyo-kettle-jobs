@@ -32,6 +32,11 @@
             <description/>
         </parameter>
         <parameter>
+            <name>filter</name>
+            <default_value>&#x22;filter&#x22; &#x3a; &#x7b; &#x22;bool&#x22; &#x3a; &#x7b; &#x22;must&#x22; &#x3a; &#x5b; &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d; &#x5d; &#x7d; &#x7d;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>group_id</name>
             <default_value>549953cf125cc31dc2000214</default_value>
             <description/>
