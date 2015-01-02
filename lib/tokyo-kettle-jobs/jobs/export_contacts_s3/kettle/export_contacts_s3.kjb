@@ -22,6 +22,26 @@
             <description/>
         </parameter>
         <parameter>
+            <name>cf_1</name>
+            <default_value>first_name</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>cf_2</name>
+            <default_value>last_name</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>cf_3</name>
+            <default_value/>
+            <description>these are set to the value of cf_1 and later on set to null</description>
+        </parameter>
+        <parameter>
+            <name>cf_4</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
             <name>contact_api_url</name>
             <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4002</default_value>
             <description/>
@@ -32,13 +52,13 @@
             <description/>
         </parameter>
         <parameter>
-            <name>filter</name>
-            <default_value>&#x22;filter&#x22; &#x3a; &#x7b; &#x22;bool&#x22; &#x3a; &#x7b; &#x22;must&#x22; &#x3a; &#x5b; &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d; &#x5d; &#x7d; &#x7d;</default_value>
+            <name>filters</name>
+            <default_value>&#x22;filter&#x22;&#x3a;&#x7b;&#x22;and&#x22;&#x3a; &#x5b;&#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_1&#x7d;&#x22; &#x7d; &#x7d;,&#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_2&#x7d;&#x22; &#x7d; &#x7d;, &#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_3&#x7d;&#x22; &#x7d; &#x7d;,&#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_4&#x7d;&#x22; &#x7d; &#x7d;,&#x7b; &#x22;bool&#x22; &#x3a; &#x7b; &#x22;must&#x22; &#x3a; &#x5b; &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.is_active&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d;&#x7d; &#x5d; &#x7d;&#x7d;&#x5d;&#x7d;</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>549953cf125cc31dc2000214</default_value>
+            <default_value>54a405a0361346d25f000211</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -63,7 +83,7 @@
         </parameter>
         <parameter>
             <name>token</name>
-            <default_value>Bearer nwymixk97o4sgie9xenwwid87uuplyn</default_value>
+            <default_value>Bearer cxr6egtrg2vby2g7epmmwyeh33h9j53</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -179,7 +199,7 @@
       <name>Abort job</name>
       <description/>
       <type>ABORT</type>
-      <message>Failed</message>
+      <message>Failed, no group query found or empty group.</message>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -205,7 +225,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>183</xloc>
+      <xloc>184</xloc>
       <yloc>200</yloc>
       </entry>
     <entry>
@@ -396,9 +416,9 @@
       <to>Delete local tempfile</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Delete local tempfile</from>
