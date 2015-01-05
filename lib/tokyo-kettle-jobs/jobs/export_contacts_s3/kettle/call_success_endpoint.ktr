@@ -93,7 +93,7 @@
     <fields>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;https&#x3a;&#x2f;&#x2f;s3-ap-southeast-1.amazonaws.com&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.gz&#x22;&#x7d;</variable>
+        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;https&#x3a;&#x2f;&#x2f;s3-ap-southeast-1.amazonaws.com&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;campaign_&#x24;&#x7b;campaign_id&#x7d;&#x2f;group_&#x24;&#x7b;group_id&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.gz&#x22;&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -155,7 +155,7 @@
     <rownum_field/>
     <encoding>UTF-8</encoding>
     <file>
-      <name>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</name>
+      <name>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -257,7 +257,7 @@
            <schema_name/>
            </partitioning>
     <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <enclosure/>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>N</header>
@@ -270,7 +270,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;</name>
+      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;campaign_&#x24;&#x7b;campaign_id&#x7d;&#x2f;group_node_&#x24;&#x7b;node_id&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>

@@ -447,7 +447,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;</name>
+      <name>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
