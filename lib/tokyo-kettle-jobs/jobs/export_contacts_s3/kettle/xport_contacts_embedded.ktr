@@ -74,12 +74,13 @@
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Write to log</from><to>Json Input, extract page of contacts from response</to><enabled>Y</enabled> </hop>
-  <hop> <from>Read from Elasticsearch</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Json Input, extract page of contacts from response</from><to>Set contact fields to 0 when they were not set ie default</to><enabled>Y</enabled> </hop>
   <hop> <from>Set contact fields to 0 when they were not set ie default</from><to>Null if 0, previous function can&#x27;t return null</to><enabled>Y</enabled> </hop>
   <hop> <from>Null if 0, previous function can&#x27;t return null</from><to>Text file output</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Read from Elasticsearch</to><enabled>Y</enabled> </hop>
+  <hop> <from>Read from Elasticsearch</from><to>Switch &#x2f; Case</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch &#x2f; Case</from><to>Json Input, extract page of contacts from response</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch &#x2f; Case</from><to>Abort</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -156,7 +157,7 @@
       <field>
         <name>group_definition</name>
         <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x24;&#x7b;filters&#x7d;,  &#x22;_source&#x22;&#x3a; &#x7b; &#x22;include&#x22;&#x3a; &#x5b; &#x22;_id&#x22;,&#x22;channels&#x22;,&#x22;&#x24;&#x7b;cf_1&#x7d;&#x22;,&#x22;&#x24;&#x7b;cf_2&#x7d;&#x22;,&#x22;&#x24;&#x7b;cf_3&#x7d;&#x22;,&#x22;&#x24;&#x7b;cf_4&#x7d;&#x22; &#x5d; &#x7d;&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -232,7 +233,7 @@
         <name>cf_2</name>
         <path>&#x24;..hits.&#x2a;._source.&#x24;&#x7b;cf_2&#x7d;</path>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency/>
         <decimal/>
         <group/>
@@ -245,7 +246,7 @@
         <name>cf_3</name>
         <path>&#x24;..hits.&#x2a;._source.&#x24;&#x7b;cf_3&#x7d;</path>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency/>
         <decimal/>
         <group/>
@@ -258,7 +259,7 @@
         <name>cf_4</name>
         <path>&#x24;..hits.&#x2a;._source.&#x24;&#x7b;cf_4&#x7d;</path>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency/>
         <decimal/>
         <group/>
@@ -546,27 +547,51 @@
     </step>
 
   <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
+    <name>Abort</name>
+    <type>Abort</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>Export contacts</logmessage>
-    <fields>
-      </fields>
+      <row_threshold>0</row_threshold>
+      <message>Elasticsearch returned an error code</message>
+      <always_log_rows>Y</always_log_rows>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>479</xloc>
-      <yloc>453</yloc>
+      <xloc>327</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Switch &#x2f; Case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>code</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>Abort</default_target_step>
+<cases><case><value>200</value>
+<target_step>Json Input, extract page of contacts from response</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>332</xloc>
+      <yloc>296</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

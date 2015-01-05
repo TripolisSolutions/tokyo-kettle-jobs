@@ -137,6 +137,64 @@
     </step>
 
   <step>
+    <name>Load file content in memory</name>
+    <type>LoadFileInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <include>N</include>
+    <include_field/>
+    <rownum>N</rownum>
+    <addresultfile>N</addresultfile>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
+    <rownum_field/>
+    <encoding>UTF-8</encoding>
+    <file>
+      <name>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      </file>
+    <fields>
+      <field>
+        <name>read_file</name>
+        <element_type>content</element_type>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        </field>
+      </fields>
+    <limit>0</limit>
+    <IsInFields>N</IsInFields>
+    <DynamicFilenameField/>
+    <shortFileFieldName/>
+    <pathFieldName/>
+    <hiddenFieldName/>
+    <lastModificationTimeFieldName/>
+    <uriNameFieldName/>
+    <rootUriNameFieldName/>
+    <extensionFieldName/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>103</xloc>
+      <yloc>109</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>REST Client campaign-api</name>
     <type>Rest</type>
     <description/>
@@ -216,11 +274,11 @@
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
+      <extention/>
       <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
-      <add_date>N</add_date>
+      <add_date>Y</add_date>
       <add_time>N</add_time>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
@@ -247,8 +305,8 @@
       <secret_key>Encrypted 48676e397047323165345a42427a6b45706977366b435560d7e8c589339ec5a289499c52f6beba8d</secret_key>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>397</xloc>
-      <yloc>156</yloc>
+      <xloc>414</xloc>
+      <yloc>86</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -275,64 +333,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>838</xloc>
       <yloc>287</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Load file content in memory</name>
-    <type>LoadFileInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <include>N</include>
-    <include_field/>
-    <rownum>N</rownum>
-    <addresultfile>N</addresultfile>
-    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
-    <rownum_field/>
-    <encoding>UTF-8</encoding>
-    <file>
-      <name>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-      </file>
-    <fields>
-      <field>
-        <name>read_file</name>
-        <element_type>content</element_type>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        </field>
-      </fields>
-    <limit>0</limit>
-    <IsInFields>N</IsInFields>
-    <DynamicFilenameField/>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>103</xloc>
-      <yloc>109</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

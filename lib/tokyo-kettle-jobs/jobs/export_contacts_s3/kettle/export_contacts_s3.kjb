@@ -28,7 +28,7 @@
         </parameter>
         <parameter>
             <name>cf_2</name>
-            <default_value>last_name</default_value>
+            <default_value/>
             <description/>
         </parameter>
         <parameter>
