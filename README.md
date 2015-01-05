@@ -21,6 +21,8 @@ There are some limitations in the way we can work with contact fields in our Ket
 3. We can't have a totally variable nr of possible fields. So i've set the maximum to 4 now but this can be extended ofcourse. I could not find a good solution to make this fully flexible because kettle needs you to specify fields in a hard manner at many places (ES queries and in Kettle Steps) and doesn't work with fields in an array.
 4. If you pass in less then 4 fieldnames, the last colums in the export will be empty (;;) they can't be completely left out. To emtpy them already required quite a few extra steps.
 5. The passed fields must be present for each contact, because ES doesn't return empty fields this would result in uneven rows and it would not be possible to convert the json to a CSV row using JSONPath. So a query is added to verify that the fields exist, but that means contacts with no data for those fields will be left out.
+6. In the ES query we skip contacts that have hard bounces or channels with a bounce count higher then the threshold. These values must also be present with the contacts.
+
 
 I tried to work around these problems, ofcourse we want to be able to pass in a variable nr of fieldsm (1 or 100 shouldn't make a difference), get a clean export without empty columns and have empty values not result in contacts being skipped. But I coulnd't find a way. It's mostly ES limitations in combination with JSONpath limitations we use to translate the json into csv rows. Perhaps the solution lies in skipping ES altogether and have Kettle talk to MongoDb directly.
 
