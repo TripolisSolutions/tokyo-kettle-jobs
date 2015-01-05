@@ -204,7 +204,7 @@
     <fields>
       <field>
         <name>primary_email</name>
-        <path>&#x24;..hits.&#x2a;._source.channels&#x5b;0&#x5d;.value</path>
+        <path>&#x24;..hits.&#x2a;._source.channels&#x5b;&#x3f;&#x28;&#x40;._type&#x3d;&#x3d;&#x27;Contacts&#x3a;&#x3a;EmailAddress&#x27; &#x26;&#x26; &#x40;.is_active&#x3d;&#x3d;true &#x26;&#x26; &#x40;.primary&#x3d;&#x3d;true &#x26;&#x26; &#x40;.hard_bounced&#x3d;&#x3d;false&#x29;&#x5d;.value</path>
         <type>String</type>
         <format/>
         <currency/>
