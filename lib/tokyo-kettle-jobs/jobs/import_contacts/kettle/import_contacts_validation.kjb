@@ -141,7 +141,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#x2f;kettle&#x2f;Post_validate_results.ktr</filename>
+      <filename>&#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;kettle&#x2f;Post_validate_results.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
