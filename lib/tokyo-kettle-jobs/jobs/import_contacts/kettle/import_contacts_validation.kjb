@@ -66,8 +66,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>118</xloc>
-      <yloc>125</yloc>
+      <xloc>226</xloc>
+      <yloc>242</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -76,8 +76,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>933</xloc>
-      <yloc>129</yloc>
+      <xloc>849</xloc>
+      <yloc>221</yloc>
       </entry>
     <entry>
       <name>Excecute dynamic task</name>
@@ -132,8 +132,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>236</xloc>
-      <yloc>18</yloc>
+      <xloc>226</xloc>
+      <yloc>52</yloc>
       </entry>
     <entry>
       <name>Post validate resutl</name>
