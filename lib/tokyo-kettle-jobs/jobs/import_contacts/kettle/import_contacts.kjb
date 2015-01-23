@@ -109,8 +109,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>547</xloc>
-      <yloc>52</yloc>
+      <xloc>549</xloc>
+      <yloc>54</yloc>
       </entry>
     <entry>
       <name>Copy dynamic transform</name>
@@ -133,7 +133,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>388</xloc>
-      <yloc>52</yloc>
+      <yloc>51</yloc>
       </entry>
   </entries>
   <hops>
