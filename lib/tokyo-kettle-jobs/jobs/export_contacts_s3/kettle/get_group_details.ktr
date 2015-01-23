@@ -98,9 +98,7 @@
   <hop> <from>Contact-api get group details</from><to>Read group response</to><enabled>Y</enabled> </hop>
   <hop> <from>Read group response</from><to>Calc nr of pages</to><enabled>Y</enabled> </hop>
   <hop> <from>Calc nr of pages</from><to>Extract group query</to><enabled>Y</enabled> </hop>
-  <hop> <from>Extract group query</from><to>Set empty cf values to cf_1 value</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set empty cf values to cf_1 value</from><to>Set Variables</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set empty cf values to cf_1 value</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Extract group query</from><to>Set Variables</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Calc nr of pages</name>
@@ -190,7 +188,7 @@
     <name>Extract group query</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -287,54 +285,6 @@
       <field>
         <name>page_size</name>
         <variable>&#x24;&#x7b;page_size&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>cf_1</name>
-        <variable>&#x24;&#x7b;cf_1&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>cf_2</name>
-        <variable>&#x24;&#x7b;cf_2&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>cf_3</name>
-        <variable>&#x24;&#x7b;cf_3&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>cf_4</name>
-        <variable>&#x24;&#x7b;cf_4&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -458,96 +408,12 @@
         <variable_type>PARENT_JOB</variable_type>
         <default_value>0</default_value>
         </field>
-      <field>
-        <field_name>cf_2</field_name>
-        <variable_name>cf_2</variable_name>
-        <variable_type>PARENT_JOB</variable_type>
-        <default_value/>
-        </field>
-      <field>
-        <field_name>cf_3</field_name>
-        <variable_name>cf_3</variable_name>
-        <variable_type>PARENT_JOB</variable_type>
-        <default_value/>
-        </field>
-      <field>
-        <field_name>cf_4</field_name>
-        <variable_name>cf_4</variable_name>
-        <variable_type>PARENT_JOB</variable_type>
-        <default_value/>
-        </field>
       </fields>
     <use_formatting>N</use_formatting>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>850</xloc>
       <yloc>313</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>group details&#x3a;</logmessage>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>748</xloc>
-      <yloc>118</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set empty cf values to cf_1 value</name>
-    <type>Formula</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>cf_2</field_name>
-<formula_string>IF&#x28;&#x5b;cf_2&#x5d;&#x3d;&#x22;&#x22;&#x3b;&#x5b;cf_1&#x5d;&#x3b;&#x5b;cf_2&#x5d;&#x29;</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field>cf_2</replace_field>
-</formula>
-       <formula><field_name>cf_3</field_name>
-<formula_string>IF&#x28;&#x5b;cf_3&#x5d;&#x3d;&#x22;&#x22;&#x3b;&#x5b;cf_1&#x5d;&#x3b;&#x5b;cf_3&#x5d;&#x29;</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field>cf_3</replace_field>
-</formula>
-       <formula><field_name>cf_4</field_name>
-<formula_string>IF&#x28;&#x5b;cf_4&#x5d;&#x3d;&#x22;&#x22;&#x3b;&#x5b;cf_1&#x5d;&#x3b;&#x5b;cf_4&#x5d;&#x29;</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field>cf_4</replace_field>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>723</xloc>
-      <yloc>226</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
