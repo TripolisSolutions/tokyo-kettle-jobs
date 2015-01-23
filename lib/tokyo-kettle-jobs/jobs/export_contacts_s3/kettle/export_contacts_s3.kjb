@@ -22,26 +22,6 @@
             <description/>
         </parameter>
         <parameter>
-            <name>cf_1</name>
-            <default_value>first_name</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>cf_2</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>cf_3</name>
-            <default_value/>
-            <description>these are set to the value of cf_1 and later on set to null</description>
-        </parameter>
-        <parameter>
-            <name>cf_4</name>
-            <default_value/>
-            <description/>
-        </parameter>
-        <parameter>
             <name>contact_api_url</name>
             <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4002</default_value>
             <description/>
@@ -53,12 +33,12 @@
         </parameter>
         <parameter>
             <name>filters</name>
-            <default_value>&#x22;filter&#x22;&#x3a;&#x7b;&#x22;and&#x22;&#x3a; &#x5b;&#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_1&#x7d;&#x22; &#x7d; &#x7d;,&#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_2&#x7d;&#x22; &#x7d; &#x7d;, &#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_3&#x7d;&#x22; &#x7d; &#x7d;,&#x7b;&#x22;exists&#x22; &#x3a; &#x7b; &#x22;field&#x22; &#x3a; &#x22;&#x24;&#x7b;cf_4&#x7d;&#x22; &#x7d; &#x7d;,&#x7b; &#x22;bool&#x22; &#x3a; &#x7b; &#x22;must&#x22; &#x3a; &#x5b; &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.is_active&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d;&#x7d; &#x5d; &#x7d;&#x7d;&#x5d;&#x7d;</default_value>
+            <default_value>&#x22;filter&#x22; &#x3a; &#x7b; &#x22;bool&#x22; &#x3a; &#x7b; &#x22;must&#x22; &#x3a; &#x5b; &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;, &#x7b; &#x22;range&#x22; &#x3a; &#x7b;&#x22;channels.soft_bounced_count&#x22; &#x3a; &#x7b;&#x22;lte&#x22;&#x3a; &#x22;5&#x22; &#x7d; &#x7d; &#x7d; &#x5d; &#x7d; &#x7d;</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>54aa67fe361346f42e000214</default_value>
+            <default_value>549ac3a3125cc32ada000211</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -79,11 +59,6 @@
         <parameter>
             <name>tenant_uuid</name>
             <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>token</name>
-            <default_value>Bearer cxr6egtrg2vby2g7epmmwyeh33h9j53</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -312,7 +287,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>597</xloc>
+      <xloc>594</xloc>
       <yloc>419</yloc>
       </entry>
     <entry>
