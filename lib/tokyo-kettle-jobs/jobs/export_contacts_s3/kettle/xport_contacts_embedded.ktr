@@ -177,7 +177,7 @@
            <schema_name/>
            </partitioning>
     <applicationType>JSON</applicationType>
-    <method>GET</method>
+    <method>POST</method>
     <url>&#x24;&#x7b;contact_api_url&#x7d;&#x2f;private&#x2f;get_transformation_file</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
@@ -194,6 +194,10 @@
     <headers>
       </headers>
     <parameters>
+      <parameter>
+        <field>merge_fields</field>
+        <name>merge_fields</name>
+        </parameter>
       </parameters>
     <result>
       <name>response</name>
@@ -269,38 +273,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
       <yloc>424</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Replace in string 2</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>xml</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>&#x5c;n</replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>465</xloc>
-      <yloc>549</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -473,6 +445,18 @@
         <name>group_definition</name>
         <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x24;&#x7b;filters&#x7d;, &#x22;_source&#x22;&#x3a; &#x7b; &#x22;includes&#x22;&#x3a; &#x5b;&#x22;_id&#x22;,&#x22;channels&#x22; ,&#x22;first_name&#x22;&#x5d; &#x7d; &#x7d;</variable>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>merge_fields</name>
+        <variable>&#x24;&#x7b;merge_fields&#x7d;</variable>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>

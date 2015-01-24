@@ -42,6 +42,11 @@
             <description/>
         </parameter>
         <parameter>
+            <name>merge_fields</name>
+            <default_value>&#x5b;&#x22;first_name&#x22;, &#x22;last_name&#x22;&#x5d;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>node_id</name>
             <default_value>dummy</default_value>
             <description/>
