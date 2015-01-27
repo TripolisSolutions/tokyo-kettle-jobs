@@ -116,8 +116,8 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>token</name>
-        <variable>&#x24;&#x7b;token&#x7d;</variable>
+        <name>oauth_token</name>
+        <variable>&#x24;&#x7b;oauth_token&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -226,7 +226,7 @@
         <name>Accept</name>
         </header>
       <header>
-        <field>token</field>
+        <field>oauth_token</field>
         <name>Authorization</name>
         </header>
       </headers>
@@ -239,7 +239,7 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>729</xloc>
+      <xloc>727</xloc>
       <yloc>156</yloc>
       <draw>Y</draw>
       </GUI>

@@ -271,18 +271,6 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>token</name>
-        <variable>&#x24;&#x7b;token&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>page_size</name>
         <variable>&#x24;&#x7b;page_size&#x7d;</variable>
         <type>String</type>

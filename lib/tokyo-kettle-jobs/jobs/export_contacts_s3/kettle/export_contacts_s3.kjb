@@ -76,11 +76,6 @@
             <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
             <description/>
         </parameter>
-        <parameter>
-            <name>token</name>
-            <default_value>dbvubb93rpluxjiqbfdpwruz5yfk2jf</default_value>
-            <description/>
-        </parameter>
     </parameters>
     <slaveservers>
     </slaveservers>
