@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>5461d8e536134631170001dd</default_value>
+            <default_value>549ac3a3125cc32ada000211</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -95,10 +95,10 @@
   </notepads>
   <order>
   <hop> <from>Get Variables</from><to>Contact-api get group details</to><enabled>Y</enabled> </hop>
-  <hop> <from>Contact-api get group details</from><to>Read group response</to><enabled>Y</enabled> </hop>
   <hop> <from>Read group response</from><to>Calc nr of pages</to><enabled>Y</enabled> </hop>
   <hop> <from>Calc nr of pages</from><to>Extract group query</to><enabled>Y</enabled> </hop>
   <hop> <from>Extract group query</from><to>Set Variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Contact-api get group details</from><to>Read group response</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Calc nr of pages</name>
@@ -137,7 +137,7 @@
     <name>Contact-api get group details</name>
     <type>Rest</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -146,7 +146,7 @@
            </partitioning>
     <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url>&#x24;&#x7b;contact_api_url&#x7d;&#x2f;private&#x2f;groups&#x2f;&#x24;&#x7b;group_id&#x7d;</url>
+    <url>&#x24;&#x7b;contact_api_url&#x7d;&#x2f;private&#x2f;tenants&#x2f;&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;groups&#x2f;&#x24;&#x7b;group_id&#x7d;</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
@@ -161,7 +161,7 @@
     <trustStorePassword>Encrypted </trustStorePassword>
     <headers>
       <header>
-        <field>token</field>
+        <field>oauth_token</field>
         <name>Authorization</name>
         </header>
       <header>
@@ -178,7 +178,7 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>248</xloc>
+      <xloc>250</xloc>
       <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
@@ -294,11 +294,35 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>tenant_uuid</name>
+        <variable>&#x24;&#x7b;tenant_uuid&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>oauth_token</name>
+        <variable>&#x24;&#x7b;oauth_token&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>66</xloc>
-      <yloc>35</yloc>
+      <xloc>65</xloc>
+      <yloc>36</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

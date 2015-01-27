@@ -17,8 +17,18 @@
             <description/>
         </parameter>
         <parameter>
+            <name>admin_api_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4000</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>campaign_id</name>
             <default_value>dummy</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>client_id_secret</name>
+            <default_value>zjj81mfqvt1gjdeqis3bhpm3q2xy4au&#x3a;666yh5z777xwora54emcudl2d5eua5z</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -66,6 +76,11 @@
             <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
             <description/>
         </parameter>
+        <parameter>
+            <name>token</name>
+            <default_value>dbvubb93rpluxjiqbfdpwruz5yfk2jf</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <slaveservers>
     </slaveservers>
@@ -106,7 +121,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>52</xloc>
+      <xloc>18</xloc>
       <yloc>106</yloc>
       </entry>
     <entry>
@@ -139,8 +154,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>186</xloc>
-      <yloc>106</yloc>
+      <xloc>355</xloc>
+      <yloc>105</yloc>
       </entry>
     <entry>
       <name>call_success_endpoint</name>
@@ -183,8 +198,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>373</xloc>
-      <yloc>200</yloc>
+      <xloc>19</xloc>
+      <yloc>259</yloc>
       </entry>
     <entry>
       <name>query present&#x3f;</name>
@@ -205,8 +220,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>184</xloc>
-      <yloc>200</yloc>
+      <xloc>354</xloc>
+      <yloc>215</yloc>
       </entry>
     <entry>
       <name>nr of pages &#x3e; 0 &#x3f;</name>
@@ -227,8 +242,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>179</xloc>
-      <yloc>307</yloc>
+      <xloc>354</xloc>
+      <yloc>322</yloc>
       </entry>
     <entry>
       <name>generate_rows.krt</name>
@@ -302,25 +317,79 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>923</xloc>
-      <yloc>117</yloc>
+      <xloc>813</xloc>
+      <yloc>423</yloc>
       </entry>
     <entry>
-      <name>Delete local tempfile</name>
+      <name>Delete local export tempfile</name>
       <description/>
       <type>DELETE_FILE</type>
-      <filename>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_x&#x2f;campaign_x&#x2f;group_node_x&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</filename>
+      <filename>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv</filename>
       <fail_if_file_not_exists>N</fail_if_file_not_exists>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>764</xloc>
-      <yloc>117</yloc>
+      <xloc>813</xloc>
+      <yloc>236</yloc>
+      </entry>
+    <entry>
+      <name>Get Oauth Token</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x2f;Users&#x2f;Zier&#x2f;Documents&#x2f;Sources&#x2f;tokyo-kettle-jobs&#x2f;lib&#x2f;tokyo-kettle-jobs&#x2f;jobs&#x2f;export_contacts_s3&#x2f;kettle&#x2f;Get_Auth_Token.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>163</xloc>
+      <yloc>103</yloc>
+      </entry>
+    <entry>
+      <name>Delete local transformation tempfile</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <filename>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;&#x24;&#x7b;group_id&#x7d;.ktr</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>812</xloc>
+      <yloc>118</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
+      <to>Get Oauth Token</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Get Oauth Token</from>
       <to>Get group details</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -393,7 +462,7 @@
     </hop>
     <hop>
       <from>call_success_endpoint</from>
-      <to>Delete local tempfile</to>
+      <to>Delete local transformation tempfile</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -401,7 +470,16 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Delete local tempfile</from>
+      <from>Delete local transformation tempfile</from>
+      <to>Delete local export tempfile</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local export tempfile</from>
       <to>All done.</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
