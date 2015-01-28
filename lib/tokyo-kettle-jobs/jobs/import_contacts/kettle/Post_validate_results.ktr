@@ -140,7 +140,7 @@
     <encoding>UTF-8</encoding>
     <addtoresult>N</addtoresult>
     <file>
-      <name>&#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#x2f;kettle&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;</name>
+      <name>&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;</name>
       <extention>json</extention>
       <append>N</append>
       <split>N</split>
