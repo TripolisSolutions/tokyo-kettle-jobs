@@ -98,7 +98,7 @@
   <hop> <from>Read group response</from><to>Extract group query</to><enabled>Y</enabled> </hop>
   <hop> <from>Extract group query</from><to>Set Variables</to><enabled>Y</enabled> </hop>
   <hop> <from>Contact-api get group details</from><to>Read group response</to><enabled>Y</enabled> </hop>
-  <hop> <from>Contact-api get group details</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Contact-api get group details</from><to>Write to log</to><enabled>N</enabled> </hop>
   </order>
   <step>
     <name>Contact-api get group details</name>
@@ -228,18 +228,6 @@
       <field>
         <name>accept</name>
         <variable>&#x24;&#x7b;accept&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>page_size</name>
-        <variable>&#x24;&#x7b;page_size&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>

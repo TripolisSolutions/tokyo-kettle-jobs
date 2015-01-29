@@ -37,6 +37,11 @@
             <description/>
         </parameter>
         <parameter>
+            <name>count_filters</name>
+            <default_value>&#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;, &#x7b; &#x22;range&#x22; &#x3a; &#x7b;&#x22;channels.soft_bounced_count&#x22; &#x3a; &#x7b;&#x22;lte&#x22;&#x3a; &#x22;5&#x22; &#x7d; &#x7d; &#x7d;</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>elasticsearch_url</name>
             <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;9200</default_value>
             <description/>
@@ -48,7 +53,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>54c9e339125cc3c071000215</default_value>
+            <default_value>54c9e339125cc3c071000210</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -502,7 +507,7 @@
       <to>Delete local transformation tempfile</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -520,7 +525,7 @@
       <to>All done.</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
     </hop>
