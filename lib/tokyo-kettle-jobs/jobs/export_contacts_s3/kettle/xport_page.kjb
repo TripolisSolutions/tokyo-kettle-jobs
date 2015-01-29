@@ -35,7 +35,7 @@
    <shared_objects_file/>
   <entries>
     <entry>
-      <name>Export the contacts</name>
+      <name>Get Transformation File</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -64,8 +64,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>572</xloc>
-      <yloc>93</yloc>
+      <xloc>480</xloc>
+      <yloc>92</yloc>
       </entry>
     <entry>
       <name>START</name>
@@ -166,7 +166,7 @@
     </hop>
     <hop>
       <from>Set page number</from>
-      <to>Export the contacts</to>
+      <to>Get Transformation File</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -174,7 +174,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Export the contacts</from>
+      <from>Get Transformation File</from>
       <to>Excecute dynamic task</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
