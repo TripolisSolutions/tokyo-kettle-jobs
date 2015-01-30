@@ -464,18 +464,6 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>group_definition</name>
-        <variable>&#x7b;&#x22;from&#x22;&#x3a;&#x24;&#x7b;from&#x7d;,&#x22;size&#x22;&#x3a;&#x24;&#x7b;page_size&#x7d;,&#x22;query&#x22;&#x3a;&#x24;&#x7b;group_query&#x7d;, &#x24;&#x7b;filters&#x7d;, &#x22;_source&#x22;&#x3a; &#x7b; &#x22;includes&#x22;&#x3a; &#x5b;&#x22;_id&#x22;,&#x22;channels&#x22; ,&#x22;first_name&#x22;&#x5d; &#x7d; &#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>merge_fields</name>
         <variable>&#x24;&#x7b;merge_fields&#x7d;</variable>
         <type>String</type>
