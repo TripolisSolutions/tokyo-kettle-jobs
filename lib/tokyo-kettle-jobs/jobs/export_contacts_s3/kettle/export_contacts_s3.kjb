@@ -22,6 +22,11 @@
             <description/>
         </parameter>
         <parameter>
+            <name>bounce_threshold</name>
+            <default_value>5</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>campaign_id</name>
             <default_value>dummy</default_value>
             <description/>
@@ -37,18 +42,8 @@
             <description/>
         </parameter>
         <parameter>
-            <name>count_filters</name>
-            <default_value>&#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;, &#x7b; &#x22;range&#x22; &#x3a; &#x7b;&#x22;channels.soft_bounced_count&#x22; &#x3a; &#x7b;&#x22;lte&#x22;&#x3a; &#x22;5&#x22; &#x7d; &#x7d; &#x7d;</default_value>
-            <description/>
-        </parameter>
-        <parameter>
             <name>elasticsearch_url</name>
             <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;9200</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>filters</name>
-            <default_value>&#x22;filter&#x22; &#x3a; &#x7b; &#x22;bool&#x22; &#x3a; &#x7b; &#x22;must&#x22; &#x3a; &#x5b; &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;, &#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;, &#x7b; &#x22;range&#x22; &#x3a; &#x7b;&#x22;channels.soft_bounced_count&#x22; &#x3a; &#x7b;&#x22;lte&#x22;&#x3a; &#x22;5&#x22; &#x7d; &#x7d; &#x7d; &#x5d; &#x7d; &#x7d;</default_value>
             <description/>
         </parameter>
         <parameter>

@@ -209,6 +209,34 @@
     </step>
 
   <step>
+    <name>Set Variables</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <field_name>pages</field_name>
+        <variable_name>pages</variable_name>
+        <variable_type>PARENT_JOB</variable_type>
+        <default_value>0</default_value>
+        </field>
+      </fields>
+    <use_formatting>N</use_formatting>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1032</xloc>
+      <yloc>253</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Set numner of Pages</name>
     <type>ScriptValueMod</type>
     <description/>
@@ -234,34 +262,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>859</xloc>
       <yloc>210</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Variables</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <field_name>pages</field_name>
-        <variable_name>pages</variable_name>
-        <variable_type>PARENT_JOB</variable_type>
-        <default_value>0</default_value>
-        </field>
-      </fields>
-    <use_formatting>N</use_formatting>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1032</xloc>
-      <yloc>253</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -332,7 +332,7 @@
       </field>
       <field>
         <name>count_query</name>
-        <variable>&#x7b; &#x22;query&#x22;&#x3a; &#x7b; &#x22;bool&#x22;&#x3a; &#x7b; &#x22;must&#x22;&#x3a; &#x5b; &#x24;&#x7b;group_query&#x7d;, &#x24;&#x7b;count_filters&#x7d; &#x5d; &#x7d; &#x7d; &#x7d;</variable>
+        <variable>&#x7b; &#x22;query&#x22;&#x3a; &#x7b; &#x22;bool&#x22;&#x3a; &#x7b; &#x22;must&#x22;&#x3a; &#x5b; &#x24;&#x7b;group_query&#x7d;, &#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels._type&#x22;&#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22; &#x7d; &#x7d;,&#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.hard_bounced&#x22;&#x3a; &#x22;false&#x22; &#x7d; &#x7d;, &#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.primary&#x22;&#x3a; &#x22;true&#x22; &#x7d; &#x7d;, &#x7b; &#x22;range&#x22;&#x3a; &#x7b; &#x22;channels.soft_bounced_count&#x22;&#x3a; &#x7b; &#x22;lte&#x22;&#x3a; &#x22;&#x24;&#x7b;bounce_threshold&#x7d;&#x22; &#x7d; &#x7d; &#x7d; &#x5d; &#x7d; &#x7d; &#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
