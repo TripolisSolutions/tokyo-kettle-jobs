@@ -205,7 +205,7 @@
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
     <urlField>url</urlField>
-    <bodyField>group_definition</bodyField>
+    <bodyField/>
     <httpLogin/>
     <httpPassword>Encrypted 2be98afc86aa7f2a1a51abc69ce86aade</httpPassword>
     <proxyHost/>
