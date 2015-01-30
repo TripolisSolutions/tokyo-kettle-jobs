@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Post validate results</name>
+    <name>import_template</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -66,19 +67,16 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;01&#x2f;15 14&#x3a;53&#x3a;00.440</created_date>
+  <created_date>2015&#x2f;01&#x2f;29 02&#x3a;11&#x3a;12.369</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;01&#x2f;15 14&#x3a;53&#x3a;00.440</modified_date>
+  <modified_date>2015&#x2f;01&#x2f;29 02&#x3a;11&#x3a;12.369</modified_date>
   </info>
   <notepads>
   </notepads>
-  <order>
-  <hop> <from>Get Variables</from><to>Json output</to><enabled>Y</enabled> </hop>
-  <hop> <from>Json output</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  </order>
+  %{order}
   <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
+    <name>CSV Import File</name>
+    <type>S3CSVINPUT</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -87,43 +85,117 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <aws_access_key>&#x24;&#x7b;S3_ACCESSKEY&#x7d;</aws_access_key>
+    <aws_secret_key>&#x24;&#x7b;S3_SECRETKEY&#x7d;</aws_secret_key>
+    <bucket>&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;</bucket>
+    <filename>&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>%{delimiter}</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>Y</header>
+    <max_line_size>5000</max_line_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <parallel>N</parallel>
+    %{fields}
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>324</xloc>
+      <yloc>21</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+%{validator_field}
+  <step>
+    <name>MongoDB Output</name>
+    <type>MongoDbOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <mongo_host>&#x24;&#x7b;MONGODB_SERVER&#x7d;</mongo_host>
+
+    <mongo_port>&#x24;&#x7b;MONGODB_PORT&#x7d;</mongo_port>
+    <use_all_replica_members>N</use_all_replica_members>
+    <auth_kerberos>N</auth_kerberos>
+
+    <mongo_db>&#x24;&#x7b;CONTACT_DB_NAME&#x7d;</mongo_db>
+
+    <mongo_collection>%{mongo_collection}</mongo_collection>
+
+    <batch_insert_size>1000</batch_insert_size>
+    <connect_timeout/>
+    <socket_timeout/>
+    <read_preference>primary</read_preference>
+    <write_concern/>
+    <w_timeout/>
+    <journaled_writes>N</journaled_writes>
+
+    <truncate>N</truncate>
+
+    <update>N</update>
+
+    <upsert>N</upsert>
+
+    <multi>N</multi>
+
+    <modifier_update>N</modifier_update>
+    <write_retries>5</write_retries>
+    <write_retry_delay>10</write_retry_delay>
+    %{mongo_fields}
+    <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>802</xloc>
+      <yloc>205</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+%{steps}
+  <step>
+    <name>Populae contact_type</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>contact_type</field_to_use>
+    <target_field/>
+    <non_match_default/>
     <fields>
       <field>
-        <name>INVALIDROWS</name>
-        <variable>&#x24;&#x7b;INVALIDROWS&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <source_value>person</source_value>
+        <target_value>Contacts&#x3a;&#x3a;Person</target_value>
       </field>
       <field>
-        <name>VALIDROWS</name>
-        <variable>&#x24;&#x7b;VALIDROWS&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <source_value>company</source_value>
+        <target_value>Contacts&#x3a;&#x3a;Company</target_value>
+      </field>
+      <field>
+        <source_value/>
+        <target_value>Contacts&#x3a;&#x3a;Person</target_value>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>181</xloc>
-      <yloc>105</yloc>
+      <xloc>435</xloc>
+      <yloc>164</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Json output</name>
-    <type>JsonOutput</type>
+    <name>collect error rows</name>
+    <type>Dummy</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -132,76 +204,27 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <outputValue>outputValue</outputValue>
-    <jsonBloc>results</jsonBloc>
-    <nrRowsInBloc>0</nrRowsInBloc>
-    <operation_type>writetofile</operation_type>
-    <compatibility_mode>N</compatibility_mode>
-    <encoding>UTF-8</encoding>
-    <addtoresult>N</addtoresult>
-    <file>
-      <name>&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;</name>
-      <extention>json</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <create_parent_folder>N</create_parent_folder>
-      <DoNotOpenNewFileInit>N</DoNotOpenNewFileInit>
-      <servlet_output>N</servlet_output>
-      </file>
-    <fields>
-      <field>
-        <name>INVALIDROWS</name>
-        <element>INVALIDROWS</element>
-    </field>
-      <field>
-        <name>VALIDROWS</name>
-        <element>VALIDROWS</element>
-    </field>
-    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>433</xloc>
-      <yloc>107</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>Log file&#x3a; &#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#x2f;kettle&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;.json</logmessage>
-    <fields>
-      <field>
-        <name>INVALIDROWS</name>
-        </field>
-      <field>
-        <name>VALIDROWS</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
-      <yloc>109</yloc>
+      <xloc>472</xloc>
+      <yloc>369</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
+      <error>
+        <source_step>Data Validator</source_step>
+        <target_step>collect error rows</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename>error_desc</descriptions_valuename>
+        <fields_valuename>error_field</fields_valuename>
+        <codes_valuename>error_code</codes_valuename>
+        <max_errors>-1</max_errors>
+        <max_pct_errors>-1</max_pct_errors>
+        <min_pct_rows>-1</min_pct_rows>
+      </error>
   </step_error_handling>
    <slave-step-copy-partition-distribution>
 </slave-step-copy-partition-distribution>
