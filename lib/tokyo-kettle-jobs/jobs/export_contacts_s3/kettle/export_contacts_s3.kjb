@@ -33,11 +33,6 @@
         </parameter>
         <parameter>
             <name>client_id_secret</name>
-            <default_value>zjj81mfqvt1gjdeqis3bhpm3q2xy4au&#x3a;666yh5z777xwora54emcudl2d5eua5z</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>contact_api_url</name>
             <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4002</default_value>
             <description/>
         </parameter>
@@ -193,8 +188,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>19</xloc>
-      <yloc>259</yloc>
+      <xloc>31</xloc>
+      <yloc>180</yloc>
       </entry>
     <entry>
       <name>query present&#x3f;</name>

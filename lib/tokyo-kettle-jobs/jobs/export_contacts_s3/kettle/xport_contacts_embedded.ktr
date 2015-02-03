@@ -96,7 +96,7 @@
            <schema_name/>
            </partitioning>
       <row_threshold>0</row_threshold>
-      <message>Elasticsearch returned an error code</message>
+      <message>Get Transformation endpoint returned an error code</message>
       <always_log_rows>Y</always_log_rows>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>

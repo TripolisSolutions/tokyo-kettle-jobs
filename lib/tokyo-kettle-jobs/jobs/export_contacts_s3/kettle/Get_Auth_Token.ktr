@@ -74,11 +74,11 @@
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Switch</from><to>Read group response</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch</from><to>Read response</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>EncodeBase64 header</to><enabled>Y</enabled> </hop>
   <hop> <from>EncodeBase64 header</from><to>Write to log</to><enabled>N</enabled> </hop>
   <hop> <from>EncodeBase64 header</from><to>Admin-API Get Oath Client Credentials</to><enabled>Y</enabled> </hop>
-  <hop> <from>Read group response</from><to>Replace in string</to><enabled>Y</enabled> </hop>
+  <hop> <from>Read response</from><to>Replace in string</to><enabled>Y</enabled> </hop>
   <hop> <from>Construct Token</from><to>Write to log</to><enabled>N</enabled> </hop>
   <hop> <from>Replace in string</from><to>Construct Token</to><enabled>Y</enabled> </hop>
   <hop> <from>Switch</from><to>Abort</to><enabled>Y</enabled> </hop>
@@ -97,7 +97,7 @@
            <schema_name/>
            </partitioning>
       <row_threshold>0</row_threshold>
-      <message>Elasticsearch returned an error code</message>
+      <message>Oauth endpoint returned an error code</message>
       <always_log_rows>Y</always_log_rows>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -250,7 +250,7 @@
       </field>
       <field>
         <name>client_id_secret</name>
-        <variable>&#x24;&#x7b;client_id_secret&#x7d;</variable>
+        <variable>zjj81mfqvt1gjdeqis3bhpm3q2xy4au&#x3a;666yh5z777xwora54emcudl2d5eua5z</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -282,7 +282,7 @@
     </step>
 
   <step>
-    <name>Read group response</name>
+    <name>Read response</name>
     <type>JsonInput</type>
     <description/>
     <distribute>N</distribute>
@@ -433,7 +433,7 @@
 <case_value_group/>
 <default_target_step>Abort</default_target_step>
 <cases><case><value>200</value>
-<target_step>Read group response</target_step>
+<target_step>Read response</target_step>
 </case></cases>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>555</xloc>
