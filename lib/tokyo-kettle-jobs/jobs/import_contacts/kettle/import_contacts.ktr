@@ -158,7 +158,7 @@
     </step>
 %{steps}
   <step>
-    <name>Populae contact_type</name>
+    <name>generate_contact_type</name>
     <type>ValueMapper</type>
     <description/>
     <distribute>Y</distribute>
@@ -168,21 +168,13 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <field_to_use>contact_type</field_to_use>
+    <field_to_use>contact_type_value</field_to_use>
     <target_field/>
     <non_match_default/>
     <fields>
       <field>
-        <source_value>person</source_value>
-        <target_value>Contacts&#x3a;&#x3a;Person</target_value>
-      </field>
-      <field>
-        <source_value>company</source_value>
-        <target_value>Contacts&#x3a;&#x3a;Company</target_value>
-      </field>
-      <field>
         <source_value/>
-        <target_value>Contacts&#x3a;&#x3a;Person</target_value>
+        <target_value>%{contact_type}</target_value>
       </field>
     </fields>
      <cluster_schema/>
