@@ -6,6 +6,7 @@ module TokyoKettleJobs
           File.delete(local_file_path)
           puts "Deleted file #{local_file_path}"
         end
+        puts "Downloading #{region}/#{bucket}/#{s3_file_path} to #{local_file_path}"
 
         aws_sdk = 'aws-sdk-core'
         begin
