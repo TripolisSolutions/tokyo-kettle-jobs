@@ -28,7 +28,7 @@
         </parameter>
         <parameter>
             <name>campaign_id</name>
-            <default_value>dummy</default_value>
+            <default_value>54f828c2125cc37660000267</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -42,8 +42,13 @@
             <description/>
         </parameter>
         <parameter>
+            <name>events_api_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;6102</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>group_id</name>
-            <default_value>54c9e339125cc3c071000210</default_value>
+            <default_value>54f0430a125cc37ae2000242</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -53,12 +58,12 @@
         </parameter>
         <parameter>
             <name>node_id</name>
-            <default_value>dummy</default_value>
+            <default_value>54f828c2125cc37660000262</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>page_size</name>
-            <default_value>10</default_value>
+            <default_value>500</default_value>
             <description/>
         </parameter>
         <parameter>
