@@ -93,7 +93,7 @@
     <fields>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;campaign_&#x24;&#x7b;campaign_id&#x7d;&#x2f;group_node_&#x24;&#x7b;node_id&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv&#x22;&#x7d;</variable>
+        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;campaign_&#x24;&#x7b;campaign_id&#x7d;&#x2f;group_node_&#x24;&#x7b;node_id&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.gz&#x22;&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -263,7 +263,7 @@
     <header>N</header>
     <footer>N</footer>
     <format>Unix</format>
-    <compression>None</compression>
+    <compression>GZip</compression>
     <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
@@ -274,7 +274,7 @@
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
+      <extention/>
       <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
