@@ -218,8 +218,8 @@
 		<fields>
 			<select_unspecified>N</select_unspecified>
 			<meta>
-				<name>birthday</name>
-				<rename>birthday</rename>
+				<name>%{birthday}</name>
+				<rename>%{birthday}</rename>
 				<type>Date</type>
 				<length>-2</length>
 				<precision>-2</precision>
