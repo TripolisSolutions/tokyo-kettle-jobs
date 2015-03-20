@@ -139,9 +139,9 @@
 
     <truncate>N</truncate>
 
-    <update>N</update>
+    <update>Y</update>
 
-    <upsert>N</upsert>
+    <upsert>Y</upsert>
 
     <multi>N</multi>
 
@@ -156,7 +156,7 @@
       <draw>Y</draw>
       </GUI>
     </step>
-%{steps}
+  %{steps}
   <step>
     <name>generate_contact_type</name>
     <type>ValueMapper</type>
@@ -164,10 +164,10 @@
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
     <field_to_use>contact_type_value</field_to_use>
     <target_field/>
     <non_match_default/>
@@ -177,14 +177,17 @@
         <target_value>%{contact_type}</target_value>
       </field>
     </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
       <xloc>435</xloc>
       <yloc>164</yloc>
       <draw>Y</draw>
-      </GUI>
-    </step>
-
+    </GUI>
+  </step>
   <step>
     <name>collect error rows</name>
     <type>Dummy</type>
@@ -192,18 +195,21 @@
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
       <xloc>472</xloc>
       <yloc>369</yloc>
       <draw>Y</draw>
-      </GUI>
-    </step>
-
+    </GUI>
+  </step>
 	<step>
 		<name>Convert strings to dates</name>
 		<type>SelectValues</type>
@@ -246,7 +252,75 @@
 			<draw>Y</draw>
 		</GUI>
 	</step>
-
+	<step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>email</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>Y</presorted>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>354</xloc>
+      <yloc>245</yloc>
+      <draw>Y</draw>
+    </GUI>
+	</step>
+  <step>
+    <name>Unique rows</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>Y</count_rows>
+    <count_field>CntDuplicate</count_field>
+    <reject_duplicate_row>Y</reject_duplicate_row>
+    <error_description>Duplicate rows</error_description>
+    <fields>
+      <field>
+        <name>email</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>500</xloc>
+      <yloc>253</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
 	<step>
 		<name>collect error rows 2</name>
 		<type>Dummy</type>
@@ -269,37 +343,67 @@
 			<draw>Y</draw>
 		</GUI>
 	</step>
-
+  <step>
+    <name>collect error rows 3</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>503</xloc>
+      <yloc>394</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step_error_handling>
-      <error>
-        <source_step>Data Validator</source_step>
-        <target_step>collect error rows</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename>error_desc</descriptions_valuename>
-        <fields_valuename>error_field</fields_valuename>
-        <codes_valuename>error_code</codes_valuename>
-        <max_errors>-1</max_errors>
-        <max_pct_errors>-1</max_pct_errors>
-        <min_pct_rows>-1</min_pct_rows>
-      </error>
-
-	<error>
-		<source_step>Convert strings to dates</source_step>
-		<target_step>collect error rows 2</target_step>
-		<is_enabled>Y</is_enabled>
-		<nr_valuename/>
-		<descriptions_valuename/>
-		<fields_valuename/>
-		<codes_valuename/>
-		<max_errors/>
-		<max_pct_errors/>
-		<min_pct_rows/>
-	</error>
-
+    <error>
+      <source_step>Data Validator</source_step>
+      <target_step>collect error rows</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename>error_desc</descriptions_valuename>
+      <fields_valuename>error_field</fields_valuename>
+      <codes_valuename>error_code</codes_valuename>
+      <max_errors>-1</max_errors>
+      <max_pct_errors>-1</max_pct_errors>
+      <min_pct_rows>-1</min_pct_rows>
+    </error>
+    <error>
+      <source_step>Convert strings to dates</source_step>
+      <target_step>collect error rows 2</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
+    <error>
+      <source_step>Unique rows</source_step>
+      <target_step>collect error rows 3</target_step>
+      <is_enabled>Y</is_enabled>
+      <nr_valuename/>
+      <descriptions_valuename/>
+      <fields_valuename/>
+      <codes_valuename/>
+      <max_errors/>
+      <max_pct_errors/>
+      <min_pct_rows/>
+    </error>
   </step_error_handling>
-   <slave-step-copy-partition-distribution>
-</slave-step-copy-partition-distribution>
-   <slave_transformation>N</slave_transformation>
-
+  <slave-step-copy-partition-distribution>
+  </slave-step-copy-partition-distribution>
+  <slave_transformation>N</slave_transformation>
 </transformation>
