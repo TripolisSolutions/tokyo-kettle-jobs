@@ -272,7 +272,7 @@
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>email</name>
+        <name>%{email_key}</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>Y</presorted>
@@ -306,7 +306,7 @@
     <error_description>Duplicate rows</error_description>
     <fields>
       <field>
-        <name>email</name>
+        <name>%{email_key}</name>
         <case_insensitive>Y</case_insensitive>
       </field>
     </fields>
