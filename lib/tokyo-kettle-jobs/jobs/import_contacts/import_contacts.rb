@@ -20,6 +20,10 @@ module TokyoKettleJobs
       def self.import_contacts_validation_template_task
         get_file_path('../kettle/import_template_validation.ktr')
       end
+
+      def self.s3_utility
+        get_file_path('../s3_utility.rb')
+      end
     end
   end
 end
