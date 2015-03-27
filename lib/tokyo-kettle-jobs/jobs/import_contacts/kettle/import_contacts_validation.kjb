@@ -19,7 +19,7 @@
         <parameter>
             <name>IMPORT_BUCKET_NAME</name>
             <default_value/>
-            <description/>
+            <description>Bucket name</description>
         </parameter>
         <parameter>
             <name>IMPORT_CSV_FILENAME</name>
@@ -34,12 +34,12 @@
         <parameter>
             <name>S3_KETTLE_JOBS_PATH</name>
             <default_value/>
-            <description/>
+            <description>kettle job path</description>
         </parameter>
         <parameter>
             <name>S3_REGION</name>
             <default_value/>
-            <description/>
+            <description>s3 region</description>
         </parameter>
         <parameter>
             <name>S3_UTILITY</name>
@@ -147,7 +147,7 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>echo &#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;&#xa;</script>
+      <script>cd &#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  s3_download.rb &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -161,7 +161,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Post_validate_results.ktr</filename>
+      <filename>&#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#x2f;kettle&#x2f;Post_validate_results.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -218,15 +218,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Post validate resutl</from>
-      <to>Success</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>START</from>
       <to>Excecute dynamic task</to>
       <from_nr>0</from_nr>
@@ -234,6 +225,15 @@
       <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Post validate resutl</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
