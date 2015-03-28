@@ -42,6 +42,11 @@
             <description>Dynamic kettle file name</description>
         </parameter>
         <parameter>
+            <name>LISTIDS</name>
+            <default_value/>
+            <description>List IDs for current import job</description>
+        </parameter>
+        <parameter>
             <name>PUSHMESSAGE_API_URL</name>
             <default_value>http&#x3a;&#x2f;&#x2f;127.0.0.1&#x3a;4103</default_value>
             <description>Pushmessage api url</description>
@@ -60,6 +65,11 @@
             <name>S3_UTILITY</name>
             <default_value/>
             <description/>
+        </parameter>
+        <parameter>
+            <name>SUBSCRIPTIONIDS</name>
+            <default_value/>
+            <description>Subscription IDS for current import job</description>
         </parameter>
         <parameter>
             <name>USERID</name>
@@ -181,7 +191,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x24;&#x7b;TOKYO_KETTLE_JOBS_PATH&#x7d;&#x2f;kettle&#x2f;call_pushmessage_api.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;call_pushmessage_api.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
