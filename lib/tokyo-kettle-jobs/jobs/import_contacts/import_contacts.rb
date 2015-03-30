@@ -25,8 +25,25 @@ module TokyoKettleJobs
         get_file_path('../s3_utility.rb')
       end
 
-      def self.get_kettle_shell_script kitchen_cmd, entry_file, kettle_import_contacts_job, s3_region, s3_utility, default_s3_bucket_name, import_csv_file_name, s3_kettle_path, ktr_file_name
-        "#{kitchen_cmd} -file:\"#{entry_file}\" #{kettle_import_contacts_job} -param:S3_REGION=\"#{s3_region}\" -param:S3_UTILITY=\"#{s3_utility}\" -param:IMPORT_BUCKET_NAME=\"#{default_s3_bucket_name}\" -param:IMPORT_CSV_FILENAME=\"#{import_csv_file_name}\" -param:S3_KETTLE_JOBS_PATH=\"#{s3_kettle_path}\" -param:KETTLE_FILENAME=\"#{ktr_file_name}\" & >/dev/null 2>&1"
+      def self.get_kettle_shell_script params
+
+        kitchen_cmd_params = [
+          "-param:S3_REGION=\"#{params[:s3_region]}\"",
+          "-param:S3_UTILITY=\"#{params[:s3_utility]}\"",
+          "-param:LISTIDS=\"#{params[:s_lists]}\"",
+          "-param:SUBSCRIPTIONIDS=\"#{params[:s_subscription_lists]}\"",
+          "-param:USERID=\"#{params[:user_id]}\"",
+          "-param:TENANT_UUID=\"#{params[:tenantUUID]}\"",
+          "-param:ADMIN_API_URL=\"#{params[:admin_url]}\"",
+          "-param:PUSHMESSAGE_API_URL=\"#{params[:pushmessage_url]}\"",
+          "-param:IMPORT_BUCKET_NAME=\"#{params[:s3_bucket_name]}\"",
+          "-param:IMPORT_CSV_FILENAME=\"#{params[:csv_file_name]}\"",
+          "-param:S3_KETTLE_JOBS_PATH=\"#{params[:s3_kettle_job_path]}\"",
+          "-param:KETTLE_FILENAME=\"#{params[:ktr_file_name]}\""
+        ].join(' ')
+
+        shell_script = "#{kitchen_cmd} -file:\"#{entry_file}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} & >/dev/null 2>&1"
+        shell_script
       end
     end
   end
