@@ -42,7 +42,7 @@ module TokyoKettleJobs
           "-param:KETTLE_FILENAME=\"#{params[:ktr_file_name]}\""
         ].join(' ')
 
-        shell_script = "#{kitchen_cmd} -file:\"#{entry_file}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} & >/dev/null 2>&1"
+        shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} & >/dev/null 2>&1"
         shell_script
       end
     end
