@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>import_template</name>
+    <name>add_to_list</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,6 +9,36 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>CONTACT_DB_NAME</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>IMPORTID</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>ListID</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>MONGODB_PORT</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>MONGODB_SERVER</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>TENANT_UUID</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -67,16 +97,19 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;01&#x2f;29 02&#x3a;11&#x3a;12.369</created_date>
+  <created_date>2015&#x2f;03&#x2f;30 18&#x3a;44&#x3a;01.666</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;01&#x2f;29 02&#x3a;11&#x3a;12.369</modified_date>
+  <modified_date>2015&#x2f;03&#x2f;30 18&#x3a;44&#x3a;01.666</modified_date>
   </info>
   <notepads>
   </notepads>
-  %{order}
+  <order>
+  <hop> <from>Get contacts for importID</from><to>Calculate ListId and Date</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculate ListId and Date</from><to>MongoDB Output</to><enabled>Y</enabled> </hop>
+  </order>
   <step>
-    <name>CSV Import File</name>
-    <type>S3CSVINPUT</type>
+    <name>Get contacts for importID</name>
+    <type>MongoDbInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -85,28 +118,41 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <aws_access_key>&#x24;&#x7b;S3_ACCESSKEY&#x7d;</aws_access_key>
-    <aws_secret_key>&#x24;&#x7b;S3_SECRETKEY&#x7d;</aws_secret_key>
-    <bucket>&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;</bucket>
-    <filename>&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>%{delimiter}</separator>
-    <enclosure>&#x22;</enclosure>
-    <header>Y</header>
-    <max_line_size>5000</max_line_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <parallel>N</parallel>
-    %{fields}
-     <cluster_schema/>
+    <hostname>&#x24;&#x7b;MONGODB_SERVER&#x7d;</hostname>
+    <port>&#x24;&#x7b;MONGODB_PORT&#x7d;</port>
+    <use_all_replica_members>N</use_all_replica_members>
+    <db_name>&#x24;&#x7b;CONTACT_DB_NAME&#x7d;</db_name>
+    <fields_name/>
+    <collection>&#x24;&#x7b;TENANT_UUID&#x7d;_contacts</collection>
+    <json_field_name>json</json_field_name>
+    <json_query>&#x7b; importID &#x3a; &#x22;&#x24;&#x7b;IMPORTID&#x7d;&#x22; &#x7d;</json_query>
+    <auth_user/>
+    <auth_password>Encrypted </auth_password>
+    <auth_kerberos>N</auth_kerberos>
+    <connect_timeout/>
+    <socket_timeout/>
+    <read_preference>primary</read_preference>
+    <output_json>N</output_json>
+    <query_is_pipeline>N</query_is_pipeline>
+    <execute_for_each_row>N</execute_for_each_row>
+
+    <mongo_fields>
+      <mongo_field>
+        <field_name>contact_id</field_name>
+
+        <field_path>&#x24;._id</field_path>
+
+        <field_type>String</field_type>
+
+      </mongo_field>
+    </mongo_fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>324</xloc>
-      <yloc>21</yloc>
+      <xloc>390</xloc>
+      <yloc>118</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
-%{validator_field}
+
   <step>
     <name>MongoDB Output</name>
     <type>MongoDbOutput</type>
@@ -127,7 +173,7 @@
 
     <mongo_db>&#x24;&#x7b;CONTACT_DB_NAME&#x7d;</mongo_db>
 
-    <mongo_collection>%{mongo_collection}</mongo_collection>
+    <mongo_collection>&#x24;&#x7b;TENANT_UUID&#x7d;_list_members</mongo_collection>
 
     <batch_insert_size>1000</batch_insert_size>
     <connect_timeout/>
@@ -139,302 +185,129 @@
 
     <truncate>N</truncate>
 
-    <update>Y</update>
+    <update>N</update>
 
-    <upsert>Y</upsert>
+    <upsert>N</upsert>
 
     <multi>N</multi>
 
     <modifier_update>N</modifier_update>
     <write_retries>5</write_retries>
     <write_retry_delay>10</write_retry_delay>
-    %{mongo_fields}
-    <cluster_schema/>
+
+    <mongo_fields>
+      <mongo_field>
+         <incoming_field_name>list_id</incoming_field_name>
+
+         <mongo_doc_path>list_id</mongo_doc_path>
+
+         <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>Y</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy>Insert&#x26;Update</modifier_policy>
+
+         <json_field>N</json_field>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>contact_id</incoming_field_name>
+
+         <mongo_doc_path>contact_id</mongo_doc_path>
+
+         <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>Y</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy>Insert&#x26;Update</modifier_policy>
+
+         <json_field>N</json_field>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>c_at</incoming_field_name>
+
+         <mongo_doc_path>c_at</mongo_doc_path>
+
+         <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy>Insert&#x26;Update</modifier_policy>
+
+         <json_field>N</json_field>
+
+      </mongo_field>
+      <mongo_field>
+         <incoming_field_name>c_at</incoming_field_name>
+
+         <mongo_doc_path>u_at</mongo_doc_path>
+
+         <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy>Insert&#x26;Update</modifier_policy>
+
+         <json_field>N</json_field>
+
+      </mongo_field>
+    </mongo_fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>802</xloc>
-      <yloc>205</yloc>
+      <xloc>912</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
-  %{steps}
+
   <step>
-    <name>generate_contact_type</name>
-    <type>ValueMapper</type>
+    <name>Calculate ListId and Date</name>
+    <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <field_to_use>contact_type_value</field_to_use>
-    <target_field/>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value/>
-        <target_value>%{contact_type}</target_value>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>435</xloc>
-      <yloc>164</yloc>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var list_id &#x3d; getEnvironmentVar&#x28;&#x22;ListID&#x22;&#x29;&#x3b;&#xd;&#xa;var c_at &#x3d; new Date&#x28;&#x29;&#x3b; </jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>list_id</name>
+        <rename>list_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>c_at</name>
+        <rename>c_at</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>659</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
-    </GUI>
-  </step>
-    <step>
-      <name>generate_import_contact_id_value</name>
-      <type>ValueMapper</type>
-      <description/>
-      <distribute>Y</distribute>
-      <custom_distribution/>
-      <copies>1</copies>
-      <partitioning>
-        <method>none</method>
-        <schema_name/>
-      </partitioning>
-      <field_to_use>import_contact_id_value</field_to_use>
-      <target_field/>
-      <non_match_default/>
-      <fields>
-        <field>
-          <source_value/>
-          <target_value>%{import_id}</target_value>
-        </field>
-      </fields>
-      <cluster_schema/>
-      <remotesteps>
-        <input>   </input>
-        <output>   </output>
-      </remotesteps>
-      <GUI>
-        <xloc>435</xloc>
-        <yloc>164</yloc>
-        <draw>Y</draw>
       </GUI>
     </step>
-  <step>
-    <name>collect error rows</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>472</xloc>
-      <yloc>369</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-	<step>
-		<name>Convert strings to dates</name>
-		<type>SelectValues</type>
-		<description/>
-		<distribute>Y</distribute>
-		<custom_distribution/>
-		<copies>1</copies>
-		<partitioning>
-		<method>none</method>
-		<schema_name/>
-		</partitioning>
-		<fields>
-			<select_unspecified>N</select_unspecified>
-			<meta>
-				<name>%{birthday}</name>
-				<rename>%{birthday}</rename>
-				<type>Date</type>
-				<length>-2</length>
-				<precision>-2</precision>
-				<conversion_mask>yyyy-dd-mm</conversion_mask>
-				<date_format_lenient>false</date_format_lenient>
-				<date_format_locale/>
-				<date_format_timezone/>
-				<lenient_string_to_number>false</lenient_string_to_number>
-				<encoding/>
-				<decimal_symbol/>
-				<grouping_symbol/>
-				<currency_symbol/>
-				<storage_type/>
-			</meta>
-		</fields>
-		<cluster_schema/>
-		<remotesteps>
-			<input>   </input>
-			<output>   </output>
-		</remotesteps>
-		<GUI>
-			<xloc>234</xloc>
-			<yloc>192</yloc>
-			<draw>Y</draw>
-		</GUI>
-	</step>
-	<step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>%{email_key}</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>Y</presorted>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>354</xloc>
-      <yloc>245</yloc>
-      <draw>Y</draw>
-    </GUI>
-	</step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>Y</count_rows>
-    <count_field>CntDuplicate</count_field>
-    <reject_duplicate_row>Y</reject_duplicate_row>
-    <error_description>Duplicate rows</error_description>
-    <fields>
-      <field>
-        <name>%{email_key}</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>500</xloc>
-      <yloc>253</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-	<step>
-		<name>collect error rows 2</name>
-		<type>Dummy</type>
-		<description/>
-		<distribute>Y</distribute>
-		<custom_distribution/>
-		<copies>1</copies>
-		<partitioning>
-			<method>none</method>
-			<schema_name/>
-		</partitioning>
-		<cluster_schema/>
-		<remotesteps>
-			<input>   </input>
-			<output>   </output>
-		</remotesteps>
-		<GUI>
-			<xloc>373</xloc>
-			<yloc>310</yloc>
-			<draw>Y</draw>
-		</GUI>
-	</step>
-  <step>
-    <name>collect error rows 3</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>503</xloc>
-      <yloc>394</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
+
   <step_error_handling>
-    <error>
-      <source_step>Data Validator</source_step>
-      <target_step>collect error rows</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename>error_desc</descriptions_valuename>
-      <fields_valuename>error_field</fields_valuename>
-      <codes_valuename>error_code</codes_valuename>
-      <max_errors>-1</max_errors>
-      <max_pct_errors>-1</max_pct_errors>
-      <min_pct_rows>-1</min_pct_rows>
-    </error>
-    <error>
-      <source_step>Convert strings to dates</source_step>
-      <target_step>collect error rows 2</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
-    <error>
-      <source_step>Unique rows</source_step>
-      <target_step>collect error rows 3</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </step_error_handling>
-  <slave-step-copy-partition-distribution>
-  </slave-step-copy-partition-distribution>
-  <slave_transformation>N</slave_transformation>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
 </transformation>
