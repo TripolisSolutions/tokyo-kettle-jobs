@@ -537,7 +537,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
    <body_field>body</body_field>
    <limit>10000</limit>
    <routing>routingkey</routing>
-   <target>&#x24;&#x7b;EXCHANGE_NAME&#x7d;</target>
+   <target>subscribe-contact</target>
    <mode>producer</mode>
    <uri>amqp&#x3a;&#x2f;&#x2f;&#x24;&#x7b;RABBIT_USER&#x7d;&#x3a;&#x24;&#x7b;RABBIT_PASSWORD&#x7d;&#x40;&#x24;&#x7b;RABBIT_HOST&#x7d;&#x3a;5672</uri>
    <username>&#x24;&#x7b;RABBIT_USER&#x7d;</username>
