@@ -73,6 +73,29 @@
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>AgileBI</name>
+    <server>localhost</server>
+    <type>MONETDB</type>
+    <access>Native</access>
+    <database>pentaho-instaview</database>
+    <port>50006</port>
+    <username>monetdb</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb14a17edb86abd8</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <read_only>true</read_only>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_INFOBRIGHT.characterEncoding</code><attribute>UTF-8</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>50006</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>S3 File Output</from><to>REST Client campaign-api</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>S3 File Output</to><enabled>Y</enabled> </hop>
@@ -93,7 +116,7 @@
     <fields>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a;&#x22;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;campaign_&#x24;&#x7b;campaign_id&#x7d;&#x2f;group_node_&#x24;&#x7b;node_id&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.gz&#x22;&#x7d;</variable>
+        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a; &#x24;&#x7b;s3_file_path&#x7d;.gz &#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -118,6 +141,54 @@
       <field>
         <name>oauth_token</name>
         <variable>&#x24;&#x7b;oauth_token&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>aws_key</name>
+        <variable>&#x24;&#x7b;aws_key&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>aws_secret</name>
+        <variable>&#x24;&#x7b;aws_secret&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>s3_bucket</name>
+        <variable>&#x24;&#x7b;s3_bucket&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>s3_file_path</name>
+        <variable>&#x24;&#x7b;s3_file_path&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -270,7 +341,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;campaign_&#x24;&#x7b;campaign_id&#x7d;&#x2f;group_node_&#x24;&#x7b;node_id&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;</name>
+      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;&#x24;&#x7b;s3_bucket&#x7d;&#x2f;&#x24;&#x7b;s3_file_path&#x7d;</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -301,8 +372,8 @@
         <precision>-1</precision>
       </field>
     </fields>
-      <access_key>Encrypted 414b4943f7d2ea875c91c6b49d29f85bffb0faeb</access_key>
-      <secret_key>Encrypted 48676e397047323165345a42427a6b45706977366b435560d7e8c589339ec5a289499c52f6beba8d</secret_key>
+      <access_key>&#x24;&#x7b;aws_key&#x7d;</access_key>
+      <secret_key>&#x24;&#x7b;aws_secret&#x7d;</secret_key>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>414</xloc>

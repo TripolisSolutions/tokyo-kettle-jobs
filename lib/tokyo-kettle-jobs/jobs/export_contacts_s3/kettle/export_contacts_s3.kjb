@@ -22,13 +22,23 @@
             <description/>
         </parameter>
         <parameter>
+            <name>aws_key</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>aws_secret</name>
+            <default_value/>
+            <description/>
+        </parameter>
+        <parameter>
             <name>bounce_threshold</name>
             <default_value>5</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>campaign_id</name>
-            <default_value>54f828c2125cc37660000267</default_value>
+            <default_value>5513c4fc125cc3b9a8000026</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -48,7 +58,7 @@
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>54f0430a125cc37ae2000242</default_value>
+            <default_value>551aeee3125cc3f6db00028d</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -58,7 +68,7 @@
         </parameter>
         <parameter>
             <name>node_id</name>
-            <default_value>54f828c2125cc37660000262</default_value>
+            <default_value>5513c4fc125cc3b9a8000002</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -67,8 +77,13 @@
             <description/>
         </parameter>
         <parameter>
-            <name>tenant_name</name>
-            <default_value>dummy</default_value>
+            <name>s3_bucket</name>
+            <default_value>bucket-tripolis-ap-southeast-1</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>s3_file_path</name>
+            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tenant-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-5513c4fc125cc3b9a8000026&#x2f;group-node-5513c4fc125cc3b9a8000002&#x2f;export_group_5513c4fc125cc3b9a8000002</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -77,6 +92,29 @@
             <description/>
         </parameter>
     </parameters>
+  <connection>
+    <name>AgileBI</name>
+    <server>localhost</server>
+    <type>MONETDB</type>
+    <access>Native</access>
+    <database>pentaho-instaview</database>
+    <port>50006</port>
+    <username>monetdb</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb14a17edb86abd8</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <read_only>true</read_only>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_INFOBRIGHT.characterEncoding</code><attribute>UTF-8</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>50006</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+    </attributes>
+  </connection>
     <slaveservers>
     </slaveservers>
 <job-log-table><connection/>
@@ -96,7 +134,18 @@
 <table/>
 <timeout_days/>
 <field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
-   <pass_batchid>N</pass_batchid>
+<checkpoint-log-table><connection/>
+<schema/>
+<table/>
+<timeout_days/>
+<max_nr_retries/>
+<run_retry_period/>
+<namespace_parameter/>
+<save_parameters/>
+<save_result_rows/>
+<save_result_files/>
+<field><id>ID_JOB_RUN</id><enabled>Y</enabled><name>ID_JOB_RUN</name></field><field><id>ID_JOB</id><enabled>Y</enabled><name>ID_JOB</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>JOBNAME</name></field><field><id>NAMESPACE</id><enabled>Y</enabled><name>NAMESPACE</name></field><field><id>CHECKPOINT_NAME</id><enabled>Y</enabled><name>CHECKPOINT_NAME</name></field><field><id>CHECKPOINT_COPYNR</id><enabled>Y</enabled><name>CHECKPOINT_COPYNR</name></field><field><id>ATTEMPT_NR</id><enabled>Y</enabled><name>ATTEMPT_NR</name></field><field><id>JOB_RUN_START_DATE</id><enabled>Y</enabled><name>JOB_RUN_START_DATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>RESULT_XML</id><enabled>Y</enabled><name>RESULT_XML</name></field><field><id>PARAMETER_XML</id><enabled>Y</enabled><name>PARAMETER_XML</name></field></checkpoint-log-table>
+   <pass_batchid>Y</pass_batchid>
    <shared_objects_file/>
   <entries>
     <entry>
@@ -527,5 +576,9 @@
   </hops>
   <notepads>
   </notepads>
+<attributes><group><name>JobRestart</name>
+<attribute><key>UniqueConnections</key>
+<value>N</value>
+</attribute></group></attributes>
 
 </job>
