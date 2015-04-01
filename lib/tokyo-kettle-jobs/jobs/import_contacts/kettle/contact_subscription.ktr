@@ -79,7 +79,7 @@
   <hop> <from>Get Variables</from><to>Check Subscription IDs</to><enabled>Y</enabled> </hop>
   <hop> <from>Check Subscription IDs</from><to>Ignore Subscription</to><enabled>Y</enabled> </hop>
   <hop> <from>Check Subscription IDs</from><to>Get contacts for importID</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ignore Subscription</from><to>Abort</to><enabled>Y</enabled> </hop>
+  <hop> <from>Ignore Subscription</from><to>Abort</to><enabled>N</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
