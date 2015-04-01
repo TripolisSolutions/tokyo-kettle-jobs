@@ -443,7 +443,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     <fields_name/>
     <collection>&#x24;&#x7b;TENANT_UUID&#x7d;_contacts</collection>
     <json_field_name>json</json_field_name>
-    <json_query>&#x7b; importID &#x3a; &#x22;&#x24;&#x7b;IMPORTID&#x7d;&#x22; &#x7d;</json_query>
+    <json_query>&#x7b; import_id&#x3a; &#x22;&#x24;&#x7b;IMPORTID&#x7d;&#x22; &#x7d;</json_query>
     <auth_user/>
     <auth_password>Encrypted </auth_password>
     <auth_kerberos>N</auth_kerberos>

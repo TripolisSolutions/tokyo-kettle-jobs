@@ -18,12 +18,12 @@
         </parameter>
         <parameter>
             <name>IMPORT_BUCKET_NAME</name>
-            <default_value/>
+            <default_value>bucket-tripolis-ap-southeast-1-env-development</default_value>
             <description>Bucket name</description>
         </parameter>
         <parameter>
             <name>IMPORT_CSV_FILENAME</name>
-            <default_value>daily.sg.tripolis.vn&#x2f;csvs&#x2f;Male_Contact_facebook_400_111.csv</default_value>
+            <default_value>acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;contacts&#x2f;csv&#x2f;19_contacts_validation.csv</default_value>
             <description>Path to csv file  in S3 bucket</description>
         </parameter>
         <parameter>
@@ -105,7 +105,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;</filename>
+      <filename>C&#x3a;&#x5c;Users&#x5c;thanh.truong&#x5c;Desktop&#x5c;19_contacts_validation_validation.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -188,17 +188,33 @@
       <xloc>684</xloc>
       <yloc>52</yloc>
       </entry>
+    <entry>
+      <name>Set default values</name>
+      <description/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename/>
+      <file_variable_type>CURRENT_JOB</file_variable_type>
+      <fields>
+        <field>
+          <variable_name>InvalidRows</variable_name>
+          <variable_value>0</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+        <field>
+          <variable_name>ValidRows</variable_name>
+          <variable_value>0</variable_value>
+          <variable_type>CURRENT_JOB</variable_type>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>111</xloc>
+      <yloc>141</yloc>
+      </entry>
   </entries>
   <hops>
-    <hop>
-      <from>START</from>
-      <to>Copy dynamic transform</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
     <hop>
       <from>Copy dynamic transform</from>
       <to>Excecute dynamic task</to>
@@ -229,6 +245,24 @@
     <hop>
       <from>Post validate resutl</from>
       <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>Set default values</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set default values</from>
+      <to>Copy dynamic transform</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
