@@ -105,7 +105,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C&#x3a;&#x5c;Users&#x5c;thanh.truong&#x5c;Desktop&#x5c;19_contacts_validation_validation.ktr</filename>
+      <filename>&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
