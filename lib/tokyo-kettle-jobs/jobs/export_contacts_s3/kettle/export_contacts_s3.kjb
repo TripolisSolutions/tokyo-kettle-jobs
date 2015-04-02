@@ -57,6 +57,11 @@
             <description/>
         </parameter>
         <parameter>
+            <name>export_file_name</name>
+            <default_value>export_group_5513c4fc125cc3b9a8000002</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>group_id</name>
             <default_value>551aeee3125cc3f6db00028d</default_value>
             <description/>

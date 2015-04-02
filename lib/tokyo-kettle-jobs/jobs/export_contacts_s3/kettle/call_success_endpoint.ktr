@@ -116,7 +116,7 @@
     <fields>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a; &#x24;&#x7b;s3_file_path&#x7d;.gz &#x7d;</variable>
+        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a; &#x24;&#x7b;s3_file_path&#x7d;&#x2f;&#x24;&#x7b;export_file_name&#x7d;.gz &#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -190,6 +190,18 @@
         <name>s3_file_path</name>
         <variable>&#x24;&#x7b;s3_file_path&#x7d;</variable>
         <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>export_file_name</name>
+        <variable>&#x24;&#x7b;export_file_name&#x7d;</variable>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
@@ -341,7 +353,7 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;&#x24;&#x7b;s3_bucket&#x7d;&#x2f;&#x24;&#x7b;s3_file_path&#x7d;</name>
+      <name>s3&#x3a;&#x2f;&#x2f;s3&#x2f;&#x24;&#x7b;s3_bucket&#x7d;&#x2f;&#x24;&#x7b;s3_file_path&#x7d;&#x2f;&#x24;&#x7b;export_file_name&#x7d;</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
