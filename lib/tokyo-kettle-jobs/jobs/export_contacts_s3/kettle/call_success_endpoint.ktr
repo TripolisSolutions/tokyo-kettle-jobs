@@ -201,7 +201,7 @@
       <field>
         <name>export_file_name</name>
         <variable>&#x24;&#x7b;export_file_name&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
