@@ -88,7 +88,7 @@
         </parameter>
         <parameter>
             <name>s3_file_path</name>
-            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tenant-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-5513c4fc125cc3b9a8000026&#x2f;group-node-5513c4fc125cc3b9a8000002&#x2f;export_group_5513c4fc125cc3b9a8000002</default_value>
+            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tenant-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-5513c4fc125cc3b9a8000026&#x2f;group-node-5513c4fc125cc3b9a8000002&#x2f;</default_value>
             <description/>
         </parameter>
         <parameter>
