@@ -125,8 +125,8 @@
         <class_source>
           import org.bson.types.ObjectId;
           String chanel_id = "";
-          String contact_id = "";
-
+          String unique_id = "";
+          String unique_id_tmp = "";
           //For custom_object
           String nameField = "body";
           String body = "";
@@ -138,38 +138,41 @@
 
           public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
           {
-            //Get variables name:
-            String tenant_uuid = getVariable("TENANT_UUID", "");
-            routingkey = getVariable("ROUTING_KEY", "subscribe-contact");
+           	//Get variables name:
+          	String tenant_uuid = getVariable("TENANT_UUID", "");
+          	routingkey = getVariable("ROUTING_KEY", "subscribe-contact");
 
             // First, get a row from the default input hop
-            Object[] r = getRow();
+          	Object[] r = getRow();
 
-              // If the row object is null, we are done processing.
-            if (r == null) {
-              setOutputDone();
-              return false;
-            }
-              // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
-              Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+            // If the row object is null, we are done processing.
+          	if (r == null) {
+          		setOutputDone();
+          		return false;
+          	}
 
-            //Contact Id
-            contact_id = new ObjectId().toString();
-            contact_id = "ObjectId:" + contact_id;
-            get(Fields.Out, "contact_id").setValue(outputRow, contact_id);
+          	//Get dynamic value for custom object:
+          	nameField = getParameter("NAME_FIELD");
+
+            // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
+            Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+          	unique_id_tmp = new ObjectId().toString();
+          	unique_id = "ObjectId:" + unique_id_tmp;
+          	get(Fields.Out, "unique_id").setValue(outputRow, unique_id);
 
             //Channel id
             %{channel_code}
 
-            //OPTION: make for custom_object to send to Rabbitmq
-            body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contact_id + "\",    \"key_value_pairs\": %{mapped_custom_field_collection}, \"parent_id\":\"" + parent_id + "\"}";
-            get(Fields.Out, nameField).setValue(outputRow, body);
+          	//OPTION: make for custom_object to send to Rabbitmq
+          	body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + unique_id_tmp + "\",    \"key_value_pairs\": %{mapped_custom_field_collection}, \"parent_id\":\"" + parent_id + "\"}";
+          	get(Fields.Out, nameField).setValue(outputRow, body);
 
-              // putRow will send the row on to the default output hop.
-            //
-              putRow(data.outputRowMeta, outputRow);
+            // putRow will send the row on to the default output hop.
+          	//
+            putRow(data.outputRowMeta, outputRow);
 
-            return true;
+          	return true;
           }
         </class_source>
       </definition>
@@ -182,7 +185,7 @@
         <field_precision>-1</field_precision>
       </field>
       <field>
-        <field_name>contact_id</field_name>
+        <field_name>unique_id</field_name>
         <field_type>String</field_type>
         <field_length>-1</field_length>
         <field_precision>-1</field_precision>
