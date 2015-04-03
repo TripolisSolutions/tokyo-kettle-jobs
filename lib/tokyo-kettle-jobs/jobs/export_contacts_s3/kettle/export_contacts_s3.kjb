@@ -23,12 +23,12 @@
         </parameter>
         <parameter>
             <name>aws_key</name>
-            <default_value/>
+            <default_value>default_value</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>aws_secret</name>
-            <default_value/>
+            <default_value>default_value</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -38,7 +38,7 @@
         </parameter>
         <parameter>
             <name>campaign_id</name>
-            <default_value>5513c4fc125cc3b9a8000026</default_value>
+            <default_value>551dcbc853ac9d5701000026</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -58,7 +58,7 @@
         </parameter>
         <parameter>
             <name>export_file_name</name>
-            <default_value>export_group_5513c4fc125cc3b9a8000002</default_value>
+            <default_value>export_group_551aeee3125cc3f6db00028d</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -88,7 +88,7 @@
         </parameter>
         <parameter>
             <name>s3_file_path</name>
-            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tenant-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-5513c4fc125cc3b9a8000026&#x2f;group-node-5513c4fc125cc3b9a8000002&#x2f;</default_value>
+            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-551dcbc853ac9d5701000026&#x2f;group-node-551aeee3125cc3f6db00028d&#x2f;</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -459,6 +459,39 @@
       <xloc>356</xloc>
       <yloc>238</yloc>
       </entry>
+    <entry>
+      <name>Construct S3 File Path</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Construct_S3_File_Path.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>590</xloc>
+      <yloc>262</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -544,6 +577,15 @@
     </hop>
     <hop>
       <from>Export page</from>
+      <to>Construct S3 File Path</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Construct S3 File Path</from>
       <to>call_success_endpoint</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
