@@ -108,6 +108,114 @@
     </step>
 %{validator_field}
   <step>
+    <name>Generate _id for array</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <definitions>
+      <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+        <class_name>Processor</class_name>
+        <class_source>
+          import org.bson.types.ObjectId;
+          String chanel_id = "";
+          String contact_id = "";
+
+          //For custom_object
+          String nameField = "body";
+          String body = "";
+          String routingkey = "";
+          //Dynamic for custom fields
+          String parent_id = "";
+          String custom_key = "";
+          String custom_value = "";
+
+          public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+          {
+            //Get variables name:
+            String tenant_uuid = getVariable("TENANT_UUID", "");
+            routingkey = getVariable("ROUTING_KEY", "subscribe-contact");
+
+            // First, get a row from the default input hop
+            Object[] r = getRow();
+
+              // If the row object is null, we are done processing.
+            if (r == null) {
+              setOutputDone();
+              return false;
+            }
+              // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
+              Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+            //Contact Id
+            contact_id = new ObjectId().toString();
+            contact_id = "ObjectId:" + contact_id;
+            get(Fields.Out, "contact_id").setValue(outputRow, contact_id);
+
+            //Channel id
+            %{channel_code}
+
+            //OPTION: make for custom_object to send to Rabbitmq
+            body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contact_id + "\",    \"key_value_pairs\": [{\"key\":\"" + custom_key + "\", \"value\": \"" + custom_value + "\"}], \"parent_id\":\"" + parent_id + "\"}";
+            get(Fields.Out, nameField).setValue(outputRow, body);
+
+              // putRow will send the row on to the default output hop.
+            //
+              putRow(data.outputRowMeta, outputRow);
+
+            return true;
+          }
+        </class_source>
+      </definition>
+    </definitions>
+    <fields>
+      <field>
+        <field_name>chanel_id</field_name>
+        <field_type>String</field_type>
+        <field_length>-1</field_length>
+        <field_precision>-1</field_precision>
+      </field>
+      <field>
+        <field_name>contact_id</field_name>
+        <field_type>String</field_type>
+        <field_length>-1</field_length>
+        <field_precision>-1</field_precision>
+      </field>
+      <field>
+        <field_name>body</field_name>
+        <field_type>String</field_type>
+        <field_length>-1</field_length>
+        <field_precision>-1</field_precision>
+      </field>
+      <field>
+        <field_name>routingkey</field_name>
+        <field_type>String</field_type>
+        <field_length>-1</field_length>
+        <field_precision>-1</field_precision>
+      </field>
+    </fields>
+    <clear_result_fields>N</clear_result_fields>
+    <info_steps/>
+    <target_steps/>
+    <usage_parameters/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>76</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>MongoDB Output</name>
     <type>MongoDbOutput</type>
     <description/>
@@ -157,6 +265,52 @@
       </GUI>
     </step>
   %{steps}
+  <step>
+    <name>Post custom object for contacts</name>
+    <type>IC AMQP Plugin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+    <method>none</method>
+    <schema_name/>
+    </partitioning>
+    <transactional>N</transactional>
+    <body_field>body</body_field>
+    <limit>10000</limit>
+    <routing>routingkey</routing>
+    <target>subscribe-contact</target>
+    <mode>producer</mode>
+    <uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri>
+    <username>${RABBIT_USER}</username>
+    <password>${RABBIT_PASSWORD}</password>
+    <host>${RABBIT_HOST}</host>
+    <port>5762</port>
+    <vhost>/</vhost>
+    <usessl>N</usessl>
+    <declare>N</declare>
+    <durable>N</durable>
+    <autodel>N</autodel>
+    <exclusive>N</exclusive>
+    <exchtype>topic</exchtype>
+    <binding>
+      <line>
+        <target_value>subscribe-contact</target_value>
+        <routing_value>subscribe-contact</routing_value>
+      </line>
+    </binding>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>339</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>generate_contact_type</name>
     <type>ValueMapper</type>
