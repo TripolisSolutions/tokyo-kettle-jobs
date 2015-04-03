@@ -162,7 +162,7 @@
             %{channel_code}
 
             //OPTION: make for custom_object to send to Rabbitmq
-            body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contact_id + "\",    \"key_value_pairs\": [{\"key\":\"" + custom_key + "\", \"value\": \"" + custom_value + "\"}], \"parent_id\":\"" + parent_id + "\"}";
+            body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contact_id + "\",    \"key_value_pairs\": %{mapped_custom_field_collection}, \"parent_id\":\"" + parent_id + "\"}";
             get(Fields.Out, nameField).setValue(outputRow, body);
 
               // putRow will send the row on to the default output hop.
