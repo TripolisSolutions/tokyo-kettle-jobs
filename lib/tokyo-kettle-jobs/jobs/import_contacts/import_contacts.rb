@@ -21,6 +21,10 @@ module TokyoKettleJobs
         get_file_path('../kettle/import_template_validation.ktr')
       end
 
+      def self.update_sub_id_template_task
+        get_file_path('../kettle/update_sub_id.ktr')
+      end
+
       def self.s3_utility
         get_file_path('../s3_utility.rb')
       end
