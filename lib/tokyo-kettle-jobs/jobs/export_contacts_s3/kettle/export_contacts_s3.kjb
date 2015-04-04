@@ -18,7 +18,7 @@
         </parameter>
         <parameter>
             <name>admin_api_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4000</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;admin-api.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -43,27 +43,27 @@
         </parameter>
         <parameter>
             <name>contact_api_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4002</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;contact-api.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>elasticsearch_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;9200</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;services.daily.sg.tripolis.vn&#x3a;9200</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>events_api_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;6102</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;event-api.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>export_file_name</name>
-            <default_value>export_group_551aeee3125cc3f6db00028d</default_value>
+            <default_value>export_group_551fd9c853ac9d5bde0009f4</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>551aeee3125cc3f6db00028d</default_value>
+            <default_value>551fd9c853ac9d5bde0009f4</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -88,7 +88,12 @@
         </parameter>
         <parameter>
             <name>s3_file_path</name>
-            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-551dcbc853ac9d5701000026&#x2f;group-node-551aeee3125cc3f6db00028d&#x2f;</default_value>
+            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;campaigns&#x2f;campaign-551dcbc853ac9d5701000026&#x2f;group-node-551fd9c853ac9d5bde0009f4</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>s3_region</name>
+            <default_value>ap-southeast-1</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -139,17 +144,6 @@
 <table/>
 <timeout_days/>
 <field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
-<checkpoint-log-table><connection/>
-<schema/>
-<table/>
-<timeout_days/>
-<max_nr_retries/>
-<run_retry_period/>
-<namespace_parameter/>
-<save_parameters/>
-<save_result_rows/>
-<save_result_files/>
-<field><id>ID_JOB_RUN</id><enabled>Y</enabled><name>ID_JOB_RUN</name></field><field><id>ID_JOB</id><enabled>Y</enabled><name>ID_JOB</name></field><field><id>JOBNAME</id><enabled>Y</enabled><name>JOBNAME</name></field><field><id>NAMESPACE</id><enabled>Y</enabled><name>NAMESPACE</name></field><field><id>CHECKPOINT_NAME</id><enabled>Y</enabled><name>CHECKPOINT_NAME</name></field><field><id>CHECKPOINT_COPYNR</id><enabled>Y</enabled><name>CHECKPOINT_COPYNR</name></field><field><id>ATTEMPT_NR</id><enabled>Y</enabled><name>ATTEMPT_NR</name></field><field><id>JOB_RUN_START_DATE</id><enabled>Y</enabled><name>JOB_RUN_START_DATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>RESULT_XML</id><enabled>Y</enabled><name>RESULT_XML</name></field><field><id>PARAMETER_XML</id><enabled>Y</enabled><name>PARAMETER_XML</name></field></checkpoint-log-table>
    <pass_batchid>Y</pass_batchid>
    <shared_objects_file/>
   <entries>
@@ -236,8 +230,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>597</xloc>
-      <yloc>117</yloc>
+      <xloc>727</xloc>
+      <yloc>26</yloc>
       </entry>
     <entry>
       <name>Abort job</name>
@@ -366,8 +360,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>813</xloc>
-      <yloc>423</yloc>
+      <xloc>918</xloc>
+      <yloc>422</yloc>
       </entry>
     <entry>
       <name>Delete local export tempfile</name>
@@ -378,8 +372,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>813</xloc>
-      <yloc>236</yloc>
+      <xloc>918</xloc>
+      <yloc>235</yloc>
       </entry>
     <entry>
       <name>Get Oauth Token</name>
@@ -423,8 +417,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>812</xloc>
-      <yloc>118</yloc>
+      <xloc>917</xloc>
+      <yloc>117</yloc>
       </entry>
     <entry>
       <name>Calculate Nr Pages</name>
@@ -491,6 +485,41 @@
       <nr>0</nr>
       <xloc>590</xloc>
       <yloc>262</yloc>
+      </entry>
+    <entry>
+      <name>Compress results and upload to s3</name>
+      <description/>
+      <type>SHELL</type>
+      <filename/>
+      <work_directory>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;</work_directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <insertScript>Y</insertScript>
+      <script>echo Compress exported results&#xa;echo &#x27;gzip -c &#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv &#x3e; &#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv.gz&#x27;&#xa;echo&#xa;&#xa;echo Upload exported results to S3&#xa;ruby ..&#x2f;s3_utility.rb upload &#x24;&#x7b;s3_bucket&#x7d; &#x24;&#x7b;s3_file_path&#x7d;&#x24;&#x7b;export_file_name&#x7d; &#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv.gz &#x24;&#x7b;s3_region&#x7d;&#xa;echo Finished uploading exported results to S3</script>
+      <loglevel>Basic</loglevel>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>591</xloc>
+      <yloc>118</yloc>
+      </entry>
+    <entry>
+      <name>Delete local export temp compressed file</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <filename>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;export_group_&#x24;&#x7b;group_id&#x7d;.csv.gz</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>919</xloc>
+      <yloc>328</yloc>
       </entry>
   </entries>
   <hops>
@@ -585,15 +614,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Construct S3 File Path</from>
-      <to>call_success_endpoint</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>call_success_endpoint</from>
       <to>Delete local transformation tempfile</to>
       <from_nr>0</from_nr>
@@ -612,13 +632,40 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Delete local export tempfile</from>
+      <from>Construct S3 File Path</from>
+      <to>Compress results and upload to s3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Compress results and upload to s3</from>
+      <to>call_success_endpoint</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local export temp compressed file</from>
       <to>All done.</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local export tempfile</from>
+      <to>Delete local export temp compressed file</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>

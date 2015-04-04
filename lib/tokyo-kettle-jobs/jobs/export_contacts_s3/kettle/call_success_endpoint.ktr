@@ -97,10 +97,11 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>S3 File Output</from><to>REST Client campaign-api</to><enabled>Y</enabled> </hop>
+  <hop> <from>S3 File Output</from><to>REST Client campaign-api</to><enabled>N</enabled> </hop>
   <hop> <from>Load file content in memory</from><to>Get Variables</to><enabled>Y</enabled> </hop>
   <hop> <from>REST Client campaign-api</from><to>Write to log</to><enabled>N</enabled> </hop>
-  <hop> <from>Get Variables</from><to>S3 File Output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>S3 File Output</to><enabled>N</enabled> </hop>
+  <hop> <from>Get Variables</from><to>REST Client campaign-api</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -189,7 +190,7 @@
       <field>
         <name>s3_bucket_name</name>
         <variable>&#x24;&#x7b;s3_bucket_name&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -201,7 +202,7 @@
       <field>
         <name>s3_file_path</name>
         <variable>&#x24;&#x7b;s3_file_path&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -213,7 +214,7 @@
       <field>
         <name>export_file_name</name>
         <variable>&#x24;&#x7b;export_file_name&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
