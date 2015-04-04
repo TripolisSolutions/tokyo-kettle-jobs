@@ -42,6 +42,11 @@
             <description>Dynamic kettle file name</description>
         </parameter>
         <parameter>
+            <name>KETTLE_FILENAME_UPDATE_ID</name>
+            <default_value/>
+            <description>Update embed document _id</description>
+        </parameter>
+        <parameter>
             <name>LISTIDS</name>
             <default_value/>
             <description>List IDs for current import job</description>
@@ -151,7 +156,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1071</xloc>
+      <xloc>1102</xloc>
       <yloc>162</yloc>
       </entry>
     <entry>
@@ -185,7 +190,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>485</xloc>
-      <yloc>48</yloc>
+      <yloc>45</yloc>
       </entry>
     <entry>
       <name>Copy dynamic transform</name>
@@ -202,13 +207,13 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;&#xa;</script>
+      <script>&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;&#xd;&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d;  &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME_UPDATE_ID&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME_UPDATE_ID&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;&#xd;&#xa;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>324</xloc>
-      <yloc>48</yloc>
+      <yloc>45</yloc>
       </entry>
     <entry>
       <name>call pushmessage api</name>
@@ -248,8 +253,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>898</xloc>
-      <yloc>48</yloc>
+      <xloc>1009</xloc>
+      <yloc>45</yloc>
       </entry>
     <entry>
       <name>Add to Subscription</name>
@@ -281,8 +286,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>617</xloc>
-      <yloc>48</yloc>
+      <xloc>731</xloc>
+      <yloc>45</yloc>
       </entry>
     <entry>
       <name>Add to List</name>
@@ -314,8 +319,205 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>745</xloc>
-      <yloc>48</yloc>
+      <xloc>856</xloc>
+      <yloc>45</yloc>
+      </entry>
+    <entry>
+      <name>Update _id documents</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME_UPDATE_ID&#x7d;</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>616</xloc>
+      <yloc>45</yloc>
+      </entry>
+    <entry>
+      <name>call pushmessage api 2</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;call_pushmessage_api.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>admin_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;ADMIN_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>pushmessage_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;PUSHMESSAGE_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>userid</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>486</xloc>
+      <yloc>162</yloc>
+      </entry>
+    <entry>
+      <name>call pushmessage api 3</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;call_pushmessage_api.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>admin_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;ADMIN_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>pushmessage_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;PUSHMESSAGE_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>userid</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>613</xloc>
+      <yloc>162</yloc>
+      </entry>
+    <entry>
+      <name>call pushmessage api 4</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;call_pushmessage_api.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>admin_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;ADMIN_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>pushmessage_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;PUSHMESSAGE_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>userid</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>742</xloc>
+      <yloc>162</yloc>
+      </entry>
+    <entry>
+      <name>call pushmessage api 5</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;call_pushmessage_api.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+            <parameter>            <name>admin_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;ADMIN_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>pushmessage_api_url</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;PUSHMESSAGE_API_URL&#x7d;</value>
+            </parameter>            <parameter>            <name>userid</name>
+            <stream_name/>
+            <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>888</xloc>
+      <yloc>162</yloc>
       </entry>
   </entries>
   <hops>
@@ -347,15 +549,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Excecute dynamic task</from>
-      <to>Add to Subscription</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Add to Subscription</from>
       <to>Add to List</to>
       <from_nr>0</from_nr>
@@ -371,6 +564,60 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Excecute dynamic task</from>
+      <to>Update _id documents</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update _id documents</from>
+      <to>Add to Subscription</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Excecute dynamic task</from>
+      <to>call pushmessage api 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Update _id documents</from>
+      <to>call pushmessage api 3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Add to Subscription</from>
+      <to>call pushmessage api 4</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Add to List</from>
+      <to>call pushmessage api 5</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
