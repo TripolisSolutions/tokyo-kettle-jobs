@@ -24,7 +24,7 @@ module TokyoKettleJobs
         puts "Uploading #{local_file_path} to #{region}/#{bucket}/#{s3_file_path}"
 
         client = Aws::S3::Client.new(region: region, credentials: s3_credentials)
-        request_options = {bucket: bucket, key: s3_file_path, body: local_file_path}.merge(extra_options || {})
+        request_options = {bucket: bucket, key: s3_file_path, body: File.read(local_file_path)}.merge(extra_options || {})
         client.put_object(request_options)
 
         puts "Uploaded #{local_file_path} to #{region}/#{bucket}/#{s3_file_path}"
