@@ -114,7 +114,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>ScriptValue</jsScript_name>
-        <jsScript_script>var construct_file_location &#x3d; rtrim&#x28;s3_bucket.getString&#x28;&#x29;&#x29;&#x2b;&#x22;&#x2f;&#x22;&#x2b;rtrim&#x28;s3_file_path.getString&#x28;&#x29;&#x29;&#x2b;rtrim&#x28;export_file_name.getString&#x28;&#x29;&#x29;&#xa;construct_file_location &#x3d; rtrim&#x28;construct_file_location&#x29;</jsScript_script>
+        <jsScript_script>var construct_file_location &#x3d; rtrim&#x28;s3_file_path.getString&#x28;&#x29;&#x29;&#x2b;rtrim&#x28;export_file_name.getString&#x28;&#x29;&#x29;&#xa;construct_file_location &#x3d; rtrim&#x28;construct_file_location&#x29;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>construct_file_location</name>
         <rename>construct_file_location</rename>
         <type>String</type>
@@ -201,7 +201,7 @@
       <field>
         <field_name>construct_file_location</field_name>
         <variable_name>construct_file_location</variable_name>
-        <variable_type>JVM</variable_type>
+        <variable_type>PARENT_JOB</variable_type>
         <default_value/>
         </field>
       </fields>
