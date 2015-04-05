@@ -117,7 +117,7 @@
     <fields>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a; &#x24;&#x7b;s3_file_path&#x7d;&#x24;&#x7b;export_file_name&#x7d;.gz &#x7d;</variable>
+        <variable>&#x7b;&#x22;total_pages&#x22;&#x3a;&#x24;&#x7b;pages&#x7d;, &#x22;file_path&#x22;&#x3a; &#x22;&#x24;&#x7b;s3_file_path&#x7d;&#x24;&#x7b;export_file_name&#x7d;.gz&#x22; &#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
