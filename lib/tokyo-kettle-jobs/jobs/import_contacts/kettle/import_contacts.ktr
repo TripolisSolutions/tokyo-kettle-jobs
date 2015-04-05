@@ -159,8 +159,7 @@
             // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
             Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
 
-          	unique_id_tmp = new ObjectId().toString();
-          	//contact_unique_id = "ObjectId:" + unique_id_tmp;
+          	contact_unique_id = new ObjectId().toString();
           	get(Fields.Out, "contact_unique_id").setValue(outputRow, contact_unique_id);
 
             //Channel id

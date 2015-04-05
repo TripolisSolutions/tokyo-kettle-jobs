@@ -23,27 +23,27 @@
         </parameter>
         <parameter>
             <name>IMPORTID</name>
-            <default_value/>
+            <default_value>12345678</default_value>
             <description>Id for current import</description>
         </parameter>
         <parameter>
             <name>IMPORT_BUCKET_NAME</name>
-            <default_value/>
+            <default_value>bucket-tripolis-ap-southeast-1-env-development</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>IMPORT_CSV_FILENAME</name>
-            <default_value/>
+            <default_value>acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;contacts&#x2f;csv&#x2f;19_contacts_validation.csv</default_value>
             <description>Path to csv file  in S3 bucket</description>
         </parameter>
         <parameter>
             <name>KETTLE_FILENAME</name>
-            <default_value/>
+            <default_value>19_contacts_validation.ktr</default_value>
             <description>Dynamic kettle file name</description>
         </parameter>
         <parameter>
             <name>KETTLE_FILENAME_UPDATE_ID</name>
-            <default_value/>
+            <default_value>19_contacts_validation_update_sub_id.ktr</default_value>
             <description>Update embed document _id</description>
         </parameter>
         <parameter>
@@ -98,7 +98,7 @@
         </parameter>
         <parameter>
             <name>TENANT_UUID</name>
-            <default_value/>
+            <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
             <description>Tenant uuid for current import</description>
         </parameter>
         <parameter>
@@ -190,7 +190,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>485</xloc>
-      <yloc>44</yloc>
+      <yloc>10</yloc>
       </entry>
     <entry>
       <name>Copy dynamic transform</name>
@@ -213,7 +213,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>156</xloc>
-      <yloc>44</yloc>
+      <yloc>10</yloc>
       </entry>
     <entry>
       <name>call pushmessage api</name>
@@ -254,7 +254,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1009</xloc>
-      <yloc>44</yloc>
+      <yloc>10</yloc>
       </entry>
     <entry>
       <name>Add to Subscription</name>
@@ -287,7 +287,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>731</xloc>
-      <yloc>44</yloc>
+      <yloc>10</yloc>
       </entry>
     <entry>
       <name>Add to List</name>
@@ -319,8 +319,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>856</xloc>
-      <yloc>44</yloc>
+      <xloc>863</xloc>
+      <yloc>10</yloc>
       </entry>
     <entry>
       <name>Update _id documents</name>
@@ -352,7 +352,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>616</xloc>
+      <xloc>623</xloc>
       <yloc>44</yloc>
       </entry>
     <entry>
@@ -393,8 +393,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>486</xloc>
-      <yloc>162</yloc>
+      <xloc>427</xloc>
+      <yloc>170</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 3</name>
@@ -540,7 +540,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>329</xloc>
-      <yloc>41</yloc>
+      <yloc>10</yloc>
       </entry>
   </entries>
   <hops>
