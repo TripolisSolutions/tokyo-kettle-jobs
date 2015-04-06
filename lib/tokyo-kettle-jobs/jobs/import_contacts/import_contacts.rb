@@ -21,6 +21,10 @@ module TokyoKettleJobs
         get_file_path('../kettle/import_template_validation.ktr')
       end
 
+      def self.update_sub_id_template_task
+        get_file_path('../kettle/update_sub_id.ktr')
+      end
+
       def self.s3_utility
         get_file_path('../s3_utility.rb')
       end
@@ -43,7 +47,8 @@ module TokyoKettleJobs
             "-param:RABBIT_HOST=\"#{params[:rabbit_host]}\"",
             "-param:RABBIT_USER=\"#{params[:rabbit_user]}\"",
             "-param:RABBIT_PASSWORD=\"#{params[:rabbit_password]}\"",
-            "-param:IMPORTID=\"#{params[:import_id]}\""
+            "-param:IMPORTID=\"#{params[:import_id]}\"",
+            "-param:KETTLE_FILENAME_UPDATE_ID=\"#{params[:kettle_filename_update_id]}\""
         ].join(' ')
         shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} & >/dev/null 2>&1"
         shell_script

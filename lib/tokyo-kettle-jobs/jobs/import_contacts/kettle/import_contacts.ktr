@@ -108,6 +108,93 @@
     </step>
 %{validator_field}
   <step>
+    <name>Generate _id for array</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <definitions>
+      <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+        <class_name>Processor</class_name>
+        <class_source>
+          import org.bson.types.ObjectId;
+          String chanel_id = "";
+          String contact_unique_id = "";
+          String unique_id_tmp = "";
+          //For custom_object
+          String nameField = "body";
+          String body = "";
+          String routingkey = "";
+          //Dynamic for custom fields
+          String parent_id = "";
+          String custom_key = "";
+          String custom_value = "";
+
+          %{global_vars}
+
+          public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+          {
+           	//Get variables name:
+          	String tenant_uuid = getVariable("TENANT_UUID", "");
+          	routingkey = getVariable("ROUTING_KEY", "subscribe-contact");
+
+            // First, get a row from the default input hop
+          	Object[] r = getRow();
+
+            // If the row object is null, we are done processing.
+          	if (r == null) {
+          		setOutputDone();
+          		return false;
+          	}
+
+          	//Get dynamic value for custom object:
+          	//nameField = getParameter("NAME_FIELD");
+
+            // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
+            Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+          	contact_unique_id = new ObjectId().toString();
+          	get(Fields.Out, "contact_unique_id").setValue(outputRow, contact_unique_id);
+
+            //Channel id
+            %{channel_code}
+
+          	//OPTION: make for custom_object to send to Rabbitmq
+          	body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + unique_id_tmp + "\",    \"key_value_pairs\": %{mapped_custom_field_collection}, \"parent_id\":\"" + parent_id + "\"}";
+          	//get(Fields.Out, nameField).setValue(outputRow, body);
+
+            // putRow will send the row on to the default output hop.
+          	//
+            putRow(data.outputRowMeta, outputRow);
+
+          	return true;
+          }
+        </class_source>
+      </definition>
+    </definitions>
+    %{unique_id_fields}
+    <clear_result_fields>N</clear_result_fields>
+    <info_steps/>
+    <target_steps/>
+    <usage_parameters/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>992</xloc>
+      <yloc>76</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>MongoDB Output</name>
     <type>MongoDbOutput</type>
     <description/>
@@ -158,6 +245,52 @@
     </step>
   %{steps}
   <step>
+    <name>Post custom object for contacts</name>
+    <type>IC AMQP Plugin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+    <method>none</method>
+    <schema_name/>
+    </partitioning>
+    <transactional>N</transactional>
+    <body_field>body</body_field>
+    <limit>10000</limit>
+    <routing>routingkey</routing>
+    <target>subscribe-contact</target>
+    <mode>producer</mode>
+    <uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri>
+    <username>${RABBIT_USER}</username>
+    <password>${RABBIT_PASSWORD}</password>
+    <host>${RABBIT_HOST}</host>
+    <port>5762</port>
+    <vhost>/</vhost>
+    <usessl>N</usessl>
+    <declare>N</declare>
+    <durable>N</durable>
+    <autodel>N</autodel>
+    <exclusive>N</exclusive>
+    <exchtype>topic</exchtype>
+    <binding>
+      <line>
+        <target_value>subscribe-contact</target_value>
+        <routing_value>subscribe-contact</routing_value>
+      </line>
+    </binding>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1200</xloc>
+      <yloc>339</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>generate_contact_type</name>
     <type>ValueMapper</type>
     <description/>
@@ -188,37 +321,37 @@
       <draw>Y</draw>
     </GUI>
   </step>
-    <step>
-      <name>generate_import_contact_id_value</name>
-      <type>ValueMapper</type>
-      <description/>
-      <distribute>Y</distribute>
-      <custom_distribution/>
-      <copies>1</copies>
-      <partitioning>
-        <method>none</method>
-        <schema_name/>
-      </partitioning>
-      <field_to_use>import_contact_id_value</field_to_use>
-      <target_field/>
-      <non_match_default/>
-      <fields>
-        <field>
-          <source_value/>
-          <target_value>%{import_id}</target_value>
-        </field>
-      </fields>
-      <cluster_schema/>
-      <remotesteps>
-        <input>   </input>
-        <output>   </output>
-      </remotesteps>
-      <GUI>
-        <xloc>435</xloc>
-        <yloc>164</yloc>
-        <draw>Y</draw>
-      </GUI>
-    </step>
+  <step>
+    <name>generate_import_contact_id_value</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <field_to_use>import_contact_id_value</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value/>
+        <target_value>%{import_id}</target_value>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>435</xloc>
+      <yloc>164</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>collect error rows</name>
     <type>Dummy</type>
