@@ -17,6 +17,11 @@
             <description>Admin api url</description>
         </parameter>
         <parameter>
+            <name>CCO_QUEUE_NAME</name>
+            <default_value>import-custom-object</default_value>
+            <description>Custom object queue name</description>
+        </parameter>
+        <parameter>
             <name>DELIMETER</name>
             <default_value>,</default_value>
             <description>Delemiter for csv file</description>
@@ -146,8 +151,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>91</xloc>
-      <yloc>175</yloc>
+      <xloc>85</xloc>
+      <yloc>264</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -156,8 +161,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1102</xloc>
-      <yloc>162</yloc>
+      <xloc>1096</xloc>
+      <yloc>251</yloc>
       </entry>
     <entry>
       <name>Excecute dynamic task</name>
@@ -189,8 +194,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>485</xloc>
-      <yloc>10</yloc>
+      <xloc>479</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
       <name>Copy dynamic transform</name>
@@ -212,8 +217,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>156</xloc>
-      <yloc>10</yloc>
+      <xloc>150</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
       <name>call pushmessage api</name>
@@ -249,12 +254,18 @@
             </parameter>            <parameter>            <name>userid</name>
             <stream_name/>
             <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>            <parameter>            <name>serverity</name>
+            <stream_name/>
+            <value>3</value>
+            </parameter>            <parameter>            <name>pmmessage</name>
+            <stream_name/>
+            <value>Import successfully.</value>
             </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1009</xloc>
-      <yloc>10</yloc>
+      <xloc>1003</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
       <name>Add to Subscription</name>
@@ -286,8 +297,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>731</xloc>
-      <yloc>10</yloc>
+      <xloc>725</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
       <name>Add to List</name>
@@ -319,8 +330,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>863</xloc>
-      <yloc>10</yloc>
+      <xloc>857</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
       <name>Update _id documents</name>
@@ -352,8 +363,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>623</xloc>
-      <yloc>44</yloc>
+      <xloc>617</xloc>
+      <yloc>99</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 2</name>
@@ -389,12 +400,18 @@
             </parameter>            <parameter>            <name>userid</name>
             <stream_name/>
             <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>            <parameter>            <name>serverity</name>
+            <stream_name/>
+            <value>1</value>
+            </parameter>            <parameter>            <name>pmmessage</name>
+            <stream_name/>
+            <value>Import failed</value>
             </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>427</xloc>
-      <yloc>170</yloc>
+      <xloc>421</xloc>
+      <yloc>259</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 3</name>
@@ -430,12 +447,18 @@
             </parameter>            <parameter>            <name>userid</name>
             <stream_name/>
             <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>            <parameter>            <name>serverity</name>
+            <stream_name/>
+            <value>1</value>
+            </parameter>            <parameter>            <name>pmmessage</name>
+            <stream_name/>
+            <value>Import failed.</value>
             </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>613</xloc>
-      <yloc>162</yloc>
+      <xloc>607</xloc>
+      <yloc>251</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 4</name>
@@ -471,12 +494,18 @@
             </parameter>            <parameter>            <name>userid</name>
             <stream_name/>
             <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>            <parameter>            <name>serverity</name>
+            <stream_name/>
+            <value>1</value>
+            </parameter>            <parameter>            <name>pmmessage</name>
+            <stream_name/>
+            <value>Import failed.</value>
             </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>742</xloc>
-      <yloc>162</yloc>
+      <xloc>736</xloc>
+      <yloc>251</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 5</name>
@@ -512,12 +541,18 @@
             </parameter>            <parameter>            <name>userid</name>
             <stream_name/>
             <value>&#x24;&#x7b;USERID&#x7d;</value>
+            </parameter>            <parameter>            <name>serverity</name>
+            <stream_name/>
+            <value>1</value>
+            </parameter>            <parameter>            <name>pmmessage</name>
+            <stream_name/>
+            <value>Import failed.</value>
             </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>888</xloc>
-      <yloc>162</yloc>
+      <xloc>882</xloc>
+      <yloc>251</yloc>
       </entry>
     <entry>
       <name>Copy update transform</name>
@@ -539,8 +574,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>329</xloc>
-      <yloc>10</yloc>
+      <xloc>323</xloc>
+      <yloc>99</yloc>
       </entry>
   </entries>
   <hops>

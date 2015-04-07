@@ -163,7 +163,7 @@
       </field>
       <field>
         <name>text</name>
-        <variable>import data successfully.</variable>
+        <variable>&#x24;&#x7b;pmmessage&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -175,7 +175,7 @@
       </field>
       <field>
         <name>severity</name>
-        <variable>2</variable>
+        <variable>3</variable>
         <type>String</type>
         <format/>
         <currency/>

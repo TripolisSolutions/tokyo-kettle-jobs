@@ -142,7 +142,7 @@
           {
            	//Get variables name:
           	String tenant_uuid = getVariable("TENANT_UUID", "");
-          	routingkey = getVariable("ROUTING_KEY", "subscribe-contact");
+          	routingkey = getVariable("ROUTING_KEY", "import-custom-object");
 
             // First, get a row from the default input hop
           	Object[] r = getRow();
@@ -259,7 +259,7 @@
     <body_field>body</body_field>
     <limit>10000</limit>
     <routing>routingkey</routing>
-    <target>subscribe-contact</target>
+    <target>import-custom-object</target>
     <mode>producer</mode>
     <uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri>
     <username>${RABBIT_USER}</username>
@@ -275,8 +275,8 @@
     <exchtype>topic</exchtype>
     <binding>
       <line>
-        <target_value>subscribe-contact</target_value>
-        <routing_value>subscribe-contact</routing_value>
+        <target_value>import-custom-object</target_value>
+        <routing_value>import-custom-object</routing_value>
       </line>
     </binding>
     <cluster_schema/>
