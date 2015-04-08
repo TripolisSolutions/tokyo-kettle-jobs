@@ -167,7 +167,6 @@
 
           	//OPTION: make for custom_object to send to Rabbitmq
           	%{mapped_custom_field_collection}
-          	//get(Fields.Out, nameField).setValue(outputRow, body);
 
             // putRow will send the row on to the default output hop.
           	//
