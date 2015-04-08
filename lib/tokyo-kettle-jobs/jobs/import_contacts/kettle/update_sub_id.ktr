@@ -95,7 +95,7 @@
     <fields_name/>
     <collection>%{mongo_collection}</collection>
     <json_field_name>json</json_field_name>
-    <json_query>&#x7b;&#x24;and &#x3a; &#x5b;&#x7b; import_id&#x3a; &#x22;%{import_id}&#x22;&#x7d;,&#x7b; channels&#x5b;0&#x5d;._id &#x3a;&#x7b;&#x24;exists&#x3a; false&#x7d;&#x7d; &#x5d;&#x7d;</json_query>
+    <json_query>&#x7b;&#x24;and &#x3a; &#x5b;&#x7b; import_id&#x3a; &#x22;%{import_id}&#x22;&#x7d;,&#x7b; channels._id &#x3a;&#x7b;&#x24;exists&#x3a; false&#x7d;&#x7d; &#x5d;&#x7d;</json_query>
     <auth_user/>
     <auth_password>Encrypted </auth_password>
     <auth_kerberos>N</auth_kerberos>

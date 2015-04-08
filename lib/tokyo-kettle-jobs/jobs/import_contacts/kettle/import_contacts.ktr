@@ -142,7 +142,7 @@
           {
            	//Get variables name:
           	String tenant_uuid = getVariable("TENANT_UUID", "");
-          	routingkey = getVariable("ROUTING_KEY", "import-custom-object");
+          	routingkey = getVariable("CCO_ROUTING_KEY", "import-custom-object");
 
             // First, get a row from the default input hop
           	Object[] r = getRow();
@@ -166,7 +166,7 @@
             %{channel_code}
 
           	//OPTION: make for custom_object to send to Rabbitmq
-          	body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + unique_id_tmp + "\",    \"key_value_pairs\": %{mapped_custom_field_collection}, \"parent_id\":\"" + parent_id + "\"}";
+          	%{mapped_custom_field_collection}
           	//get(Fields.Out, nameField).setValue(outputRow, body);
 
             // putRow will send the row on to the default output hop.
@@ -244,52 +244,7 @@
       </GUI>
     </step>
   %{steps}
-  <step>
-    <name>Post custom object for contacts</name>
-    <type>IC AMQP Plugin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-    <method>none</method>
-    <schema_name/>
-    </partitioning>
-    <transactional>N</transactional>
-    <body_field>body</body_field>
-    <limit>10000</limit>
-    <routing>routingkey</routing>
-    <target>import-custom-object</target>
-    <mode>producer</mode>
-    <uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri>
-    <username>${RABBIT_USER}</username>
-    <password>${RABBIT_PASSWORD}</password>
-    <host>${RABBIT_HOST}</host>
-    <port>5762</port>
-    <vhost>/</vhost>
-    <usessl>N</usessl>
-    <declare>N</declare>
-    <durable>N</durable>
-    <autodel>N</autodel>
-    <exclusive>N</exclusive>
-    <exchtype>topic</exchtype>
-    <binding>
-      <line>
-        <target_value>import-custom-object</target_value>
-        <routing_value>import-custom-object</routing_value>
-      </line>
-    </binding>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1200</xloc>
-      <yloc>339</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
+  %{post_custom_object_for_contacts_step}
   <step>
     <name>generate_contact_type</name>
     <type>ValueMapper</type>
@@ -417,75 +372,6 @@
 		</GUI>
 	</step>
 	<step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>%{email_key}</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>Y</presorted>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>354</xloc>
-      <yloc>245</yloc>
-      <draw>Y</draw>
-    </GUI>
-	</step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>Y</count_rows>
-    <count_field>CntDuplicate</count_field>
-    <reject_duplicate_row>Y</reject_duplicate_row>
-    <error_description>Duplicate rows</error_description>
-    <fields>
-      <field>
-        <name>%{email_key}</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>500</xloc>
-      <yloc>253</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-	<step>
 		<name>collect error rows 2</name>
 		<type>Dummy</type>
 		<description/>
@@ -508,24 +394,30 @@
 		</GUI>
 	</step>
   <step>
-    <name>collect error rows 3</name>
-    <type>Dummy</type>
+    <name>Block this step until steps finish</name>
+    <type>BlockUntilStepsFinish</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
-      <method>none</method>
-      <schema_name/>
+    <method>none</method>
+    <schema_name/>
     </partitioning>
+    <steps>
+      <step>
+        <name>MongoDB Output</name>
+        <CopyNr>0</CopyNr>
+      </step>
+    </steps>
     <cluster_schema/>
     <remotesteps>
       <input>   </input>
       <output>   </output>
     </remotesteps>
     <GUI>
-      <xloc>503</xloc>
-      <yloc>394</yloc>
+      <xloc>1020</xloc>
+      <yloc>213</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
