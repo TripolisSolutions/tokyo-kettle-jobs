@@ -183,43 +183,31 @@
     <definitions>
         <definition>
         <class_type>TRANSFORM_CLASS</class_type>
-
         <class_name>Processor</class_name>
-
-        <class_source><![CDATA[import org.bson.types.ObjectId;
+        <class_source>
+          import org.bson.types.ObjectId;
 
           %{mongo_sub_field_global_vars}
 
           public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
           {
             //Get variables name:
-
-
             // First, get a row from the default input hop
             Object[] r = getRow();
 
-              // If the row object is null, we are done processing.
+            // If the row object is null, we are done processing.
             if (r == null) {
               setOutputDone();
               return false;
             }
 
             // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
-              Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
-
+            Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
             %{mongo_sub_field_values}
-
-            //convert _id to format in var _id = '{ "$oid": "' + _id + '" }';
-             // String _id = get(Fields.In, "_id").getString(r);
-              //String output_id = "{ \"$oid\": \"" + _id + "\" }";
-            //get(Fields.Out, "_id").setValue(outputRow, output_id);
-
             // putRow will send the row on to the default output hop.
-            //
-              putRow(data.outputRowMeta, outputRow);
-
+            putRow(data.outputRowMeta, outputRow);
             return true;
-          }]]>
+          }
         </class_source>
         </definition>
     </definitions>
