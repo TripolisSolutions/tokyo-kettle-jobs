@@ -22,8 +22,18 @@
             <description/>
         </parameter>
         <parameter>
+            <name>pmmessage</name>
+            <default_value>Import failed.</default_value>
+            <description/>
+        </parameter>
+        <parameter>
             <name>pushmessage_api_url</name>
             <default_value>http&#x3a;&#x2f;&#x2f;127.0.0.1&#x3a;4103</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>severity</name>
+            <default_value>2</default_value>
             <description/>
         </parameter>
         <parameter>

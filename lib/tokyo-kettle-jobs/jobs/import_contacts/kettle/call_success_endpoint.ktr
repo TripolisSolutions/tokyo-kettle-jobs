@@ -127,7 +127,7 @@
       </field>
       <field>
         <name>success_body</name>
-        <variable>&#x7b;&#x22;channel&#x22;&#x3a; &#x22;&#x2f;private&#x2f;&#x24;&#x7b;userid&#x7d;&#x22;, &#x22;text&#x22;&#x3a;&#x22;Import contacts successfully.&#x22;, &#x22;severity&#x22;&#x3a;1&#x7d;</variable>
+        <variable>&#x7b;&#x22;channel&#x22;&#x3a; &#x22;&#x2f;private&#x2f;&#x24;&#x7b;userid&#x7d;&#x22;, &#x22;text&#x22;&#x3a;&#x22;&#x24;&#x7b;pmmessage&#x7d;&#x22;, &#x22;severity&#x22;&#x3a; &#x24;&#x7b;severity&#x7d; &#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -175,7 +175,7 @@
       </field>
       <field>
         <name>severity</name>
-        <variable>3</variable>
+        <variable>&#x24;severity</variable>
         <type>String</type>
         <format/>
         <currency/>
