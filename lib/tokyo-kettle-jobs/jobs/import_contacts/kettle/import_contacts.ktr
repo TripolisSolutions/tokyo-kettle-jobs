@@ -462,8 +462,8 @@ var q = JSON.stringify(query)
         <jsScript_script>
         var csvFilename = getEnvironmentVar("CSVFile");
 
-        //var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"channels.value","query": email}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
-        var query = { total_rows: 0, current_row: 0,mapping_id: csvFilename, data: first_name + "," + last_name + "," +  address + "," + city + "," +  country + "," +  Province + "," +  zipcode + "," + phone_number + "," + email + "," + birthday + "," +  gender }
+        //var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"channels.value","query": %{email_key_field}}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
+        var query = { total_rows: 0, current_row: 0,mapping_id: csvFilename, data: %{csv_header_string} }
         var q = JSON.stringify(query)
         </jsScript_script>
       </jsScript>
