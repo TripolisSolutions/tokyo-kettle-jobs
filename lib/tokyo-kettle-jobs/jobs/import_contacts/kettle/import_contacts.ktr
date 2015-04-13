@@ -470,7 +470,7 @@ var q = JSON.stringify(query)
     </jsScripts>
     <fields>
       <field>
-        <name>updatemsg</name>
+        <name>q</name>
         <rename>updatemsg</rename>
         <type>String</type>
         <length>-1</length>
