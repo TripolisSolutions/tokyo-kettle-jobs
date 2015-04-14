@@ -620,7 +620,7 @@
       <to>Update _id documents</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -688,14 +688,14 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Excecute dynamic task</from>
-      <to>Add to Subscription</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
+          <from>Excecute dynamic task</from>
+          <to>Add to Subscription</to>
+          <from_nr>0</from_nr>
+          <to_nr>0</to_nr>
+          <enabled>Y</enabled>
+          <evaluation>Y</evaluation>
+          <unconditional>N</unconditional>
+        </hop>
   </hops>
   <notepads>
   </notepads>

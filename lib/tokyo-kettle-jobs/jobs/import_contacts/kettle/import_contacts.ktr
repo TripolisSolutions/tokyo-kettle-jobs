@@ -225,9 +225,9 @@
 
     <truncate>N</truncate>
 
-    <update>Y</update>
+    <update>N</update>
 
-    <upsert>Y</upsert>
+    <upsert>N</upsert>
 
     <multi>N</multi>
 
@@ -392,6 +392,20 @@
 			<draw>Y</draw>
 		</GUI>
 	</step>
+
+<step><name>Modified Java Script Value</name><type>ScriptValueMod</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><compatible>N</compatible><optimizationLevel>9</optimizationLevel><jsScripts><jsScript><jsScript_type>0</jsScript_type><jsScript_name>Script 1</jsScript_name>
+<jsScript_script>
+var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"tokyo_api_dynamic_daily-sg_contacts.channels.value","query": email}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
+var q = JSON.stringify(query)
+</jsScript_script>
+</jsScript></jsScripts><fields><field><name>q</name><rename>esquerys</rename><type>String</type><length>-1</length><precision>-1</precision><replace>N</replace></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>672</xloc><yloc>258</yloc><draw>Y</draw></GUI></step>
+
+<step><name>Elasticsearch lookup</name><type>Rest</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><applicationType>JSON</applicationType><method>POST</method><url>${ELASTICSEARCH_URL}/${TENANT_UUID}_contacts/_search</url><urlInField>N</urlInField><dynamicMethod>N</dynamicMethod><methodFieldName/><urlField/><bodyField>esquerys</bodyField><httpLogin/><httpPassword>Encrypted </httpPassword><proxyHost/><proxyPort/><preemptive>N</preemptive><trustStoreFile/><trustStorePassword>Encrypted </trustStorePassword><headers>
+      </headers><parameters>
+      </parameters><result><name>foundContact</name><code/><response_time/></result><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>571</xloc><yloc>406</yloc><draw>Y</draw></GUI></step>
+
+<step><name>Check if existing contact</name><type>JsonInput</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><include>N</include><include_field/><rownum>N</rownum><addresultfile>N</addresultfile><readurl>N</readurl><IsIgnoreEmptyFile>N</IsIgnoreEmptyFile><doNotFailIfNoFile>Y</doNotFailIfNoFile><ignoreMissingPath>N</ignoreMissingPath><rownum_field/><file><name/><filemask/><exclude_filemask/><file_required>N</file_required><include_subfolders>N</include_subfolders></file><fields><field><name>totals</name><path>$.hits.total</path><type>None</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field></fields><limit>0</limit><IsInFields>Y</IsInFields><IsAFile>N</IsAFile><valueField>foundContact</valueField><shortFileFieldName/><pathFieldName/><hiddenFieldName/><lastModificationTimeFieldName/><uriNameFieldName/><rootUriNameFieldName/><extensionFieldName/><sizeFieldName/><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>696</xloc><yloc>515</yloc><draw>Y</draw></GUI></step>
+<step><name>Post custom object for contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>N</transactional><body_field>body</body_field><limit>10000</limit><routing>routingkey</routing><target>import-custom-object</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>N</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>import-custom-object</target_value><routing_value>import-custom-object</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1235</xloc><yloc>332</yloc><draw>Y</draw></GUI></step>
   <step>
     <name>Block this step until steps finish</name>
     <type>BlockUntilStepsFinish</type>
@@ -400,8 +414,8 @@
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
-    <method>none</method>
-    <schema_name/>
+      <method>none</method>
+      <schema_name/>
     </partitioning>
     <steps>
       <step>
@@ -415,11 +429,179 @@
       <output>   </output>
     </remotesteps>
     <GUI>
-      <xloc>1020</xloc>
-      <yloc>213</yloc>
+      <xloc>1146</xloc>
+      <yloc>218</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
+
+  <step>
+    <name>Update msg</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage/>
+    <fields>
+      <field>
+      <name>email</name>
+      </field>
+      <field>
+        <name>updatemsg</name>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1091</xloc>
+      <yloc>581</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+
+  <step>
+    <name>Switch / Case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+    <method>none</method>
+    <schema_name/>
+    </partitioning>
+    <fieldname>totals</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>Integer</case_value_type>
+    <case_value_format/>
+    <case_value_decimal/>
+    <case_value_group/>
+    <default_target_step>Update json data</default_target_step>
+    <cases>
+    <case>
+    <value>0</value>
+    <target_step>MongoDB Output</target_step>
+    </case>
+    </cases>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>867</xloc>
+      <yloc>452</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+
+  <step>
+    <name>Update json data</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+    <method>none</method>
+    <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>
+        var csvFilename = getEnvironmentVar("CSVFile");
+
+        //var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"channels.value","query": %{email_key_field}}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
+        var query = { total_rows: 0, current_row: 0,mapping_id: csvFilename, data: %{csv_header_string} }
+        var q = JSON.stringify(query)
+        </jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>q</name>
+        <rename>updatemsg</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1089</xloc>
+      <yloc>504</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+
+  <step>
+    <name>Post to update queue</name>
+    <type>IC AMQP Plugin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <transactional>N</transactional>
+    <body_field>foundContact</body_field>
+    <limit>10000</limit>
+    <routing>import.contacts</routing>
+    <target>import.service</target>
+    <mode>producer</mode>
+    <uri>amqp://guest:guest@services.daily.sg.tripolis.vn:5672</uri>
+    <username/>
+    <password/>
+    <host/>
+    <port/>
+    <vhost/>
+    <usessl>N</usessl>
+    <declare>N</declare>
+    <durable>N</durable>
+    <autodel>N</autodel>
+    <exclusive>N</exclusive>
+    <exchtype>topic</exchtype>
+    <binding>
+      <line>
+        <target_value>import.service</target_value>
+        <routing_value>import.contacts</routing_value>
+      </line>
+    </binding>
+    <cluster_schema/>
+    <remotesteps>
+      <input>   </input>
+      <output>   </output>
+    </remotesteps>
+    <GUI>
+      <xloc>964</xloc>
+      <yloc>617</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+
   <step_error_handling>
     <error>
       <source_step>Data Validator</source_step>

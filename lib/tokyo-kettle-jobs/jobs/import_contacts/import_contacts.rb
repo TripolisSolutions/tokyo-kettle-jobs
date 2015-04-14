@@ -49,7 +49,8 @@ module TokyoKettleJobs
             "-param:RABBIT_PASSWORD=\"#{params[:rabbit_password]}\"",
             "-param:IMPORTID=\"#{params[:import_id]}\"",
             "-param:KETTLE_FILENAME_UPDATE_ID=\"#{params[:kettle_filename_update_id]}\"",
-            "-param:CCO_QUEUE_NAME=\"#{params[:cco_queue_name]}\""
+            "-param:CCO_QUEUE_NAME=\"#{params[:cco_queue_name]}\"",
+            "-param:ELASTICSEARCH_URL=\"#{params[:elasticsearch_url]}\""
         ].join(' ')
         shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} & >/dev/null 2>&1"
         shell_script
