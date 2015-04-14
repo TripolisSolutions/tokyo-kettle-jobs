@@ -569,8 +569,8 @@ var q = JSON.stringify(query)
     <transactional>N</transactional>
     <body_field>foundContact</body_field>
     <limit>10000</limit>
-    <routing>import-custom-object</routing>
-    <target>import-custom-object</target>
+    <routing>import.contacts</routing>
+    <target>import.service</target>
     <mode>producer</mode>
     <uri>amqp://guest:guest@services.daily.sg.tripolis.vn:5672</uri>
     <username/>
@@ -583,7 +583,7 @@ var q = JSON.stringify(query)
     <durable>N</durable>
     <autodel>N</autodel>
     <exclusive>N</exclusive>
-    <exchtype>direct</exchtype>
+    <exchtype>topic</exchtype>
     <binding>
     </binding>
     <cluster_schema/>
