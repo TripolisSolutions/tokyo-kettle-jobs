@@ -585,6 +585,10 @@ var q = JSON.stringify(query)
     <exclusive>N</exclusive>
     <exchtype>topic</exchtype>
     <binding>
+      <line>
+        <target_value>import.service</target_value>
+        <routing_value>import.contacts</routing_value>
+      </line>
     </binding>
     <cluster_schema/>
     <remotesteps>
