@@ -363,8 +363,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>616</xloc>
-      <yloc>158</yloc>
+      <xloc>610</xloc>
+      <yloc>159</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 2</name>
