@@ -11,32 +11,32 @@
     <parameters>
         <parameter>
             <name>CONTACT_DB_NAME</name>
-            <default_value/>
+            <default_value>tokyo_api_development_contacts</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>IMPORTID</name>
-            <default_value/>
+            <default_value>3e7b6e40-c41e-0132-6f95-74d435ed88e5</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>ListID</name>
-            <default_value/>
+            <default_value>55127b8353ac9dbbb900015a</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>MONGODB_PORT</name>
-            <default_value/>
+            <default_value>27017</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>MONGODB_SERVER</name>
-            <default_value/>
+            <default_value>localhost</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>TENANT_UUID</name>
-            <default_value/>
+            <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -104,9 +104,47 @@
   <notepads>
   </notepads>
   <order>
-  <hop> <from>Get contacts for importID</from><to>Calculate ListId and Date</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculate ListId and Date</from><to>MongoDB Output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get contacts for importID</from><to>Calculate ListId and Date</to><enabled>N</enabled> </hop>
+  <hop> <from>Calculate ListId and Date</from><to>MongoDB Output</to><enabled>N</enabled> </hop>
+  <hop> <from>Get contacts for importID</from><to>Maker ObjectId</to><enabled>Y</enabled> </hop>
+  <hop> <from>Maker ObjectId</from><to>MongoDB Output</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Calculate ListId and Date</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var list_id &#x3d; getEnvironmentVar&#x28;&#x22;ListID&#x22;&#x29;&#x3b;&#xd;&#xa;var c_at &#x3d; new Date&#x28;&#x29;&#x3b; </jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>list_id</name>
+        <rename>list_id</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>c_at</name>
+        <rename>c_at</rename>
+        <type>Date</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>659</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Get contacts for importID</name>
     <type>MongoDbInput</type>
@@ -197,7 +235,7 @@
 
     <mongo_fields>
       <mongo_field>
-         <incoming_field_name>list_id</incoming_field_name>
+         <incoming_field_name>new_listID</incoming_field_name>
 
          <mongo_doc_path>list_id</mongo_doc_path>
 
@@ -213,7 +251,7 @@
 
       </mongo_field>
       <mongo_field>
-         <incoming_field_name>contact_id</incoming_field_name>
+         <incoming_field_name>new_contact_id</incoming_field_name>
 
          <mongo_doc_path>contact_id</mongo_doc_path>
 
@@ -269,8 +307,8 @@
     </step>
 
   <step>
-    <name>Calculate ListId and Date</name>
-    <type>ScriptValueMod</type>
+    <name>Maker ObjectId</name>
+    <type>UserDefinedJavaClass</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -279,27 +317,85 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var list_id &#x3d; getEnvironmentVar&#x28;&#x22;ListID&#x22;&#x29;&#x3b;&#xd;&#xa;var c_at &#x3d; new Date&#x28;&#x29;&#x3b; </jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>list_id</name>
-        <rename>list_id</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>c_at</name>
-        <rename>c_at</rename>
-        <type>Date</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+{
+ 	//Get variables name: 
+	String listID = getVariable("ListID", "");
+	//var c_at = new Date(); 
+
+   // First, get a row from the default input hop
+	Object[] r = getRow();
+
+    // If the row object is null, we are done processing.
+	if (r == null) {
+		setOutputDone();
+		return false;
+	}
+
+  // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
+    Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+	listID = "ObjectId:" + listID;
+	get(Fields.Out, "new_listID").setValue(outputRow, listID );
+	
+	String new_contact_id = get(Fields.In, "contact_id").getString(r);
+	new_contact_id  = "ObjectId:" + new_contact_id ;
+	get(Fields.Out, "new_contact_id").setValue(outputRow, new_contact_id );
+
+	java.util.Date c_at = new java.util.Date();
+	get(Fields.Out, "c_at").setValue(outputRow, c_at);
+
+    putRow(data.outputRowMeta, outputRow);
+
+	return true;
+}
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name>new_listID</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>c_at</field_name>
+
+        <field_type>Date</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>new_contact_id</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>659</xloc>
-      <yloc>208</yloc>
+      <xloc>644</xloc>
+      <yloc>82</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

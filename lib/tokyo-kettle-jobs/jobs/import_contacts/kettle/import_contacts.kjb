@@ -27,11 +27,6 @@
             <description>Delemiter for csv file</description>
         </parameter>
         <parameter>
-            <name>ELASTICSEARCH_URL</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;9200&#x2f;</default_value>
-            <description/>
-        </parameter>
-        <parameter>
             <name>IMPORTID</name>
             <default_value>12345678</default_value>
             <description>Id for current import</description>
@@ -368,8 +363,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>616</xloc>
-      <yloc>158</yloc>
+      <xloc>610</xloc>
+      <yloc>159</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 2</name>
@@ -625,7 +620,7 @@
       <to>Update _id documents</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -693,14 +688,14 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Excecute dynamic task</from>
-      <to>Add to Subscription</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
+          <from>Excecute dynamic task</from>
+          <to>Add to Subscription</to>
+          <from_nr>0</from_nr>
+          <to_nr>0</to_nr>
+          <enabled>Y</enabled>
+          <evaluation>Y</evaluation>
+          <unconditional>N</unconditional>
+        </hop>
   </hops>
   <notepads>
   </notepads>
