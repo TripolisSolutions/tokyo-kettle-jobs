@@ -27,6 +27,11 @@
             <description>Delemiter for csv file</description>
         </parameter>
         <parameter>
+            <name>ELASTICSEARCH_URL</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;127.0.0.1&#x3a;9200</default_value>
+            <description>ElasticSearch URL</description>
+        </parameter>
+        <parameter>
             <name>IMPORTID</name>
             <default_value>12345678</default_value>
             <description>Id for current import</description>
@@ -151,8 +156,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>85</xloc>
-      <yloc>264</yloc>
+      <xloc>89</xloc>
+      <yloc>253</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -194,8 +199,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>479</xloc>
-      <yloc>99</yloc>
+      <xloc>426</xloc>
+      <yloc>98</yloc>
       </entry>
     <entry>
       <name>Copy dynamic transform</name>
@@ -217,7 +222,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>150</xloc>
+      <xloc>180</xloc>
       <yloc>99</yloc>
       </entry>
     <entry>
@@ -410,8 +415,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>421</xloc>
-      <yloc>259</yloc>
+      <xloc>435</xloc>
+      <yloc>256</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 3</name>
@@ -554,29 +559,6 @@
       <xloc>882</xloc>
       <yloc>251</yloc>
       </entry>
-    <entry>
-      <name>Copy update transform</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <set_append_logfile>N</set_append_logfile>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d;  &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_KETTLE_JOBS_PATH&#x7d;&#x2f;&#x24;&#x7b;KETTLE_FILENAME_UPDATE_ID&#x7d;&#x22; &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME_UPDATE_ID&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;&#xa;</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>323</xloc>
-      <yloc>99</yloc>
-      </entry>
   </entries>
   <hops>
     <hop>
@@ -620,7 +602,7 @@
       <to>Update _id documents</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -670,8 +652,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Copy dynamic transform</from>
-      <to>Copy update transform</to>
+      <from>Excecute dynamic task</from>
+      <to>Add to Subscription</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -679,7 +661,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Copy update transform</from>
+      <from>Copy dynamic transform</from>
       <to>Excecute dynamic task</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -687,15 +669,6 @@
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
-    <hop>
-          <from>Excecute dynamic task</from>
-          <to>Add to Subscription</to>
-          <from_nr>0</from_nr>
-          <to_nr>0</to_nr>
-          <enabled>Y</enabled>
-          <evaluation>Y</evaluation>
-          <unconditional>N</unconditional>
-        </hop>
   </hops>
   <notepads>
   </notepads>
