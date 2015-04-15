@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tokyo-kettle-jobs (0.0.34)
+    tokyo-kettle-jobs (0.0.35)
 
 GEM
   remote: https://rubygems.org/
