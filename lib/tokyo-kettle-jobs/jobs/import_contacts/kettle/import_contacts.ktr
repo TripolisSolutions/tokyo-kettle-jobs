@@ -395,7 +395,7 @@
 
 <step><name>Modified Java Script Value</name><type>ScriptValueMod</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><compatible>N</compatible><optimizationLevel>9</optimizationLevel><jsScripts><jsScript><jsScript_type>0</jsScript_type><jsScript_name>Script 1</jsScript_name>
 <jsScript_script>
-var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"tokyo_api_dynamic_daily-sg_contacts.channels.value","query": email}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
+var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"tokyo_api_dynamic_daily-sg_contacts.channels.value","query": %{email_key_field}}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
 var q = JSON.stringify(query)
 </jsScript_script>
 </jsScript></jsScripts><fields><field><name>q</name><rename>esquerys</rename><type>String</type><length>-1</length><precision>-1</precision><replace>N</replace></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>672</xloc><yloc>258</yloc><draw>Y</draw></GUI></step>
