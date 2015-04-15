@@ -395,7 +395,7 @@
 
 <step><name>Modified Java Script Value</name><type>ScriptValueMod</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><compatible>N</compatible><optimizationLevel>9</optimizationLevel><jsScripts><jsScript><jsScript_type>0</jsScript_type><jsScript_name>Script 1</jsScript_name>
 <jsScript_script>
-var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"tokyo_api_dynamic_daily-sg_contacts.channels.value","query": %{email_key_field}}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
+var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"channels.value","query": %{email_key_field}}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
 var q = JSON.stringify(query)
 </jsScript_script>
 </jsScript></jsScripts><fields><field><name>q</name><rename>esquerys</rename><type>String</type><length>-1</length><precision>-1</precision><replace>N</replace></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>672</xloc><yloc>258</yloc><draw>Y</draw></GUI></step>
@@ -555,52 +555,7 @@ var q = JSON.stringify(query)
     </GUI>
   </step>
 
-  <step>
-    <name>Post to update queue</name>
-    <type>IC AMQP Plugin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <transactional>N</transactional>
-    <body_field>foundContact</body_field>
-    <limit>10000</limit>
-    <routing>import.contacts</routing>
-    <target>import.service</target>
-    <mode>producer</mode>
-    <uri>amqp://guest:guest@services.daily.sg.tripolis.vn:5672</uri>
-    <username/>
-    <password/>
-    <host/>
-    <port/>
-    <vhost/>
-    <usessl>N</usessl>
-    <declare>N</declare>
-    <durable>N</durable>
-    <autodel>N</autodel>
-    <exclusive>N</exclusive>
-    <exchtype>topic</exchtype>
-    <binding>
-      <line>
-        <target_value>import.service</target_value>
-        <routing_value>import.contacts</routing_value>
-      </line>
-    </binding>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>964</xloc>
-      <yloc>617</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
+<step><name>Post to update queue</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>N</transactional><body_field>updatemsg</body_field><limit>10000</limit><routing>routingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>N</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>import.service</target_value><routing_value>import.contacts</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>908</xloc><yloc>624</yloc><draw>Y</draw></GUI></step>
 
   <step_error_handling>
     <error>
