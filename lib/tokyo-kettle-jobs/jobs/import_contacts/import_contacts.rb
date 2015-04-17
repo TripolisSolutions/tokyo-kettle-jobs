@@ -52,7 +52,7 @@ module TokyoKettleJobs
             "-param:CCO_QUEUE_NAME=\"#{params[:cco_queue_name]}\"",
             "-param:ELASTICSEARCH_URL=\"#{params[:elasticsearch_url]}\""
         ].join(' ')
-        shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} & >/dev/null 2>&1"
+        shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} >/tmp/import_contact.log 2>&1 &"
         shell_script
       end
     end
