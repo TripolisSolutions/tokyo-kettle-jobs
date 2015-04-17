@@ -29,7 +29,7 @@ module TokyoKettleJobs
         get_file_path('../s3_utility.rb')
       end
 
-      def self.get_kettle_shell_script params
+      def self.get_kettle_shell_script params, default_log = "& >/dev/null 2>&1"
         kitchen_cmd_params = [
             "-param:S3_REGION=\"#{params[:s3_region]}\"",
             "-param:S3_UTILITY=\"#{params[:s3_utility]}\"",
@@ -52,7 +52,7 @@ module TokyoKettleJobs
             "-param:CCO_QUEUE_NAME=\"#{params[:cco_queue_name]}\"",
             "-param:ELASTICSEARCH_URL=\"#{params[:elasticsearch_url]}\""
         ].join(' ')
-        shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} >/tmp/import_contact.log 2>&1 &"
+        shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} #{default_log}"
         shell_script
       end
     end
