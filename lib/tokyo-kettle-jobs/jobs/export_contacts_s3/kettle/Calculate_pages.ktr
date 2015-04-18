@@ -140,8 +140,8 @@
       </result>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>569</xloc>
-      <yloc>162</yloc>
+      <xloc>488</xloc>
+      <yloc>150</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -332,7 +332,7 @@
       </field>
       <field>
         <name>count_query</name>
-        <variable>&#x7b; &#x22;query&#x22;&#x3a; &#x7b; &#x22;bool&#x22;&#x3a; &#x7b; &#x22;must&#x22;&#x3a; &#x5b; &#x24;&#x7b;group_query&#x7d;, &#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels._type&#x22;&#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22; &#x7d; &#x7d;,&#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.hard_bounced&#x22;&#x3a; &#x22;false&#x22; &#x7d; &#x7d;, &#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.primary&#x22;&#x3a; &#x22;true&#x22; &#x7d; &#x7d;, &#x7b; &#x22;range&#x22;&#x3a; &#x7b; &#x22;channels.soft_bounced_count&#x22;&#x3a; &#x7b; &#x22;lte&#x22;&#x3a; &#x22;&#x24;&#x7b;bounce_threshold&#x7d;&#x22; &#x7d; &#x7d; &#x7d; &#x5d; &#x7d; &#x7d; &#x7d;</variable>
+        <variable>&#x7b; &#x22;query&#x22;&#x3a; &#x7b; &#x22;bool&#x22;&#x3a; &#x7b; &#x22;must&#x22;&#x3a; &#x5b; &#x24;&#x7b;group_query&#x7d;, &#x7b; &#x22;match&#x22;&#x3a; &#x7b; &#x22;channels._type&#x22;&#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22; &#x7d; &#x7d;,&#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.hard_bounced&#x22;&#x3a; &#x22;false&#x22; &#x7d; &#x7d;, &#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.primary&#x22;&#x3a; &#x22;true&#x22; &#x7d; &#x7d;, &#x7b; &#x22;range&#x22;&#x3a; &#x7b; &#x22;channels.soft_bounced_count&#x22;&#x3a; &#x7b; &#x22;lte&#x22;&#x3a; &#x22;&#x24;&#x7b;bounce_threshold&#x7d;&#x22; &#x7d; &#x7d; &#x7d; &#x5d; &#x7d; &#x7d; &#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
