@@ -97,9 +97,11 @@
   <hop> <from>Get Variables</from><to>Contact-api get group details</to><enabled>Y</enabled> </hop>
   <hop> <from>Read group response</from><to>Extract group query</to><enabled>Y</enabled> </hop>
   <hop> <from>Contact-api get group details</from><to>Read group response</to><enabled>Y</enabled> </hop>
-  <hop> <from>Extract group query</from><to>Modified Java Script Value</to><enabled>Y</enabled> </hop>
-  <hop> <from>Modified Java Script Value</from><to>Set Variables</to><enabled>Y</enabled> </hop>
-  <hop> <from>Modified Java Script Value</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Extract group query</from><to>Build ES queries</to><enabled>Y</enabled> </hop>
+  <hop> <from>Build ES queries</from><to>Set Variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Get group details - Get variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Build ES queries</from><to>Get group details - Build ES queries</to><enabled>Y</enabled> </hop>
+  <hop> <from>Read group response</from><to>Get group details - Read group response</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Contact-api get group details</name>
@@ -156,7 +158,7 @@
     <name>Extract group query</name>
     <type>JsonInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -218,7 +220,7 @@
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -262,17 +264,29 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>bounce_threshold</name>
+        <variable>&#x24;&#x7b;bounce_threshold&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>65</xloc>
-      <yloc>36</yloc>
+      <xloc>62</xloc>
+      <yloc>33</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Modified Java Script Value</name>
+    <name>Build ES queries</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>N</distribute>
@@ -286,7 +300,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var group_query_object &#x3d; JSON.parse&#x28;group_query_without_channel_type_filter&#x29;&#xa;&#xa;&#xa;var channel_type_condition &#x3d; &#x7b; &#x22;match&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d; &#x7d;&#xa;group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d;.push&#x28;channel_type_condition&#x29;&#xa;var group_query &#x3d; JSON.stringify&#x28;group_query_object&#x29;</jsScript_script>
+        <jsScript_script>var group_query_object &#x3d; JSON.parse&#x28;group_query_without_channel_type_filter&#x29;&#xa;&#xa;&#x2f;&#x2f; create &#x22;bool&#x22; if not exist&#xa;if &#x28;typeof&#x28;group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x29; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;  group_query_object&#x5b;&#x22;bool&#x22;&#x5d; &#x3d; &#x7b;&#x7d;&#xa;&#x7d;&#xa;&#xa;&#x2f;&#x2f; create &#x22;bool.must&#x22; if not exist&#xa;if &#x28;typeof&#x28;group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d;&#x29; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;  group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d; &#x3d; &#x5b;&#x5d;&#xa;&#x7d;&#xa;&#xa;var must_array &#x3d; group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d;&#xa;&#xa;if &#x28;typeof&#x28;group_query_object&#x5b;&#x22;filtered&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;  must_array.push&#x28;group_query_object&#x5b;&#x22;filtered&#x22;&#x5d;&#x29;&#xa;  delete group_query_object&#x5b;&#x22;filtered&#x22;&#x5d;&#xa;&#x7d;&#xa;&#xa;if &#x28;typeof&#x28;group_query_object&#x5b;&#x22;filter&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;  must_array.push&#x28;&#x7b;&#x22;filtered&#x22;&#x3a; &#x7b; &#x22;filter&#x22;&#x3a; group_query_object&#x5b;&#x22;filter&#x22;&#x5d; &#x7d; &#x7d;&#x29;&#xa;  delete group_query_object&#x5b;&#x22;filter&#x22;&#x5d;&#xa;&#x7d;&#xa;&#xa;if &#x28;typeof&#x28;group_query_object&#x5b;&#x22;term&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;  must_array.push&#x28;group_query_object&#x5b;&#x22;term&#x22;&#x5d;&#x29;&#xa;  delete group_query_object&#x5b;&#x22;term&#x22;&#x5d;&#xa;&#x7d;&#xa;&#xa;if &#x28;typeof&#x28;group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d;&#x5b;&#x22;filter&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;  must_array.push&#x28;&#x7b;&#x22;filtered&#x22;&#x3a; &#x7b; &#x22;filter&#x22;&#x3a; group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d;&#x5b;&#x22;filter&#x22;&#x5d; &#x7d; &#x7d;&#x29;&#xa;  delete group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d;&#x5b;&#x22;filter&#x22;&#x5d;&#xa;&#x7d;&#xa;&#xa;var tmp_must_array &#x3d; &#x5b;&#x5d;&#xa;var tmp_processed_item &#x3d; &#x7b;&#x7d; &#x2f;&#x2f;this hash is used to marked processed items, to avoid of duplication&#xa;for &#x28;var i &#x3d; 0&#x3b; i &#x3c;&#x3d; must_array.length&#x3b; i&#x2b;&#x2b;&#x29; &#x7b;&#xa;  var item &#x3d; must_array&#x5b;i&#x5d;&#x3b;&#xa;&#xa;  if &#x28;typeof&#x28;item&#x29; &#x3d;&#x3d;&#x3d; &#x22;undefined&#x22;&#x29; continue&#x3b;&#xa;  if &#x28;typeof&#x28;item&#x5b;&#x22;filter&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22;&#x29; &#x7b;&#xa;    tmp_must_array.push&#x28;&#x7b;&#x22;filtered&#x22;&#x3a; &#x7b; &#x22;filter&#x22;&#x3a; item&#x5b;&#x22;filter&#x22;&#x5d; &#x7d; &#x7d;&#x29;&#xa;  &#x7d; else if &#x28;typeof&#x28;item&#x5b;&#x22;match&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22; &#x26;&#x26; tmp_processed_item&#x5b;&#x22;match.channels._type&#x22;&#x5d; &#x21;&#x3d;&#x3d; true&#x29; &#x7b;&#xa;    tmp_must_array.push&#x28;&#x7b; &#x22;match&#x22; &#x3a; &#x7b;&#x22;channels._type&#x22; &#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22;&#x7d;&#x7d;&#x29;&#xa;    tmp_processed_item&#x5b;&#x22;match.channels._type&#x22;&#x5d; &#x3d; true&#xa;  &#x7d; else if &#x28;typeof&#x28;item&#x5b;&#x22;term&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22; &#x26;&#x26; tmp_processed_item&#x5b;&#x22;term.channels.hard_bounced&#x22;&#x5d; &#x21;&#x3d;&#x3d; true&#x29; &#x7b;&#xa;    tmp_must_array.push&#x28;&#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.hard_bounced&#x22; &#x3a; &#x22;false&#x22;&#x7d; &#x7d;&#x29;&#xa;    tmp_processed_item&#x5b;&#x22;term.channels.hard_bounced&#x22;&#x5d; &#x3d; true&#xa;  &#x7d; else if &#x28;typeof&#x28;item&#x5b;&#x22;term&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22; &#x26;&#x26; tmp_processed_item&#x5b;&#x22;term.channels.primary&#x22;&#x5d; &#x21;&#x3d;&#x3d; true&#x29; &#x7b;&#xa;    tmp_must_array.push&#x28;&#x7b; &#x22;term&#x22; &#x3a; &#x7b;&#x22;channels.primary&#x22; &#x3a; &#x22;true&#x22;&#x7d; &#x7d;&#x29;&#xa;    tmp_processed_item&#x5b;&#x22;term.channels.primary&#x22;&#x5d; &#x3d; true&#xa;  &#x7d; else if &#x28;typeof&#x28;item&#x5b;&#x22;range&#x22;&#x5d;&#x29; &#x21;&#x3d; &#x22;undefined&#x22; &#x26;&#x26; tmp_processed_item&#x5b;&#x22;range.channels.soft_bounced_count&#x22;&#x5d; &#x21;&#x3d;&#x3d; true&#x29; &#x7b;&#xa;    tmp_must_array.push&#x28;&#x7b; &#x22;range&#x22; &#x3a; &#x7b;&#x22;channels.soft_bounced_count&#x22; &#x3a; &#x7b;&#x22;lte&#x22;&#x3a; &#x22;&#x24;&#x7b;bounce_threshold&#x7d;&#x22; &#x7d; &#x7d; &#x7d;&#x29;&#xa;    tmp_processed_item&#x5b;&#x22;range.channels.soft_bounced_count&#x22;&#x5d; &#x3d; true&#xa;  &#x7d;&#xa;&#x7d;&#xa;&#xa;group_query_object&#x5b;&#x22;bool&#x22;&#x5d;&#x5b;&#x22;must&#x22;&#x5d; &#x3d; tmp_must_array&#xa;&#xa;var group_query &#x3d; JSON.stringify&#x28;group_query_object&#x29;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>group_query</name>
         <rename>group_query</rename>
         <type>String</type>
@@ -405,7 +419,7 @@
     </step>
 
   <step>
-    <name>Write to log</name>
+    <name>Get group details - Build ES queries</name>
     <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
@@ -421,6 +435,18 @@
       <limitRowsNumber>0</limitRowsNumber>
       <logmessage>GET FROM CONTACT API&#x3a; </logmessage>
     <fields>
+      <field>
+        <name>accept</name>
+        </field>
+      <field>
+        <name>tenant_uuid</name>
+        </field>
+      <field>
+        <name>oauth_token</name>
+        </field>
+      <field>
+        <name>bounce_threshold</name>
+        </field>
       <field>
         <name>group_response</name>
         </field>
@@ -447,6 +473,94 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>764</xloc>
       <yloc>354</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get group details - Read group response</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>Extract group query</logmessage>
+    <fields>
+      <field>
+        <name>accept</name>
+        </field>
+      <field>
+        <name>tenant_uuid</name>
+        </field>
+      <field>
+        <name>oauth_token</name>
+        </field>
+      <field>
+        <name>group_response</name>
+        </field>
+      <field>
+        <name>code</name>
+        </field>
+      <field>
+        <name>respTime</name>
+        </field>
+      <field>
+        <name>group_definition</name>
+        </field>
+      <field>
+        <name>group_size</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>610</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get group details - Get variables</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>accept</name>
+        </field>
+      <field>
+        <name>tenant_uuid</name>
+        </field>
+      <field>
+        <name>oauth_token</name>
+        </field>
+      <field>
+        <name>bounce_threshold</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>83</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

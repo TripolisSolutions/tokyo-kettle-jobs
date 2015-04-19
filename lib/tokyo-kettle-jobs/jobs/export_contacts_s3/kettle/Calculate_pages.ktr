@@ -80,6 +80,7 @@
   <hop> <from>Vars</from><to>Elasticsearch</to><enabled>Y</enabled> </hop>
   <hop> <from>Set numner of Pages</from><to>Set Variables</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Number of Rows</from><to>Set numner of Pages</to><enabled>Y</enabled> </hop>
+  <hop> <from>Vars</from><to>Calculate pages - Vars</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -298,7 +299,7 @@
     <name>Vars</name>
     <type>GetVariable</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -332,7 +333,7 @@
       </field>
       <field>
         <name>count_query</name>
-        <variable>&#x7b; &#x22;query&#x22;&#x3a; &#x7b; &#x22;bool&#x22;&#x3a; &#x7b; &#x22;must&#x22;&#x3a; &#x5b; &#x24;&#x7b;group_query&#x7d;, &#x7b; &#x22;match&#x22;&#x3a; &#x7b; &#x22;channels._type&#x22;&#x3a; &#x22;Contacts&#x3a;&#x3a;EmailAddress&#x22; &#x7d; &#x7d;,&#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.hard_bounced&#x22;&#x3a; &#x22;false&#x22; &#x7d; &#x7d;, &#x7b; &#x22;term&#x22;&#x3a; &#x7b; &#x22;channels.primary&#x22;&#x3a; &#x22;true&#x22; &#x7d; &#x7d;, &#x7b; &#x22;range&#x22;&#x3a; &#x7b; &#x22;channels.soft_bounced_count&#x22;&#x3a; &#x7b; &#x22;lte&#x22;&#x3a; &#x22;&#x24;&#x7b;bounce_threshold&#x7d;&#x22; &#x7d; &#x7d; &#x7d; &#x5d; &#x7d; &#x7d; &#x7d;</variable>
+        <variable>&#x7b; &#x22;query&#x22;&#x3a; &#x24;&#x7b;group_query&#x7d;&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -347,6 +348,41 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>306</xloc>
       <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculate pages - Vars</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage/>
+    <fields>
+      <field>
+        <name>accept</name>
+        </field>
+      <field>
+        <name>page_size</name>
+        </field>
+      <field>
+        <name>count_query</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>306</xloc>
+      <yloc>239</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
