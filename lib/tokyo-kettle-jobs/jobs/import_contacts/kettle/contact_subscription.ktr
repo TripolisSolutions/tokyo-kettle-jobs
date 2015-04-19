@@ -80,6 +80,7 @@
   <hop> <from>Check Subscription IDs</from><to>Ignore Subscription</to><enabled>Y</enabled> </hop>
   <hop> <from>Check Subscription IDs</from><to>Get contacts for importID</to><enabled>Y</enabled> </hop>
   <hop> <from>Ignore Subscription</from><to>Abort</to><enabled>N</enabled> </hop>
+  <hop> <from>Calculate body for rabbit</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Abort</name>
@@ -107,7 +108,7 @@
     <name>Calculate body for rabbit</name>
     <type>UserDefinedJavaClass</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -132,7 +133,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	//Get variables name: 
 	String tenant_uuid = getVariable("TENANT_UUID", "");
 	String subscriptionIDs = getVariable("SUBSCRIPTIONIDS", "");
-	routingkey = getVariable("ROUTING_KEY", "subscribe-contact");
+	routingkey = "subscribe-contact";
 
 
     // First, get a row from the default input hop
@@ -169,7 +170,9 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	body = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contactId + "\",    \"to_field_id\": \"" + to_field_id + "\",    \"email\":\"" + email + "\",    \"first_name\": \"" + firstname + "\",    \"last_name\": \"" + lastname + "\",    \"subscription_ids\": [" + subscriptionIDs + "]}";
 	get(Fields.Out, nameField).setValue(outputRow, body);
     
-    // putRow will send the row on to the default output hop.
+    get(Fields.Out, "routingkey").setValue(outputRow, routingkey);
+    
+	// putRow will send the row on to the default output hop.
 	//
     putRow(data.outputRowMeta, outputRow);
 
@@ -533,7 +536,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <transactional>N</transactional>
+   <transactional>Y</transactional>
    <body_field>body</body_field>
    <limit>10000</limit>
    <routing>routingkey</routing>
@@ -561,6 +564,38 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>801</xloc>
       <yloc>204</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>DATA SEND TO QUEUE&#x3a; &#xa;</logmessage>
+    <fields>
+      <field>
+        <name>body</name>
+        </field>
+      <field>
+        <name>routingkey</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>804</xloc>
+      <yloc>15</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
