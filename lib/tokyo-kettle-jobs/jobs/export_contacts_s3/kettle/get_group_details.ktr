@@ -14,26 +14,6 @@
             <default_value>application&#x2f;json</default_value>
             <description/>
         </parameter>
-        <parameter>
-            <name>contact_api_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4002</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>group_id</name>
-            <default_value>55360d75125cc31d19000284</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>oauth_token</name>
-            <default_value>Bearer si72qbhpv26fzp96x2gblc3mzj3xfky</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>tenant_uuid</name>
-            <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
-            <description/>
-        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -271,6 +251,36 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>505</xloc>
       <yloc>184</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Final Query</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>Y</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>ScriptValue</jsScript_name>
+        <jsScript_script>var final_query &#x3d; group_query_with_filters.getString&#x28;&#x29;.substr&#x28;0, group_query_with_filters.length&#x28;&#x29;-1&#x29;.replace&#x28;&#x22;&#x7b;&#x5c;&#x22;query&#x5c;&#x22;&#x3a;&#x22;, &#x22;&#x22;&#x29; 	</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>final_query</name>
+        <rename>final_query</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>650</xloc>
+      <yloc>229</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -560,36 +570,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>813</xloc>
       <yloc>182</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Final Query</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>Y</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>ScriptValue</jsScript_name>
-        <jsScript_script>var final_query &#x3d; group_query_with_filters.getString&#x28;&#x29;.substr&#x28;0, group_query_with_filters.length&#x28;&#x29;-1&#x29;.replace&#x28;&#x22;&#x7b;&#x5c;&#x22;query&#x5c;&#x22;&#x3a;&#x22;, &#x22;&#x22;&#x29; 	</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>final_query</name>
-        <rename>final_query</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>650</xloc>
-      <yloc>229</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
