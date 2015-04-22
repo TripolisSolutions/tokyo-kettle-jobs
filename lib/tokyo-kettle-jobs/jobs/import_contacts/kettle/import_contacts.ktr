@@ -293,9 +293,9 @@
 
     <truncate>N</truncate>
 
-    <update>N</update>
+    <update>Y</update>
 
-    <upsert>N</upsert>
+    <upsert>Y</upsert>
 
     <multi>N</multi>
 
