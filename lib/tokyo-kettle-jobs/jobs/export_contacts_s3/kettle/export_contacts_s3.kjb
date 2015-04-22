@@ -18,7 +18,7 @@
         </parameter>
         <parameter>
             <name>admin_api_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4000</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;admin-api.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -43,12 +43,12 @@
         </parameter>
         <parameter>
             <name>contact_api_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4002</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;contact-api.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>elasticsearch_url</name>
-            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;9200</default_value>
+            <default_value>http&#x3a;&#x2f;&#x2f;services2.daily.sg.tripolis.vn&#x3a;9200</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -58,12 +58,12 @@
         </parameter>
         <parameter>
             <name>export_file_name</name>
-            <default_value>export_group_55360d75125cc31d1900028d</default_value>
+            <default_value>export_group_553778e653ac9dfc36000001</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>55360d75125cc31d1900028d</default_value>
+            <default_value>553778e653ac9dfc36000001</default_value>
             <description/>
         </parameter>
         <parameter>
