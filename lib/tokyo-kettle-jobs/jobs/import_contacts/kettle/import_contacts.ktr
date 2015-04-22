@@ -497,41 +497,7 @@ var q = JSON.stringify(query)
     </GUI>
   </step>
 
-  <step>
-    <name>Update msg</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage/>
-    <fields>
-      <field>
-      <name>email</name>
-      </field>
-      <field>
-        <name>updatemsg</name>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1091</xloc>
-      <yloc>581</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
+<step><name>Update msg</name><type>WriteToLog</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><loglevel>log_level_basic</loglevel><displayHeader>Y</displayHeader><limitRows>N</limitRows><limitRowsNumber>0</limitRowsNumber><logmessage/><fields><field><name>channel_email</name></field><field><name>updatemsg</name></field><field><name>improutingkey</name></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1008</xloc><yloc>549</yloc><draw>Y</draw></GUI></step>
 
   <step>
     <name>Update json data</name>
@@ -552,7 +518,7 @@ var q = JSON.stringify(query)
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>
         var csvFilename = getEnvironmentVar("CSVFile");
-
+        var improutingkey = "import.contacts";
         //var query = {"query":{"bool":{"must":[{"query_string":{"default_field":"channels.value","query": %{email_key_field}}}],"must_not":[],"should":[]}},"from":0,"size":10,"sort":[],"facets":{}}
         var query = { total_rows: 0, current_row: 0,mapping_id: csvFilename, data: %{csv_header_string} }
         var q = JSON.stringify(query)
@@ -568,6 +534,7 @@ var q = JSON.stringify(query)
         <precision>-1</precision>
         <replace>N</replace>
       </field>
+      <field><name>improutingkey</name><rename>improutingkey</rename><type>String</type><length>-1</length><precision>-1</precision><replace>N</replace></field>
     </fields>
     <cluster_schema/>
     <remotesteps>
@@ -581,8 +548,7 @@ var q = JSON.stringify(query)
     </GUI>
   </step>
 <step><name>Switch / Case 2</name><type>SwitchCase</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><fieldname>contactFound</fieldname><use_contains>N</use_contains><case_value_type>String</case_value_type><case_value_format/><case_value_decimal/><case_value_group/><default_target_step>InsertClass</default_target_step><cases><case><value>Y</value><target_step>Json Input</target_step></case><case><value>N</value><target_step>MongoDB Output</target_step></case></cases><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1024</xloc><yloc>168</yloc><draw>Y</draw></GUI></step>
-<step><name>Post to update queue</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>N</transactional><body_field>updatemsg</body_field><limit>10000</limit><routing>routingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>N</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>import.service</target_value><routing_value>import.contacts</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>908</xloc><yloc>624</yloc><draw>Y</draw></GUI></step>
-
+<step><name>Post to update queue</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>updatemsg</body_field><limit>10000</limit><routing>improutingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>import.contacts</target_value><routing_value>import.contacts</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>730</xloc><yloc>688</yloc><draw>Y</draw></GUI></step>
 <step><name>Json Input</name><type>JsonInput</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><include>N</include><include_field/><rownum>N</rownum><addresultfile>N</addresultfile><readurl>N</readurl><IsIgnoreEmptyFile>N</IsIgnoreEmptyFile><doNotFailIfNoFile>Y</doNotFailIfNoFile><ignoreMissingPath>N</ignoreMissingPath><rownum_field/><file><name/><filemask/><exclude_filemask/><file_required>N</file_required><include_subfolders>N</include_subfolders></file><fields><field><name>_id</name><path>$._id.$oid</path><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field><field><name>to_field_id</name><path>$.channels[0]._id.$oid</path><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field><field><name>channel_email</name><path>$.channels[0].value</path><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field></fields><limit>0</limit><IsInFields>Y</IsInFields><IsAFile>N</IsAFile><valueField>contactJson</valueField><shortFileFieldName/><pathFieldName/><hiddenFieldName/><lastModificationTimeFieldName/><uriNameFieldName/><rootUriNameFieldName/><extensionFieldName/><sizeFieldName/><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1200</xloc><yloc>306</yloc><draw>Y</draw></GUI></step>
 <step><name>Calculate update message to queue</name><type>UserDefinedJavaClass</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><definitions><definition><class_type>TRANSFORM_CLASS</class_type><class_name>Processor</class_name><class_source>
 String contactId;
@@ -641,9 +607,9 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 
 	return true;
 }</class_source></definition></definitions><fields><field><field_name>body</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>routingkey</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field></fields><clear_result_fields>N</clear_result_fields><info_steps/><target_steps/><usage_parameters/><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1382</xloc><yloc>354</yloc><draw>Y</draw></GUI></step>
-<step><name>Post subscription for existing contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>body</body_field><limit>10000</limit><routing>routingkey</routing><target>subscribe-contact</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5762</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>N</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>subscribe-contact</target_value><routing_value>subscribe-contact</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1422</xloc><yloc>535</yloc><draw>Y</draw></GUI></step>
+<step><name>Post subscription for existing contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>body</body_field><limit>10000</limit><routing>routingkey</routing><target>subscribe-contact</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>subscribe-contact</target_value><routing_value>subscribe-contact</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1349</xloc><yloc>497</yloc><draw>Y</draw></GUI></step>
 
-<step><name>Get List IDs</name><type>GetVariable</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><fields><field><name>LISTIDS</name><variable>${LISTIDS}</variable><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field><field><name>Empty</name><variable/><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>979</xloc><yloc>202</yloc><draw>Y</draw></GUI></step>
+<step><name>Get List IDs</name><type>GetVariable</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><fields><field><name>LISTIDS</name><variable>${LISTIDS}</variable><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field><field><name>Empty</name><variable/><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field><field><name>MONGODB_SERVER</name><variable>${MONGODB_SERVER}</variable><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field><field><name>MONGODB_PORT</name><variable>${MONGODB_PORT}</variable><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field><field><name>TENANT_UUID</name><variable>${TENANT_UUID}</variable><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field><field><name>CONTACT_DB_NAME</name><variable>${CONTACT_DB_NAME}</variable><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1018</xloc><yloc>346</yloc><draw>Y</draw></GUI></step>
 <step><name>Check List IDs</name><type>FilterRows</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><send_true_to>Ignore List</send_true_to><send_false_to>Split field to rows</send_false_to><compare><condition><negated>N</negated><leftvalue>LISTIDS</leftvalue><function>=</function><rightvalue>Empty</rightvalue></condition></compare><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1130</xloc><yloc>194</yloc><draw>Y</draw></GUI></step>
 <step><name>Split field to rows</name><type>SplitFieldToRows3</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><splitfield>LISTIDS</splitfield><delimiter>,</delimiter><newfield>ListID</newfield><rownum>N</rownum><rownum_field>ListID</rownum_field><resetrownumber>Y</resetrownumber><delimiter_is_regex>Y</delimiter_is_regex><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1294</xloc><yloc>177</yloc><draw>Y</draw></GUI></step>
 <step><name>Add to ListID</name><type>TransExecutor</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><specification_method>filename</specification_method><trans_object_id/><trans_name/><filename>${Internal.Job.Filename.Directory}/add_to_list_update.ktr</filename><directory_path/><group_size>1</group_size><group_field/><group_time/><parameters><variablemapping><variable>MONGODB_SERVER</variable><field>MONGODB_SERVER</field><input/></variablemapping><variablemapping><variable>MONGODB_PORT</variable><field>MONGODB_PORT</field><input/></variablemapping><variablemapping><variable>CONTACT_DB_NAME</variable><field>CONTACT_DB_NAME</field><input/></variablemapping><variablemapping><variable>TENANT_UUID</variable><field>TENANT_UUID</field><input/></variablemapping><variablemapping><variable>ListID</variable><field>ListID</field><input/></variablemapping><variablemapping><variable>ContactID</variable><field>_id</field><input/></variablemapping><inherit_all_vars>Y</inherit_all_vars></parameters><execution_result_target_step/><execution_time_field>ExecutionTime</execution_time_field><execution_result_field>ExecutionResult</execution_result_field><execution_errors_field>ExecutionNrErrors</execution_errors_field><execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field><execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field><execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field><execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field><execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field><execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field><execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field><execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field><execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field><execution_log_text_field>ExecutionLogText</execution_log_text_field><execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field><result_rows_target_step/><result_files_target_step/><result_files_file_name_field>FileName</result_files_file_name_field><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1475</xloc><yloc>208</yloc><draw>Y</draw></GUI></step>
