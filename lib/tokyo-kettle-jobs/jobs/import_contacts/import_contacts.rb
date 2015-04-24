@@ -75,11 +75,11 @@ module TokyoKettleJobs
         ].join(' ')
 
         if params[:run_in_remote_server] and params[:run_in_remote_server] == true
-          shell_script = "ssh #{params[:pentaho_user]}@#{params[:pentaho_server]} #{kitchen_cmd_params} 'bash -s' <<'ENDSSH' \n#{params[:kitchen_cmd].sub(" ", ";\n")} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{pars} #{default_log.nil? ? "& >/dev/null 2>&1" : default_log} \nENDSSH"
+          shell_script = "ssh #{params[:pentaho_user]}@#{params[:pentaho_server]} #{kitchen_cmd_params} 'bash -s' <<'ENDSSH' \n#{params[:kitchen_cmd].sub(" ", ";\n")} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{pars} #{default_log.nil? ? " > /dev/null 2>&1 &" : default_log} \nENDSSH"
         else
-          shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} #{default_log.nil? ? "& >/dev/null 2>&1" : default_log}"
+          shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} #{default_log.nil? ? " > /dev/null 2>&1 &" : default_log}"
         end
-        # shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} #{default_log.nil? ? "& >/dev/null 2>&1" : default_log}"
+        # shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} #{default_log.nil? ? " > /dev/null 2>&1 &" : default_log}"
         shell_script
       end
     end
