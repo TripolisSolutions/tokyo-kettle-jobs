@@ -50,7 +50,8 @@ module TokyoKettleJobs
             "-param:IMPORTID=\"#{params[:import_id]}\"",
             "-param:KETTLE_FILENAME_UPDATE_ID=\"#{params[:kettle_filename_update_id]}\"",
             "-param:CCO_QUEUE_NAME=\"#{params[:cco_queue_name]}\"",
-            "-param:ELASTICSEARCH_URL=\"#{params[:elasticsearch_url]}\""
+            "-param:ELASTICSEARCH_URL=\"#{params[:elasticsearch_url]}\"",
+            "-param:IMPORT_CSV_SHORT_FILENAME=\"#{params[:import_csv_short_file_name]}\""
         ].join(' ')
         shell_script = "#{params[:kitchen_cmd]} -file:\"#{params[:entry_file]}\" #{params[:kettle_job_option]} #{kitchen_cmd_params} #{default_log.nil? ? "& >/dev/null 2>&1" : default_log}"
         shell_script
