@@ -76,85 +76,11 @@
   <order>
   <hop> <from>Get Variables</from><to>Check List IDs</to><enabled>Y</enabled> </hop>
   <hop> <from>Check List IDs</from><to>Ignore List</to><enabled>Y</enabled> </hop>
-  <hop> <from>Ignore List</from><to>Abort</to><enabled>N</enabled> </hop>
-  <hop> <from>Check List IDs</from><to>Split field to rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split field to rows</from><to>Add to ListID</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculate body for rabbit</from><to>Post list for new contacts</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get contacts for importID</from><to>Calculate body for rabbit</to><enabled>Y</enabled> </hop>
+  <hop> <from>Check List IDs</from><to>Get contacts for importID</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculate body for rabbit</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Abort</name>
-    <type>Abort</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <row_threshold>0</row_threshold>
-      <message/>
-      <always_log_rows>Y</always_log_rows>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>563</xloc>
-      <yloc>204</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add to ListID</name>
-    <type>TransExecutor</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <specification_method>filename</specification_method>
-    <trans_object_id/>
-    <trans_name/>
-    <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;add_to_list.ktr</filename>
-    <directory_path/>
-    <group_size>1</group_size>
-    <group_field/>
-    <group_time/>
-          <parameters>       <variablemapping><variable>MONGODB_SERVER</variable><field>MONGODB_SERVER</field><input/></variablemapping>
-       <variablemapping><variable>MONGODB_PORT</variable><field>MONGODB_PORT</field><input/></variablemapping>
-       <variablemapping><variable>CONTACT_DB_NAME</variable><field>CONTACT_DB_NAME</field><input/></variablemapping>
-       <variablemapping><variable>TENANT_UUID</variable><field>TENANT_UUID</field><input/></variablemapping>
-       <variablemapping><variable>ListID</variable><field>ListID</field><input/></variablemapping>
-       <variablemapping><variable>IMPORTID</variable><field>IMPORTID</field><input/></variablemapping>
-    <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    <execution_result_target_step/>
-    <execution_time_field>ExecutionTime</execution_time_field>
-    <execution_result_field>ExecutionResult</execution_result_field>
-    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
-    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
-    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
-    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
-    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
-    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
-    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
-    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
-    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
-    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
-    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
-    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
-    <result_rows_target_step/>
-    <result_files_target_step/>
-    <result_files_file_name_field>FileName</result_files_file_name_field>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>641</xloc>
-      <yloc>55</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Check List IDs</name>
     <type>FilterRows</type>
@@ -167,7 +93,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Ignore List</send_true_to>
-<send_false_to>Split field to rows</send_false_to>
+<send_false_to>Get contacts for importID</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -321,8 +247,116 @@
     </step>
 
   <step>
-    <name>Split field to rows</name>
-    <type>SplitFieldToRows3</type>
+    <name>Calculate body for rabbit</name>
+    <type>UserDefinedJavaClass</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+
+    <definitions>
+        <definition>
+        <class_type>TRANSFORM_CLASS</class_type>
+
+        <class_name>Processor</class_name>
+
+        <class_source><![CDATA[
+String contactId;
+String nameField = "body";
+String body = "";
+String routingkey = "";
+
+public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
+{
+	//Get variables name: 
+	String tenant_uuid = getVariable("TENANT_UUID", "");
+	routingkey = "list-member-contact";
+
+
+    // First, get a row from the default input hop
+	//
+	Object[] r = getRow();
+
+    // If the row object is null, we are done processing.
+	//
+	if (r == null) {
+		setOutputDone();
+		return false;
+	}
+
+	// Let's look up parameters only once for performance reason.
+	//
+	if (first) {
+		contactId = getParameter("_id");
+		first=false;
+	}
+
+    // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
+    // enough to handle any new fields you are creating in this step.
+	//
+    Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
+
+	String contactId = get(Fields.In, "unique_id").getString(r);
+	String firstname = get(Fields.In, "first_name").getString(r);
+	String lastname  = get(Fields.In, "last_name").getString(r);
+	String email  = get(Fields.In, "email").getString(r);
+	String to_field_id  = get(Fields.In, "to_field_id").getString(r);	
+
+	// Set the value in the output field
+	//
+    String listIDs = getVariable("LISTIDS");
+	body  = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
+	get(Fields.Out, nameField).setValue(outputRow, body);
+    
+    get(Fields.Out, "routingkey").setValue(outputRow, routingkey);
+    
+	// putRow will send the row on to the default output hop.
+	//
+    putRow(data.outputRowMeta, outputRow);
+
+	return true;
+}
+
+]]></class_source>
+        </definition>
+    </definitions>
+    <fields>
+        <field>
+        <field_name>body</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+        <field>
+        <field_name>routingkey</field_name>
+
+        <field_type>String</field_type>
+
+        <field_length>-1</field_length>
+
+        <field_precision>-1</field_precision>
+
+        </field>
+    </fields><clear_result_fields>N</clear_result_fields>
+<info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>749</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Post list for new contacts</name>
+    <type>IC AMQP Plugin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -331,17 +365,144 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-   <splitfield>LISTIDS</splitfield>
-   <delimiter>,</delimiter>
-   <newfield>ListID</newfield>
-   <rownum>N</rownum>
-   <rownum_field>ListID</rownum_field>
-   <resetrownumber>Y</resetrownumber>
-   <delimiter_is_regex>Y</delimiter_is_regex>
+   <transactional>Y</transactional>
+   <body_field>body</body_field>
+   <limit>10000</limit>
+   <routing>routingkey</routing>
+   <target>import.service</target>
+   <mode>producer</mode>
+   <uri>amqp&#x3a;&#x2f;&#x2f;&#x24;&#x7b;RABBIT_USER&#x7d;&#x3a;&#x24;&#x7b;RABBIT_PASSWORD&#x7d;&#x40;&#x24;&#x7b;RABBIT_HOST&#x7d;&#x3a;5672</uri>
+   <username>&#x24;&#x7b;RABBIT_USER&#x7d;</username>
+   <password>&#x24;&#x7b;RABBIT_PASSWORD&#x7d;</password>
+   <host>&#x24;&#x7b;RABBIT_HOST&#x7d;</host>
+   <port>5672</port>
+   <vhost>&#x2f;</vhost>
+   <usessl>N</usessl>
+   <declare>N</declare>
+   <durable>Y</durable>
+   <autodel>N</autodel>
+   <exclusive>N</exclusive>
+   <exchtype>topic</exchtype>
+    <binding>
+      <line>
+        <target_value> list-member-contact</target_value>
+        <routing_value> list-member-contact</routing_value>
+      </line>
+    </binding>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>444</xloc>
-      <yloc>55</yloc>
+      <xloc>864</xloc>
+      <yloc>199</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get contacts for importID</name>
+    <type>MongoDbInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <hostname>&#x24;&#x7b;MONGODB_SERVER&#x7d;</hostname>
+    <port>&#x24;&#x7b;MONGODB_PORT&#x7d;</port>
+    <use_all_replica_members>N</use_all_replica_members>
+    <db_name>&#x24;&#x7b;CONTACT_DB_NAME&#x7d;</db_name>
+    <fields_name/>
+    <collection>&#x24;&#x7b;TENANT_UUID&#x7d;_contacts</collection>
+    <json_field_name>json</json_field_name>
+    <json_query>&#x7b; import_id&#x3a; &#x22;&#x24;&#x7b;IMPORTID&#x7d;&#x22; &#x7d;</json_query>
+    <auth_user/>
+    <auth_password>Encrypted </auth_password>
+    <auth_kerberos>N</auth_kerberos>
+    <connect_timeout/>
+    <socket_timeout/>
+    <read_preference>primary</read_preference>
+    <output_json>N</output_json>
+    <query_is_pipeline>N</query_is_pipeline>
+    <execute_for_each_row>N</execute_for_each_row>
+
+    <mongo_fields>
+      <mongo_field>
+        <field_name>_id</field_name>
+
+        <field_path>&#x24;._id</field_path>
+
+        <field_type>String</field_type>
+
+      </mongo_field>
+      <mongo_field>
+        <field_name>last_name</field_name>
+
+        <field_path>&#x24;.last_name</field_path>
+
+        <field_type>String</field_type>
+
+      </mongo_field>
+      <mongo_field>
+        <field_name>first_name</field_name>
+
+        <field_path>&#x24;.first_name</field_path>
+
+        <field_type>String</field_type>
+
+      </mongo_field>
+      <mongo_field>
+        <field_name>to_field_id</field_name>
+
+        <field_path>&#x24;.channels&#x5b;0&#x5d;._id</field_path>
+
+        <field_type>String</field_type>
+
+      </mongo_field>
+      <mongo_field>
+        <field_name>email</field_name>
+
+        <field_path>&#x24;.channels&#x5b;0&#x5d;.value</field_path>
+
+        <field_type>String</field_type>
+
+      </mongo_field>
+    </mongo_fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>516</xloc>
+      <yloc>47</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_debug</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
+      <logmessage>LIST to Queue&#x3a; </logmessage>
+    <fields>
+      <field>
+        <name>body</name>
+        </field>
+      <field>
+        <name>routingkey</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>963</xloc>
+      <yloc>52</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

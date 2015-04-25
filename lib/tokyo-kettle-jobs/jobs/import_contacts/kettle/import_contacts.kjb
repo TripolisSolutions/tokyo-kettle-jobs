@@ -274,8 +274,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1003</xloc>
-      <yloc>95</yloc>
+      <xloc>1007</xloc>
+      <yloc>89</yloc>
       </entry>
     <entry>
       <name>Add to Subscription</name>
@@ -307,8 +307,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>725</xloc>
-      <yloc>95</yloc>
+      <xloc>729</xloc>
+      <yloc>160</yloc>
       </entry>
     <entry>
       <name>Add to List</name>
@@ -340,8 +340,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>857</xloc>
-      <yloc>95</yloc>
+      <xloc>860</xloc>
+      <yloc>159</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 2</name>
@@ -387,8 +387,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>590</xloc>
-      <yloc>255</yloc>
+      <xloc>546</xloc>
+      <yloc>248</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 4</name>
