@@ -582,7 +582,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	//
     Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
 
-	String contactId = get(Fields.In, "contact_unique_id").getString(r);
+	String contactId = get(Fields.In, "_id").getString(r);
 
 
 	//String subscriptionIDs = "\"552ce9ab3963ba5bfe000003\"";
@@ -596,7 +596,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	String to_field_id  = get(Fields.In, "to_field_id").getString(r);
 	subscribe_routingkey = "subscribe-contact";
 	get(Fields.Out, "subscribe_routingkey").setValue(outputRow, subscribe_routingkey);
- 	subscribe_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + contactId + "\",    \"to_field_id\": \"" + to_field_id + "\",    \"email\":\"" + channel_email_email_0 + "\",    \"first_name\": \"" + firstname + "\",    \"last_name\": \"" + lastname + "\",    \"subscription_ids\": [" + subscriptionIDs + "]}";
+ 	subscribe_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contactId + "\",    \"to_field_id\": \"" + to_field_id + "\",    \"email\":\"" + channel_email_email_0 + "\",    \"first_name\": \"" + firstname + "\",    \"last_name\": \"" + lastname + "\",    \"subscription_ids\": [" + subscriptionIDs + "]}";
 	get(Fields.Out, "subscribe_msg").setValue(outputRow, subscribe_msg);
 
 
@@ -604,7 +604,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     list_routingkey = "list-member-contact";
 	get(Fields.Out, "list_routingkey").setValue(outputRow, list_routingkey);
     String listIDs = getVariable("LISTIDS");
-	list_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
+	list_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
 	get(Fields.Out, "list_msg").setValue(outputRow, list_msg);
 
 

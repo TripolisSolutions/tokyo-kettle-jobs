@@ -135,7 +135,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	//
     Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
 
-	String contactId = get(Fields.In, "unique_id").getString(r);
+	String contactId = get(Fields.In, "_id").getString(r);
 	String firstname = get(Fields.In, "first_name").getString(r);
 	String lastname  = get(Fields.In, "last_name").getString(r);
 	String email  = get(Fields.In, "email").getString(r);
@@ -144,7 +144,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
 	// Set the value in the output field
 	//
     String listIDs = getVariable("LISTIDS");
-	body  = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
+	body  = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
 	get(Fields.Out, nameField).setValue(outputRow, body);
     
     get(Fields.Out, "routingkey").setValue(outputRow, routingkey);
@@ -401,14 +401,6 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
         <field_name>email</field_name>
 
         <field_path>&#x24;.channels&#x5b;0&#x5d;.value</field_path>
-
-        <field_type>String</field_type>
-
-      </mongo_field>
-      <mongo_field>
-        <field_name>unique_id</field_name>
-
-        <field_path>&#x24;.unique_id</field_path>
 
         <field_type>String</field_type>
 
