@@ -55,8 +55,8 @@ module TokyoKettleJobs
         pars = [
             "-param:S3_REGION=\"$S3_REGION\"",
             "-param:S3_UTILITY=\"$S3_UTILITY\"",
-            "-param:LISTIDS=\"$LISTIDS\"",
-            "-param:SUBSCRIPTIONIDS=\"$SUBSCRIPTIONIDS\"",
+            "-param:LISTIDS=\"#{params[:s_lists]}\"",
+            "-param:SUBSCRIPTIONIDS=\"#{params[:s_subscription_lists]}\"",
             "-param:USERID=\"$USERID\"",
             "-param:TENANT_UUID=\"$TENANT_UUID\"",
             "-param:ADMIN_API_URL=\"$ADMIN_API_URL\"",
