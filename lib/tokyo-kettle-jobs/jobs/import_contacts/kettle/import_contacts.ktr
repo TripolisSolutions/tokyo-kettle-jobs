@@ -167,7 +167,7 @@
           {
            	//Get variables name:
           	String tenant_uuid = getVariable("TENANT_UUID", "");
-          	routingkey = getVariable("CCO_ROUTING_KEY", "import.service");
+          	routingkey = getVariable("CCO_ROUTING_KEY", "import-custom-object");
 
             // First, get a row from the default input hop
           	Object[] r = getRow();
@@ -216,6 +216,7 @@
               contactFound.setValue(outputRow, "N");
             }
 
+            get(Fields.Out, "routingkey").setValue(outputRow, routingkey);
             // putRow will send the row on to the default output hop.
           	//
             putRow(data.outputRowMeta, outputRow);
