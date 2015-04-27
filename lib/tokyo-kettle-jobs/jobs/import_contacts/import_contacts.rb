@@ -71,7 +71,8 @@ module TokyoKettleJobs
             "-param:RABBIT_PASSWORD=\"$RABBIT_PASSWORD\"",
             "-param:IMPORTID=\"$IMPORTID\"",
             "-param:CCO_QUEUE_NAME=\"$CCO_QUEUE_NAME\"",
-            "-param:IMPORT_CSV_SHORT_FILENAME=\"$IMPORT_CSV_SHORT_FILENAME\""
+            "-param:IMPORT_CSV_SHORT_FILENAME=\"$IMPORT_CSV_SHORT_FILENAME\"",
+            "-param:TMP_FOLDER=\"#{params[:tmp_folder]}\""
         ].join(' ')
 
         if params[:run_in_remote_server] and params[:run_in_remote_server] == true
