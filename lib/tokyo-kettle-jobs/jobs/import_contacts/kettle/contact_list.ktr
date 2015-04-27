@@ -63,6 +63,8 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>Slave1</name><hostname>localhost</hostname><port>8081</port><webAppName/><username/><password>Encrypted </password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>Master1</name><hostname>localhost</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
@@ -79,7 +81,6 @@
   <hop> <from>Calculate body for rabbit</from><to>Post list for new contacts</to><enabled>Y</enabled> </hop>
   <hop> <from>Get contacts for importID</from><to>Calculate body for rabbit</to><enabled>Y</enabled> </hop>
   <hop> <from>Check List IDs</from><to>Get contacts for importID</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculate body for rabbit</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Calculate body for rabbit</name>
@@ -183,8 +184,8 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
     </fields><clear_result_fields>N</clear_result_fields>
 <info_steps></info_steps><target_steps></target_steps><usage_parameters></usage_parameters>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>749</xloc>
-      <yloc>48</yloc>
+      <xloc>722</xloc>
+      <yloc>49</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -213,7 +214,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>242</xloc>
-      <yloc>55</yloc>
+      <yloc>49</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -348,7 +349,7 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
            </partitioning>
     <hostname>&#x24;&#x7b;MONGODB_SERVER&#x7d;</hostname>
     <port>&#x24;&#x7b;MONGODB_PORT&#x7d;</port>
-    <use_all_replica_members>N</use_all_replica_members>
+    <use_all_replica_members>Y</use_all_replica_members>
     <db_name>&#x24;&#x7b;CONTACT_DB_NAME&#x7d;</db_name>
     <fields_name/>
     <collection>&#x24;&#x7b;TENANT_UUID&#x7d;_contacts</collection>
@@ -407,8 +408,8 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
       </mongo_field>
     </mongo_fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>516</xloc>
-      <yloc>47</yloc>
+      <xloc>501</xloc>
+      <yloc>49</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -471,38 +472,6 @@ public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws K
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>864</xloc>
       <yloc>199</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_debug</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage>LIST to Queue&#x3a; </logmessage>
-    <fields>
-      <field>
-        <name>body</name>
-        </field>
-      <field>
-        <name>routingkey</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>963</xloc>
-      <yloc>52</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
