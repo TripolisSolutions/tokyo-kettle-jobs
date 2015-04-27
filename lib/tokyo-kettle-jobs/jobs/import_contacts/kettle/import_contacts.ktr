@@ -126,7 +126,7 @@
       <definition>
         <class_type>TRANSFORM_CLASS</class_type>
         <class_name>Processor</class_name>
-        <class_source>
+        <class_source><![CDATA[
           import java.math.*;
           import java.util.*;
           import java.util.Map.Entry;
@@ -202,7 +202,7 @@
 
             //TODO:
             String csvEmail = get(Fields.In, "%{email_key_field}").getString(r);
-            logBasic("EMAIL: " + csvEmail) ;
+            //logBasic("EMAIL: " + csvEmail) ;
             //  run the query and print the results out
             BasicDBObject query = new BasicDBObject("channels.value", csvEmail);
             DBObject contact = coll.findOne(query);
@@ -246,16 +246,15 @@
           		//TODO: make collection variable
               coll = db.getCollection(tenant_uuid + "_contacts");
 
-          		logBasic("=============================================================");
-          		logBasic("Get contact DBs for lookat. ");
-          		logBasic("=============================================================");
+          		//logBasic("=============================================================");
+          		//logBasic("Get contact DBs for lookat. ");
+          		//logBasic("=============================================================");
            		return parent.initImpl(stepMetaInterface, stepDataInterface);
             } catch(Exception e) {
               logError("Error connecting to MongoDB: ", e);
               return false;
             }
-          }
-        </class_source>
+          }]]></class_source>
       </definition>
     </definitions>
     %{unique_id_fields}
