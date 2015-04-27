@@ -48,12 +48,12 @@
         </parameter>
         <parameter>
             <name>export_file_name</name>
-            <default_value>export_group_553a32e753ac9d0f5d000002</default_value>
+            <default_value>export_group_553d009853ac9dca2c000682</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>553a32e753ac9d0f5d000002</default_value>
+            <default_value>553d009853ac9dca2c000682</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -63,7 +63,7 @@
         </parameter>
         <parameter>
             <name>node_id</name>
-            <default_value>553a32e753ac9d0f5d000002</default_value>
+            <default_value>553ca71753ac9de7d5000682</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -231,8 +231,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>727</xloc>
-      <yloc>39</yloc>
+      <xloc>913</xloc>
+      <yloc>43</yloc>
       </entry>
     <entry>
       <name>Abort job no query</name>
@@ -290,39 +290,6 @@
       <yloc>364</yloc>
       </entry>
     <entry>
-      <name>generate_rows.krt</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;generate_rows.krt.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>N</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>395</xloc>
-      <yloc>467</yloc>
-      </entry>
-    <entry>
       <name>Export page</name>
       <description/>
       <type>JOB</type>
@@ -332,7 +299,7 @@
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
-      <exec_per_row>Y</exec_per_row>
+      <exec_per_row>N</exec_per_row>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
@@ -347,12 +314,21 @@
       <pass_export>N</pass_export>
       <force_separate_logging>N</force_separate_logging>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
+            <parameter>            <name>elasticsearch_url</name>
+            <stream_name/>
+            <value/>
+            </parameter>            <parameter>            <name>scroll_id</name>
+            <stream_name/>
+            <value/>
+            </parameter>            <parameter>            <name>tenant_uuid</name>
+            <stream_name/>
+            <value/>
+            </parameter>      </parameters>      <set_append_logfile>N</set_append_logfile>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>583</xloc>
-      <yloc>466</yloc>
+      <xloc>586</xloc>
+      <yloc>480</yloc>
       </entry>
     <entry>
       <name>All done.</name>
@@ -374,7 +350,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>915</xloc>
-      <yloc>220</yloc>
+      <yloc>216</yloc>
       </entry>
     <entry>
       <name>Get Oauth Token</name>
@@ -418,8 +394,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>917</xloc>
-      <yloc>130</yloc>
+      <xloc>587</xloc>
+      <yloc>373</yloc>
       </entry>
     <entry>
       <name>Calculate Nr Pages</name>
@@ -484,8 +460,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>590</xloc>
-      <yloc>275</yloc>
+      <xloc>588</xloc>
+      <yloc>131</yloc>
       </entry>
     <entry>
       <name>Compress results and upload to s3</name>
@@ -507,8 +483,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>591</xloc>
-      <yloc>132</yloc>
+      <xloc>589</xloc>
+      <yloc>43</yloc>
       </entry>
     <entry>
       <name>Delete local export temp compressed file</name>
@@ -519,8 +495,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>918</xloc>
-      <yloc>321</yloc>
+      <xloc>920</xloc>
+      <yloc>347</yloc>
       </entry>
     <entry>
       <name>Get Transformation File &#x2f; Scroll ID</name>
@@ -552,8 +528,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>47</xloc>
-      <yloc>365</yloc>
+      <xloc>46</xloc>
+      <yloc>362</yloc>
       </entry>
     <entry>
       <name>Excecute dynamic task</name>
@@ -585,8 +561,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>43</xloc>
-      <yloc>466</yloc>
+      <xloc>41</xloc>
+      <yloc>482</yloc>
       </entry>
     <entry>
       <name>Delete local transformation for getting scroll id</name>
@@ -597,8 +573,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>922</xloc>
-      <yloc>417</yloc>
+      <xloc>590</xloc>
+      <yloc>251</yloc>
       </entry>
     <entry>
       <name>Abort - Empty Group</name>
@@ -610,39 +586,6 @@
       <nr>0</nr>
       <xloc>53</xloc>
       <yloc>261</yloc>
-      </entry>
-    <entry>
-      <name>Pages &#x2b; Extra to get Result</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Page_extra.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>207</xloc>
-      <yloc>397</yloc>
       </entry>
     <entry>
       <name>Get Transformation File</name>
@@ -674,8 +617,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>235</xloc>
-      <yloc>470</yloc>
+      <xloc>296</xloc>
+      <yloc>481</yloc>
       </entry>
   </entries>
   <hops>
@@ -743,51 +686,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>generate_rows.krt</from>
-      <to>Export page</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Get Transformation File &#x2f; Scroll ID</from>
-      <to>Excecute dynamic task</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Export page</from>
-      <to>Construct S3 File Path</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>call_success_endpoint</from>
-      <to>Delete local transformation tempfile</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Delete local transformation tempfile</from>
-      <to>Delete local export tempfile</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Construct S3 File Path</from>
       <to>Compress results and upload to s3</to>
       <from_nr>0</from_nr>
@@ -806,24 +704,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Delete local transformation for getting scroll id</from>
-      <to>All done.</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>Delete local export temp compressed file</from>
-      <to>Delete local transformation for getting scroll id</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Delete local export tempfile</from>
       <to>Delete local export temp compressed file</to>
       <from_nr>0</from_nr>
@@ -834,7 +714,7 @@
     </hop>
     <hop>
       <from>nr of pages &#x3e; 0 &#x3f;</from>
-      <to>Pages &#x2b; Extra to get Result</to>
+      <to>Get Transformation File &#x2f; Scroll ID</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -842,13 +722,58 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Pages &#x2b; Extra to get Result</from>
-      <to>Get Transformation File &#x2f; Scroll ID</to>
+      <from>Get Transformation File &#x2f; Scroll ID</from>
+      <to>Excecute dynamic task</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>call_success_endpoint</from>
+      <to>Delete local export tempfile</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Export page</from>
+      <to>Delete local transformation tempfile</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local export temp compressed file</from>
+      <to>All done.</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local transformation tempfile</from>
+      <to>Delete local transformation for getting scroll id</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Delete local transformation for getting scroll id</from>
+      <to>Construct S3 File Path</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>Excecute dynamic task</from>
@@ -861,7 +786,7 @@
     </hop>
     <hop>
       <from>Get Transformation File</from>
-      <to>generate_rows.krt</to>
+      <to>Export page</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
