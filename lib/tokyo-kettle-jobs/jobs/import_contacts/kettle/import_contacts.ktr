@@ -130,7 +130,7 @@
           import java.math.*;
           import java.util.*;
           import java.util.Map.Entry;
-
+          import java.util.ArrayList;
           import com.mongodb.Mongo;
           import com.mongodb.DB;
           import com.mongodb.DBCollection;
@@ -139,6 +139,7 @@
           import com.mongodb.DBCursor;
           import com.mongodb.util.JSON;
           import com.mongodb.WriteConcern;
+          import com.mongodb.ServerAddress;
 
           import org.bson.types.ObjectId;
 
@@ -166,7 +167,7 @@
           {
            	//Get variables name:
           	String tenant_uuid = getVariable("TENANT_UUID", "");
-          	routingkey = getVariable("CCO_ROUTING_KEY", "import-custom-object");
+          	routingkey = getVariable("CCO_ROUTING_KEY", "import.service");
 
             // First, get a row from the default input hop
           	Object[] r = getRow();
@@ -227,11 +228,19 @@
           	try {
               String mongodb_svr = getVariable("MONGODB_SERVER", "");
               String contactDB = getVariable("CONTACT_DB_NAME", "");
-          		String tenant_uuid = getVariable("TENANT_UUID", "");
+          	  String tenant_uuid = getVariable("TENANT_UUID", "");
               int mongodbPort = Integer.parseInt(getVariable("MONGODB_PORT", ""));
+              ArrayList mongoReplicaList = new ArrayList();
+
+              String[] pairs =  mongodb_svr.split(",");
+              for ( int i = 0; i < pairs.length; i++)
+              {
+                ServerAddress node = new ServerAddress(pairs[i]);
+                mongoReplicaList.add(node);
+              }
 
               //TODO: make host variable
-          		m = new Mongo(mongodb_svr, mongodbPort);
+          		m = new Mongo(mongoReplicaList);
           		db = m.getDB( contactDB );
 
           		//TODO: make collection variable
