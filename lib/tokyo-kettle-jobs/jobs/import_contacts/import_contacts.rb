@@ -72,7 +72,9 @@ module TokyoKettleJobs
             "-param:IMPORTID=\"$IMPORTID\"",
             "-param:CCO_QUEUE_NAME=\"$CCO_QUEUE_NAME\"",
             "-param:IMPORT_CSV_SHORT_FILENAME=\"$IMPORT_CSV_SHORT_FILENAME\"",
-            "-param:TMP_FOLDER=\"#{params[:tmp_folder]}\""
+            "-param:TMP_FOLDER=\"#{params[:tmp_folder]}\"",
+            "-param:SPLIT_SCRIPT=\"#{params[:split_script]}\"",
+            "-param:CHUNK_SIZE=\"#{params[:chunk_size]}\""
         ].join(' ')
 
         if params[:run_in_remote_server] and params[:run_in_remote_server] == true

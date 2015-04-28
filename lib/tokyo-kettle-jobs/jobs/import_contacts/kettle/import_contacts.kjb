@@ -22,6 +22,11 @@
             <description>Custom object queue name</description>
         </parameter>
         <parameter>
+            <name>CHUNK_SIZE</name>
+            <default_value>50000</default_value>
+            <description>chunk size for split csv </description>
+        </parameter>
+        <parameter>
             <name>DELIMETER</name>
             <default_value>,</default_value>
             <description>Delemiter for csv file</description>
@@ -38,22 +43,22 @@
         </parameter>
         <parameter>
             <name>IMPORT_BUCKET_NAME</name>
-            <default_value>bucket-tripolis-ap-southeast-1-env-development</default_value>
+            <default_value>bucket-tripolis-sa-east-1</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>IMPORT_CSV_FILENAME</name>
-            <default_value>acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;contacts&#x2f;csv&#x2f;19_contacts_validation.csv</default_value>
+            <default_value>env-prod1&#x2f;acc-cust1.test.tripolis.vn&#x2f;tent-a71fe780-c261-0132-294d-56847afe9799&#x2f;contacts&#x2f;csv&#x2f;1000000_contacts_dummy.tripolis.vn.csv</default_value>
             <description>Path to csv file  in S3 bucket</description>
         </parameter>
         <parameter>
             <name>IMPORT_CSV_SHORT_FILENAME</name>
-            <default_value/>
+            <default_value>1000000_contacts_dummy.tripolis.vn.csv</default_value>
             <description>name of csv file</description>
         </parameter>
         <parameter>
             <name>KETTLE_FILENAME</name>
-            <default_value>19_contacts_validation.ktr</default_value>
+            <default_value>1000000_contacts_dummy.tripolis.vn.ktr</default_value>
             <description>Dynamic kettle file name</description>
         </parameter>
         <parameter>
@@ -93,18 +98,23 @@
         </parameter>
         <parameter>
             <name>S3_KETTLE_JOBS_PATH</name>
-            <default_value/>
+            <default_value>env-prod1&#x2f;acc-cust1.test.tripolis.vn&#x2f;tent-a71fe780-c261-0132-294d-56847afe9799&#x2f;contacts&#x2f;ktr</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>S3_REGION</name>
-            <default_value/>
+            <default_value>sa-east-1</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>S3_UTILITY</name>
-            <default_value/>
+            <default_value>&#x2f;Users&#x2f;mc97616g&#x2f;projects&#x2f;tripolis&#x2f;tokyo-kettle-jobs&#x2f;lib&#x2f;tokyo-kettle-jobs&#x2f;jobs&#x2f;import_contacts&#x2f;s3_utility.rb</default_value>
             <description/>
+        </parameter>
+        <parameter>
+            <name>SPLIT_SCRIPT</name>
+            <default_value>&#x2f;Users&#x2f;mc97616g&#x2f;projects&#x2f;tripolis&#x2f;tokyo-kettle-jobs&#x2f;lib&#x2f;tokyo-kettle-jobs&#x2f;jobs&#x2f;import_contacts&#x2f;split_csv.sh</default_value>
+            <description>Split shell script path</description>
         </parameter>
         <parameter>
             <name>SUBSCRIPTIONIDS</name>
@@ -211,8 +221,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>492</xloc>
-      <yloc>95</yloc>
+      <xloc>442</xloc>
+      <yloc>94</yloc>
       </entry>
     <entry>
       <name>Copy dynamic transform</name>
@@ -234,8 +244,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>163</xloc>
-      <yloc>95</yloc>
+      <xloc>116</xloc>
+      <yloc>94</yloc>
       </entry>
     <entry>
       <name>call pushmessage api</name>
@@ -282,7 +292,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>1096</xloc>
-      <yloc>95</yloc>
+      <yloc>94</yloc>
       </entry>
     <entry>
       <name>Add to Subscription</name>
@@ -314,8 +324,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>95</yloc>
+      <xloc>622</xloc>
+      <yloc>94</yloc>
       </entry>
     <entry>
       <name>Add to List</name>
@@ -347,8 +357,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>95</yloc>
+      <xloc>782</xloc>
+      <yloc>94</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 2</name>
@@ -394,8 +404,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>492</xloc>
-      <yloc>242</yloc>
+      <xloc>442</xloc>
+      <yloc>241</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 4</name>
@@ -441,8 +451,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>672</xloc>
-      <yloc>242</yloc>
+      <xloc>622</xloc>
+      <yloc>241</yloc>
       </entry>
     <entry>
       <name>call pushmessage api 5</name>
@@ -488,8 +498,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>832</xloc>
-      <yloc>242</yloc>
+      <xloc>782</xloc>
+      <yloc>241</yloc>
       </entry>
     <entry>
       <name>Copy csv files</name>
@@ -506,13 +516,13 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;</script>
+      <script>mkdir -p &#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>350</xloc>
-      <yloc>95</yloc>
+      <xloc>217</xloc>
+      <yloc>232</yloc>
       </entry>
     <entry>
       <name>Delete tmp files</name>
@@ -529,13 +539,13 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>rm -f &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;&#x22;</script>
+      <script>rm -f &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;&#x2a;&#x22;&#xa;rm -f &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>965</xloc>
-      <yloc>95</yloc>
+      <xloc>925</xloc>
+      <yloc>94</yloc>
       </entry>
     <entry>
       <name>DUMMY</name>
@@ -554,8 +564,33 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>992</xloc>
-      <yloc>242</yloc>
+      <xloc>942</xloc>
+      <yloc>241</yloc>
+      </entry>
+    <entry>
+      <name>Split csv files</name>
+      <description/>
+      <type>SHELL</type>
+      <filename>&#x24;&#x7b;SPLIT_SCRIPT&#x7d;</filename>
+      <work_directory/>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>Y</set_logfile>
+      <logfile/>
+      <set_append_logfile>N</set_append_logfile>
+      <logext/>
+      <add_date>Y</add_date>
+      <add_time>Y</add_time>
+      <insertScript>N</insertScript>
+      <script>&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;</script>
+      <loglevel>Basic</loglevel>
+      <argument0>&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;</argument0>
+      <argument1>&#x24;&#x7b;CHUNK_SIZE&#x7d;</argument1>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>94</yloc>
       </entry>
   </entries>
   <hops>
@@ -632,15 +667,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Copy csv files</from>
-      <to>Excecute dynamic task</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Add to List</from>
       <to>Delete tmp files</to>
       <from_nr>0</from_nr>
@@ -665,6 +691,24 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Copy csv files</from>
+      <to>Split csv files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Split csv files</from>
+      <to>Excecute dynamic task</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>
