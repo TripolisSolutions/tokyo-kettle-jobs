@@ -1,4 +1,4 @@
 module TokyoKettleJobs
-  VERSION = '0.0.69'
+  VERSION = '0.0.70'
 end
 
