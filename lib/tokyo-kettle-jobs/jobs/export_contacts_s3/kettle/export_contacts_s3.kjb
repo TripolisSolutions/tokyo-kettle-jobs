@@ -175,8 +175,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>17</xloc>
-      <yloc>64</yloc>
+      <xloc>53</xloc>
+      <yloc>63</yloc>
       </entry>
     <entry>
       <name>call_success_endpoint</name>
@@ -219,8 +219,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>43</xloc>
-      <yloc>160</yloc>
+      <xloc>52</xloc>
+      <yloc>164</yloc>
       </entry>
     <entry>
       <name>query present&#x3f;</name>
@@ -263,8 +263,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>352</xloc>
-      <yloc>364</yloc>
+      <xloc>358</xloc>
+      <yloc>365</yloc>
       </entry>
     <entry>
       <name>Export page</name>
@@ -371,7 +371,7 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>356</xloc>
+      <xloc>359</xloc>
       <yloc>251</yloc>
       </entry>
     <entry>
@@ -623,8 +623,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>338</xloc>
-      <yloc>481</yloc>
+      <xloc>357</xloc>
+      <yloc>480</yloc>
       </entry>
   </entries>
   <hops>

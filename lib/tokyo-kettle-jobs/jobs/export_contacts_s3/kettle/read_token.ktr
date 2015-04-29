@@ -100,7 +100,7 @@
   <hop> <from>Construct Token</from><to>If field value is null</to><enabled>Y</enabled> </hop>
   <hop> <from>If field value is null</from><to>Set Variables</to><enabled>Y</enabled> </hop>
   <hop> <from>Redis Input</from><to>Construct Token</to><enabled>Y</enabled> </hop>
-  <hop> <from>Redis Input</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Redis Input</from><to>Write to log</to><enabled>N</enabled> </hop>
   </order>
   <step>
     <name>Construct Token</name>

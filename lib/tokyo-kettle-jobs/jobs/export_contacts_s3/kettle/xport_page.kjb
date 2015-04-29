@@ -85,8 +85,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>105</xloc>
-      <yloc>98</yloc>
+      <xloc>26</xloc>
+      <yloc>23</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -95,8 +95,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>760</xloc>
-      <yloc>95</yloc>
+      <xloc>795</xloc>
+      <yloc>165</yloc>
       </entry>
     <entry>
       <name>Abort job</name>
@@ -106,8 +106,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>253</xloc>
-      <yloc>501</yloc>
+      <xloc>803</xloc>
+      <yloc>390</yloc>
       </entry>
     <entry>
       <name>Init</name>
@@ -131,8 +131,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>237</xloc>
-      <yloc>98</yloc>
+      <xloc>227</xloc>
+      <yloc>23</yloc>
       </entry>
     <entry>
       <name>Export Success</name>
@@ -144,8 +144,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>609</xloc>
-      <yloc>96</yloc>
+      <xloc>612</xloc>
+      <yloc>168</yloc>
       </entry>
     <entry>
       <name>Execute next page</name>
@@ -157,7 +157,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>383</xloc>
       <yloc>275</yloc>
       </entry>
     <entry>
@@ -179,8 +179,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>258</xloc>
-      <yloc>276</yloc>
+      <xloc>382</xloc>
+      <yloc>393</yloc>
       </entry>
     <entry>
       <name>Export Failed </name>
@@ -192,11 +192,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>253</xloc>
-      <yloc>393</yloc>
+      <xloc>622</xloc>
+      <yloc>391</yloc>
       </entry>
     <entry>
-      <name>wait a while</name>
+      <name>wait a while &#x28;debugging&#x29;</name>
       <description>Wait for</description>
       <type>DELAY</type>
       <maximumTimeout>1</maximumTimeout>
@@ -204,8 +204,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>69</xloc>
-      <yloc>176</yloc>
+      <xloc>94</xloc>
+      <yloc>104</yloc>
       </entry>
     <entry>
       <name>Excecute dynamic task</name>
@@ -237,8 +237,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>390</xloc>
-      <yloc>97</yloc>
+      <xloc>386</xloc>
+      <yloc>25</yloc>
       </entry>
     <entry>
       <name>exit_loop</name>
@@ -259,8 +259,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>491</xloc>
-      <yloc>177</yloc>
+      <xloc>384</xloc>
+      <yloc>169</yloc>
       </entry>
     <entry>
       <name>Set page nr after first page export</name>
@@ -279,8 +279,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>85</xloc>
-      <yloc>276</yloc>
+      <xloc>102</xloc>
+      <yloc>222</yloc>
       </entry>
   </entries>
   <hops>
