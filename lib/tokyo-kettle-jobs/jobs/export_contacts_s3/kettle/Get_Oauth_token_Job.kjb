@@ -114,7 +114,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Zier&#x2f;Documents&#x2f;Sources&#x2f;tokyo-kettle-jobs&#x2f;lib&#x2f;tokyo-kettle-jobs&#x2f;jobs&#x2f;export_contacts_s3&#x2f;kettle&#x2f;read_token.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;read_token.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
