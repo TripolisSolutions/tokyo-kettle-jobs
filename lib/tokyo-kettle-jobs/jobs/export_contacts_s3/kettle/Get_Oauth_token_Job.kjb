@@ -11,6 +11,26 @@
   <modified_user>-</modified_user>
   <modified_date>2015&#x2f;04&#x2f;28 15&#x3a;36&#x3a;01.200</modified_date>
     <parameters>
+        <parameter>
+            <name>accept</name>
+            <default_value>application&#x2f;json</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>admin_api_url</name>
+            <default_value>http&#x3a;&#x2f;&#x2f;localhost&#x3a;4000</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>redis_port</name>
+            <default_value>6379</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>redis_url</name>
+            <default_value>localhost</default_value>
+            <description/>
+        </parameter>
     </parameters>
   <connection>
     <name>AgileBI</name>
@@ -69,29 +89,6 @@
    <shared_objects_file/>
   <entries>
     <entry>
-      <name>Get Oauth Token</name>
-      <description/>
-      <type>SHELL</type>
-      <filename/>
-      <work_directory>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;</work_directory>
-      <arg_from_previous>N</arg_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>Y</set_logfile>
-      <logfile>&#x2f;tmp&#x2f;tokyo-campaign-data&#x2f;tenant_&#x24;&#x7b;tenant_uuid&#x7d;&#x2f;token</logfile>
-      <set_append_logfile>N</set_append_logfile>
-      <logext>txt</logext>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <insertScript>Y</insertScript>
-      <script>echo Get Oauth Token&#xa;echo ruby ..&#x2f;get_oauth_token.rb get_token&#xa;token &#x3d; ruby ..&#x2f;get_oauth_token.rb get_token&#xa;echo token</script>
-      <loglevel>Basic</loglevel>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>301</xloc>
-      <yloc>214</yloc>
-      </entry>
-    <entry>
       <name>START</name>
       <description/>
       <type>SPECIAL</type>
@@ -108,11 +105,11 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>105</xloc>
-      <yloc>214</yloc>
+      <xloc>102</xloc>
+      <yloc>221</yloc>
       </entry>
     <entry>
-      <name>Read Token from Logfile</name>
+      <name>Read Token from Redis</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
@@ -141,14 +138,79 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>532</xloc>
-      <yloc>211</yloc>
+      <xloc>279</xloc>
+      <yloc>220</yloc>
+      </entry>
+    <entry>
+      <name>get new token &#x3f;</name>
+      <description>Simple evaluation</description>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>&#x24;&#x7b;token&#x7d;</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>no token retrieved</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>different</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>true</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>479</xloc>
+      <yloc>221</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description/>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>683</xloc>
+      <yloc>220</yloc>
+      </entry>
+    <entry>
+      <name>Get Oauth Token</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Get_Auth_Token.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>479</xloc>
+      <yloc>374</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Get Oauth Token</to>
+      <to>Read Token from Redis</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -156,12 +218,30 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Get Oauth Token</from>
-      <to>Read Token from Logfile</to>
+      <from>Read Token from Redis</from>
+      <to>get new token &#x3f;</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>get new token &#x3f;</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>get new token &#x3f;</from>
+      <to>Get Oauth Token</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

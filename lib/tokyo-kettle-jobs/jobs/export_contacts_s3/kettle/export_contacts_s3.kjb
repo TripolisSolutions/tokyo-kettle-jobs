@@ -48,12 +48,12 @@
         </parameter>
         <parameter>
             <name>export_file_name</name>
-            <default_value>export_group_553d009853ac9dca2c000682</default_value>
+            <default_value>export_group_553f214753ac9da25e000682</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>553d009853ac9dca2c000682</default_value>
+            <default_value>553f214753ac9da25e000682</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -69,6 +69,16 @@
         <parameter>
             <name>page_size</name>
             <default_value>500</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>redis_port</name>
+            <default_value>6379</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>redis_url</name>
+            <default_value>services2.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -320,39 +330,6 @@
       <yloc>216</yloc>
       </entry>
     <entry>
-      <name>Get Oauth Token</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Get_Auth_Token.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>1286</xloc>
-      <yloc>130</yloc>
-      </entry>
-    <entry>
       <name>Delete local transformation tempfile</name>
       <description/>
       <type>DELETE_FILE</type>
@@ -466,39 +443,6 @@
       <yloc>347</yloc>
       </entry>
     <entry>
-      <name>Get Transformation File &#x2f; Scroll ID</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;get_ES_scrolling_id.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>N</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>46</xloc>
-      <yloc>362</yloc>
-      </entry>
-    <entry>
       <name>Excecute dynamic task</name>
       <description/>
       <type>TRANS</type>
@@ -528,8 +472,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>41</xloc>
-      <yloc>482</yloc>
+      <xloc>106</xloc>
+      <yloc>481</yloc>
       </entry>
     <entry>
       <name>Delete local transformation for getting scroll id</name>
@@ -553,39 +497,6 @@
       <nr>0</nr>
       <xloc>53</xloc>
       <yloc>261</yloc>
-      </entry>
-    <entry>
-      <name>Get Transformation File</name>
-      <description/>
-      <type>TRANS</type>
-      <specification_method>filename</specification_method>
-      <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;xport_contacts_embedded.ktr</filename>
-      <transname/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>N</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>296</xloc>
-      <yloc>481</yloc>
       </entry>
     <entry>
       <name>Get Group Details Job</name>
@@ -620,7 +531,7 @@
       <yloc>60</yloc>
       </entry>
     <entry>
-      <name>Job</name>
+      <name>Get Transformation File for Scroll_Id</name>
       <description/>
       <type>JOB</type>
       <specification_method>filename</specification_method>
@@ -648,8 +559,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>192</xloc>
-      <yloc>406</yloc>
+      <xloc>112</xloc>
+      <yloc>365</yloc>
       </entry>
     <entry>
       <name>Get Oauth token Job</name>
@@ -657,7 +568,7 @@
       <type>JOB</type>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>&#x2f;Users&#x2f;Zier&#x2f;Documents&#x2f;Sources&#x2f;tokyo-kettle-jobs&#x2f;lib&#x2f;tokyo-kettle-jobs&#x2f;jobs&#x2f;export_contacts_s3&#x2f;kettle&#x2f;Get_Oauth_token_Job.kjb</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Get_Oauth_token_Job.kjb</filename>
       <jobname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -682,6 +593,38 @@
       <nr>0</nr>
       <xloc>157</xloc>
       <yloc>62</yloc>
+      </entry>
+    <entry>
+      <name>Get Transformation File</name>
+      <description/>
+      <type>JOB</type>
+      <specification_method>filename</specification_method>
+      <job_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;Get_transformation.kjb</filename>
+      <jobname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <slave_server_name/>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <expand_remote_job>N</expand_remote_job>
+      <create_parent_folder>N</create_parent_folder>
+      <pass_export>N</pass_export>
+      <force_separate_logging>N</force_separate_logging>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <set_append_logfile>N</set_append_logfile>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>338</xloc>
+      <yloc>481</yloc>
       </entry>
   </entries>
   <hops>
@@ -735,7 +678,7 @@
       <to>call_success_endpoint</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -747,24 +690,6 @@
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>nr of pages &#x3e; 0 &#x3f;</from>
-      <to>Get Transformation File &#x2f; Scroll ID</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Get Transformation File &#x2f; Scroll ID</from>
-      <to>Excecute dynamic task</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>call_success_endpoint</from>
@@ -812,24 +737,6 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Excecute dynamic task</from>
-      <to>Get Transformation File</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Get Transformation File</from>
-      <to>Export page</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>Get Group Details Job</from>
       <to>query present&#x3f;</to>
       <from_nr>0</from_nr>
@@ -855,6 +762,42 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>nr of pages &#x3e; 0 &#x3f;</from>
+      <to>Get Transformation File for Scroll_Id</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Get Transformation File for Scroll_Id</from>
+      <to>Excecute dynamic task</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Excecute dynamic task</from>
+      <to>Get Transformation File</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Get Transformation File</from>
+      <to>Export page</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
     </hop>
   </hops>
   <notepads>
