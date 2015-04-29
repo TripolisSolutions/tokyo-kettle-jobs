@@ -123,8 +123,8 @@
         <replace>N</replace>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>382</xloc>
-      <yloc>221</yloc>
+      <xloc>206</xloc>
+      <yloc>13</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -180,8 +180,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>201</xloc>
-      <yloc>220</yloc>
+      <xloc>25</xloc>
+      <yloc>12</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -208,8 +208,8 @@
     <use_formatting>Y</use_formatting>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>230</yloc>
+      <xloc>363</xloc>
+      <yloc>14</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

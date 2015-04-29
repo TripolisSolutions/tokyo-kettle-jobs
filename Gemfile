@@ -1,11 +1,5 @@
 source 'https://rubygems.org'
 
-if ENV['LOCATION'] == 'VN'
-
-else
-
-end
-
 # Specify your gem's dependencies in tokyo-kettle-jobs.gemspec
 gemspec
 gem 'rake'
