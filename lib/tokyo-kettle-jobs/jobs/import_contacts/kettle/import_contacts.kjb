@@ -197,7 +197,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;import_single_csv_file.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -516,7 +516,7 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>mkdir -p &#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;</script>
+      <script>mkdir -p &#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#xa;mkdir -p &#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;processed&#xa;&#x24;&#x7b;RVM_PATH&#x7d;&#x2f;bin&#x2f;rvm &#x24;&#x7b;IMPORT_JOB_GEMSET&#x7d; do ruby  &#x24;&#x7b;S3_UTILITY&#x7d; &#x22;&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;&#x22; &#x22;&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;&#x24;&#x7b;IMPORT_CSV_SHORT_FILENAME&#x7d;&#x22; &#x22;&#x24;&#x7b;S3_REGION&#x7d;&#x22;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
@@ -539,7 +539,7 @@
       <add_date>N</add_date>
       <add_time>N</add_time>
       <insertScript>Y</insertScript>
-      <script>rm -f &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x2f;&#x2a;&#x22;&#xa;rm -f &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;</script>
+      <script>rm -rf &#x22;&#x24;&#x7b;TMP_FOLDER&#x7d;&#x2f;&#x24;&#x7b;TENANT_UUID&#x7d;&#x2f;&#x24;&#x7b;IMPORTID&#x7d;&#x22;&#xa;rm -f &#x22;&#x2f;tmp&#x2f;&#x24;&#x7b;KETTLE_FILENAME&#x7d;&#x22;&#xa;</script>
       <loglevel>Basic</loglevel>
       <parallel>N</parallel>
       <draw>Y</draw>
