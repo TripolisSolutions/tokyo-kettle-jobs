@@ -48,12 +48,12 @@
         </parameter>
         <parameter>
             <name>export_file_name</name>
-            <default_value>export_group_553f214753ac9da25e000682</default_value>
+            <default_value>export_group_5542032253ac9d06f100000b</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>group_id</name>
-            <default_value>553f214753ac9da25e000682</default_value>
+            <default_value>5542032253ac9d06f100000b</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -78,7 +78,7 @@
         </parameter>
         <parameter>
             <name>redis_url</name>
-            <default_value>services2.daily.sg.tripolis.vn</default_value>
+            <default_value>services.daily.sg.tripolis.vn</default_value>
             <description/>
         </parameter>
         <parameter>
