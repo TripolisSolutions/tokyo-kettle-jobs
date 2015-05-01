@@ -13,6 +13,8 @@ namespace :gem do
         execute :gem, 'build', "#{fetch(:gem_name)}.gemspec"
         execute :cp, '-rf', '*.gem', File.join(fetch(:gems_server_dir), 'gems', '')
         execute :gem, 'generate_index', '-d', fetch(:gems_server_dir)
+        gem_path = File.join(fetch(:gems_server_dir), 'gems', "$(ls #{fetch(:gem_name)}-*.gem)")
+        execute :gem, 'inabox', gem_path, '--host http://127.0.0.1:8807', '-o'
       end
     end
   end
