@@ -102,6 +102,18 @@
     <connectionTimeout>10000</connectionTimeout>
     <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
     <lookup>
+      <arg>
+        <name>LISTIDS</name>
+        <parameter>list_ids</parameter>
+      </arg>
+      <arg>
+        <name>SUBSCRIPTIONIDS</name>
+        <parameter>subscription_ids</parameter>
+      </arg>
+      <arg>
+        <name>USERID</name>
+        <parameter>user_id</parameter>
+      </arg>
     </lookup>
     <result>
       <name>result</name>
@@ -176,6 +188,42 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>LISTIDS</name>
+        <variable>&#x24;&#x7b;LISTIDS&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>SUBSCRIPTIONIDS</name>
+        <variable>&#x24;&#x7b;SUBSCRIPTIONIDS&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>USERID</name>
+        <variable>&#x24;&#x7b;USERID&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -203,6 +251,15 @@
       <logmessage>Result from calling import.service&#x3a;</logmessage>
     <fields>
       <field>
+        <name>LISTIDS</name>
+        </field>
+      <field>
+        <name>SUBSCRIPTIONIDS</name>
+        </field>
+      <field>
+        <name>USERID</name>
+        </field>
+      <field>
         <name>import_url</name>
         </field>
       <field>
@@ -221,7 +278,7 @@
     <name>Make import url</name>
     <type>ScriptValueMod</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>

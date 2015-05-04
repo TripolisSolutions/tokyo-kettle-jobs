@@ -43,12 +43,12 @@
         </parameter>
         <parameter>
             <name>LISTIDS</name>
-            <default_value/>
+            <default_value>5547298353ac9dc944000005</default_value>
             <description>List IDs for current import job</description>
         </parameter>
         <parameter>
             <name>MAPPING_ID</name>
-            <default_value>60000_Person_Full_Objects</default_value>
+            <default_value>100_Company_Contacts</default_value>
             <description>Mapping Id</description>
         </parameter>
         <parameter>
@@ -68,7 +68,7 @@
         </parameter>
         <parameter>
             <name>SUBSCRIPTIONIDS</name>
-            <default_value/>
+            <default_value>5547297653ac9d59ca00000d</default_value>
             <description>Subscription IDS for current import job</description>
         </parameter>
         <parameter>
