@@ -179,7 +179,7 @@
     <mongo_host>${MONGODB_SERVER}</mongo_host>
 
     <mongo_port>${MONGODB_PORT}</mongo_port>
-    <use_all_replica_members>N</use_all_replica_members>
+    <use_all_replica_members>Y</use_all_replica_members>
     <auth_kerberos>N</auth_kerberos>
 
     <mongo_db>${CONTACT_DB_NAME}</mongo_db>
