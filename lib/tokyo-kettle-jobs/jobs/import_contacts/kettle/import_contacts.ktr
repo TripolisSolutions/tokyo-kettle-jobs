@@ -1,4 +1,4 @@
-﻿﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
     <name>Template_improt</name>
@@ -8,18 +8,6 @@
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
-    <parameters>
-        <parameter>
-            <name>IMPORT_BUCKET_NAME</name>
-            <default_value>bucket-tripolis-ap-southeast-1</default_value>
-            <description/>
-        </parameter>
-        <parameter>
-            <name>IMPORT_CSV_FILENAME</name>
-            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;contacts&#x2f;csv&#x2f;Import_10000_customfields.csv</default_value>
-            <description/>
-        </parameter>
-    </parameters>
     <log>
 <trans-log-table><connection/>
 <schema/>
@@ -100,8 +88,8 @@
            </partitioning>
     <aws_access_key>&#x24;&#x7b;S3_ACCESSKEY&#x7d;</aws_access_key>
     <aws_secret_key>&#x24;&#x7b;S3_SECRETKEY&#x7d;</aws_secret_key>
-    <bucket>${IMPORT_BUCKET_NAME}</bucket>
-    <filename>${IMPORT_CSV_FILENAME}</filename>
+    <bucket>&#x24;&#x7b;IMPORT_BUCKET_NAME&#x7d;</bucket>
+    <filename>&#x24;&#x7b;IMPORT_CSV_FILENAME&#x7d;</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -111,7 +99,7 @@
     <max_line_size>50000</max_line_size>
     <lazy_conversion>Y</lazy_conversion>
     <parallel>Y</parallel>
-    %{fields}
+   %{fields}
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>153</xloc>
@@ -131,7 +119,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>,</separator>
+    <separator>%{delimiter}</separator>
     <enclosure>&#x22;</enclosure>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
@@ -191,7 +179,7 @@
     <mongo_host>${MONGODB_SERVER}</mongo_host>
 
     <mongo_port>${MONGODB_PORT}</mongo_port>
-    <use_all_replica_members>Y</use_all_replica_members>
+    <use_all_replica_members>N</use_all_replica_members>
     <auth_kerberos>N</auth_kerberos>
 
     <mongo_db>${CONTACT_DB_NAME}</mongo_db>
@@ -217,24 +205,39 @@
     <modifier_update>N</modifier_update>
     <write_retries>5</write_retries>
     <write_retry_delay>10</write_retry_delay>
+
     <mongo_fields>
       <mongo_field>
-        <incoming_field_name>%{email_key_field}</incoming_field_name>
-        <mongo_doc_path>Key</mongo_doc_path>
-        <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
-        <update_match_field>N</update_match_field>
-        <modifier_update_operation>N/A</modifier_update_operation>
-        <modifier_policy>Insert&Update</modifier_policy>
-        <json_field>N</json_field>
-        </mongo_field>
+         <incoming_field_name>%{email_key_field}</incoming_field_name>
+
+         <mongo_doc_path>Key</mongo_doc_path>
+
+         <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy>Insert&#x26;Update</modifier_policy>
+
+         <json_field>N</json_field>
+
+      </mongo_field>
       <mongo_field>
-        <incoming_field_name>csv_record</incoming_field_name>
-        <mongo_doc_path>csv_record</mongo_doc_path>
-        <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
-        <update_match_field>N</update_match_field>
-        <modifier_update_operation>N/A</modifier_update_operation>
-        <modifier_policy>Insert&Update</modifier_policy>
-        <json_field>N</json_field>
+         <incoming_field_name>csv_record</incoming_field_name>
+
+         <mongo_doc_path>csv_record</mongo_doc_path>
+
+         <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+
+         <update_match_field>N</update_match_field>
+
+         <modifier_update_operation>N&#x2f;A</modifier_update_operation>
+
+         <modifier_policy>Insert&#x26;Update</modifier_policy>
+
+         <json_field>N</json_field>
+
       </mongo_field>
     </mongo_fields>
     <mongo_indexes>
