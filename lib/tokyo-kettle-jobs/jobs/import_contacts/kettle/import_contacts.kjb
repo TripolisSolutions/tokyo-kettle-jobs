@@ -43,12 +43,12 @@
         </parameter>
         <parameter>
             <name>LISTIDS</name>
-            <default_value>5547298353ac9dc944000005</default_value>
+            <default_value>5547408d53ac9d5d29000002</default_value>
             <description>List IDs for current import job</description>
         </parameter>
         <parameter>
             <name>MAPPING_ID</name>
-            <default_value>100_Company_Contacts</default_value>
+            <default_value>Import_99_customfields</default_value>
             <description>Mapping Id</description>
         </parameter>
         <parameter>
@@ -68,7 +68,7 @@
         </parameter>
         <parameter>
             <name>SUBSCRIPTIONIDS</name>
-            <default_value>5547297653ac9d59ca00000d</default_value>
+            <default_value>554740ae53ac9d4b5e000002</default_value>
             <description>Subscription IDS for current import job</description>
         </parameter>
         <parameter>
@@ -77,8 +77,13 @@
             <description>Tenant uuid for current import</description>
         </parameter>
         <parameter>
+            <name>TotalRows</name>
+            <default_value>0</default_value>
+            <description>Total csv rows</description>
+        </parameter>
+        <parameter>
             <name>USERID</name>
-            <default_value>1</default_value>
+            <default_value>32</default_value>
             <description>UserID for pushmessage API</description>
         </parameter>
     </parameters>

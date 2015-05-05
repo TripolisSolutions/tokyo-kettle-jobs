@@ -74,7 +74,10 @@ module TokyoKettleJobs
             "-param:IMPORT_CSV_SHORT_FILENAME=\"$IMPORT_CSV_SHORT_FILENAME\"",
             "-param:TMP_FOLDER=\"#{params[:tmp_folder]}\"",
             "-param:SPLIT_SCRIPT=\"#{params[:split_script]}\"",
-            "-param:CHUNK_SIZE=\"#{params[:chunk_size]}\""
+            "-param:CHUNK_SIZE=\"#{params[:chunk_size]}\"",
+            "-param:IMPORT_SERVICE_URL=\"#{params[:import_service_url]}\"",
+            "-param:TotalRows=\"#{params[:total_rows]}\"",
+            "-param:MAPPING_ID=\"#{params[:mapping_id]}\""
         ].join(' ')
 
         if params[:run_in_remote_server] and params[:run_in_remote_server] == true

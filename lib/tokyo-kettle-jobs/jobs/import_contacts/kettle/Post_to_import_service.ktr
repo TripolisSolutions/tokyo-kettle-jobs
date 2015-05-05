@@ -80,55 +80,6 @@
   <hop> <from>Make import url</from><to>HTTP Client</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>HTTP Client</name>
-    <type>HTTP</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <url/>
-    <urlInField>Y</urlInField>
-    <urlField>import_url</urlField>
-    <encoding>UTF-8</encoding>
-    <httpLogin/>
-    <httpPassword>Encrypted </httpPassword>
-    <proxyHost/>
-    <proxyPort/>
-    <socketTimeout>10000</socketTimeout>
-    <connectionTimeout>10000</connectionTimeout>
-    <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
-    <lookup>
-      <arg>
-        <name>LISTIDS</name>
-        <parameter>list_ids</parameter>
-      </arg>
-      <arg>
-        <name>SUBSCRIPTIONIDS</name>
-        <parameter>subscription_ids</parameter>
-      </arg>
-      <arg>
-        <name>USERID</name>
-        <parameter>user_id</parameter>
-      </arg>
-    </lookup>
-    <result>
-      <name>result</name>
-      <code/>
-      <response_time/>
-    </result>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>579</xloc>
-      <yloc>191</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
@@ -224,11 +175,106 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>TotalRows</name>
+        <variable>&#x24;&#x7b;TotalRows&#x7d;</variable>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>327</xloc>
       <yloc>300</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>HTTP Client</name>
+    <type>HTTP</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <url/>
+    <urlInField>Y</urlInField>
+    <urlField>import_url</urlField>
+    <encoding>UTF-8</encoding>
+    <httpLogin/>
+    <httpPassword>Encrypted </httpPassword>
+    <proxyHost/>
+    <proxyPort/>
+    <socketTimeout>10000</socketTimeout>
+    <connectionTimeout>10000</connectionTimeout>
+    <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
+    <lookup>
+      <arg>
+        <name>LISTIDS</name>
+        <parameter>list_ids</parameter>
+      </arg>
+      <arg>
+        <name>SUBSCRIPTIONIDS</name>
+        <parameter>subscription_ids</parameter>
+      </arg>
+      <arg>
+        <name>USERID</name>
+        <parameter>user_id</parameter>
+      </arg>
+      <arg>
+        <name>IMPORTID</name>
+        <parameter>import_id</parameter>
+      </arg>
+    </lookup>
+    <result>
+      <name>result</name>
+      <code/>
+      <response_time/>
+    </result>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>579</xloc>
+      <yloc>191</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Make import url</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;var strUrl &#x3d; IMPORT_SERVICE_URL &#x2b; &#x22;&#x2f;tenants&#x2f;&#x22; &#x2b; TENANT_UUID &#x2b; &#x22;&#x2f;imports&#x2f;collections&#x2f;&#x22; &#x2b; IMPORTID &#x2b; &#x22;_tmp&#x2f;mapping&#x2f;&#x22; &#x2b; MAPPING_ID &#x2b; &#x22;&#x3f;total_csv_record&#x3d;&#x22; &#x2b; str2num&#x28;TotalRows&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>strUrl</name>
+        <rename>import_url</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>432</xloc>
+      <yloc>191</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -251,6 +297,18 @@
       <logmessage>Result from calling import.service&#x3a;</logmessage>
     <fields>
       <field>
+        <name>IMPORT_SERVICE_URL</name>
+        </field>
+      <field>
+        <name>TENANT_UUID</name>
+        </field>
+      <field>
+        <name>IMPORTID</name>
+        </field>
+      <field>
+        <name>MAPPING_ID</name>
+        </field>
+      <field>
         <name>LISTIDS</name>
         </field>
       <field>
@@ -270,36 +328,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>701</xloc>
       <yloc>297</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Make import url</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;var strUrl &#x3d; IMPORT_SERVICE_URL &#x2b; &#x22;&#x2f;tenants&#x2f;&#x22; &#x2b; TENANT_UUID &#x2b; &#x22;&#x2f;imports&#x2f;collections&#x2f;&#x22; &#x2b; IMPORTID &#x2b; &#x22;_tmp&#x2f;mapping&#x2f;&#x22; &#x2b; MAPPING_ID&#x3b;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>strUrl</name>
-        <rename>import_url</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>432</xloc>
-      <yloc>191</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿﻿<?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>import_template</name>
+    <name>Template_improt</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -9,11 +9,16 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-    <parameter>
-    <name>CURRENT_CSV_FILE</name>
-    <default_value/>
-    <description/>
-    </parameter>
+        <parameter>
+            <name>IMPORT_BUCKET_NAME</name>
+            <default_value>bucket-tripolis-ap-southeast-1</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>IMPORT_CSV_FILENAME</name>
+            <default_value>env-development&#x2f;acc-tripolis.com&#x2f;tent-2b66d7a9-8cb5-4802-838a-f1f58869bbf5&#x2f;contacts&#x2f;csv&#x2f;Import_10000_customfields.csv</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -57,7 +62,7 @@
     <sleep_time_full>50</sleep_time_full>
     <unique_connections>N</unique_connections>
     <feedback_shown>Y</feedback_shown>
-    <feedback_size>1000</feedback_size>
+    <feedback_size>50000</feedback_size>
     <using_thread_priorities>Y</using_thread_priorities>
     <shared_objects_file/>
     <capture_step_performance>N</capture_step_performance>
@@ -68,217 +73,109 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>Slave1</name><hostname>localhost</hostname><port>8081</port><webAppName/><username/><password>Encrypted </password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
+         <slaveserver><name>Master1</name><hostname>localhost</hostname><port>8081</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>Y</master></slaveserver>
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2015&#x2f;01&#x2f;29 02&#x3a;11&#x3a;12.369</created_date>
+  <created_date>2015&#x2f;05&#x2f;03 11&#x3a;16&#x3a;28.533</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;01&#x2f;29 02&#x3a;11&#x3a;12.369</modified_date>
+  <modified_date>2015&#x2f;05&#x2f;03 11&#x3a;16&#x3a;28.533</modified_date>
   </info>
   <notepads>
   </notepads>
   %{order}
- <step>
-   <name>CSV Import File</name>
-   <type>CsvInput</type>
-   <description/>
-   <distribute>Y</distribute>
-   <custom_distribution/>
-   <copies>1</copies>
-   <partitioning>
-     <method>none</method>
-     <schema_name/>
-   </partitioning>
-   <filename>${CURRENT_CSV_FILE}</filename>
-   <filename_field></filename_field>
-   <rownum_field/>
-   <include_filename>Y</include_filename>
-   <separator>,</separator>
-   <enclosure>"</enclosure>
-   <header>Y</header>
-   <buffer_size>5000</buffer_size>
-   <lazy_conversion>N</lazy_conversion>
-   <add_filename_result>N</add_filename_result>
-   <parallel>N</parallel>
-   <newline_possible>N</newline_possible>
-   <encoding/>
-   %{fields}
-   <cluster_schema/>
-   <remotesteps>
-     <input>   </input>
-     <output>   </output>
-   </remotesteps>
-   <GUI>
-     <xloc>105</xloc>
-     <yloc>98</yloc>
-     <draw>Y</draw>
-   </GUI>
- </step>
-%{validator_field}
+  %{validator_field}
   <step>
-    <name>Generate _id for array</name>
-    <type>UserDefinedJavaClass</type>
+    <name>CSV Import File</name>
+    <type>S3CSVINPUT</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <aws_access_key>&#x24;&#x7b;S3_ACCESSKEY&#x7d;</aws_access_key>
+    <aws_secret_key>&#x24;&#x7b;S3_SECRETKEY&#x7d;</aws_secret_key>
+    <bucket>${IMPORT_BUCKET_NAME}</bucket>
+    <filename>${IMPORT_CSV_FILENAME}</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>%{delimiter}</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>Y</header>
+    <max_line_size>50000</max_line_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <parallel>Y</parallel>
+    %{fields}
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>153</xloc>
+      <yloc>66</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Make CsvRecord</name>
+    <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <definitions>
-      <definition>
-        <class_type>TRANSFORM_CLASS</class_type>
-        <class_name>Processor</class_name>
-        <class_source><![CDATA[
-          import java.math.*;
-          import java.util.*;
-          import java.util.Map.Entry;
-          import java.util.ArrayList;
-          import com.mongodb.Mongo;
-          import com.mongodb.DB;
-          import com.mongodb.DBCollection;
-          import com.mongodb.BasicDBObject;
-          import com.mongodb.DBObject;
-          import com.mongodb.DBCursor;
-          import com.mongodb.util.JSON;
-          import com.mongodb.WriteConcern;
-          import com.mongodb.ServerAddress;
-
-          import org.bson.types.ObjectId;
-
-          private Mongo m;
-          private DB db;
-          private DBCollection coll;
-          private FieldHelper contactJsonHelper = null;
-          private FieldHelper contactFound = null;
-
-          String chanel_id = "";
-          String contact_unique_id = "";
-          String unique_id_tmp = "";
-          //For custom_object
-          String nameField = "body";
-          String body = "";
-          String routingkey = "";
-          //Dynamic for custom fields
-          String parent_id = "";
-          String custom_key = "";
-          String custom_value = "";
-
-          %{global_vars}
-
-          public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
-          {
-           	//Get variables name:
-          	String tenant_uuid = getVariable("TENANT_UUID", "");
-          	routingkey = getVariable("CCO_ROUTING_KEY", "import-custom-object");
-
-            // First, get a row from the default input hop
-          	Object[] r = getRow();
-
-            //TODO: input fields which we are just going to propagate to the next node
-            if (first) {
-              contactFound = get(Fields.Out,"contactFound");
-              contactJsonHelper = get(Fields.Out,"contactJson");
-              first = false;
-            }
-
-            // If the row object is null, we are done processing.
-          	if (r == null) {
-          		setOutputDone();
-          		return false;
-          	}
-
-          	//Get dynamic value for custom object:
-          	//nameField = getParameter("NAME_FIELD");
-
-            // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
-            Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
-
-          	contact_unique_id = new ObjectId().toString();
-          	get(Fields.Out, "contact_unique_id").setValue(outputRow, contact_unique_id);
-
-            //Channel id
-            %{channel_code}
-
-          	//OPTION: make for custom_object to send to Rabbitmq
-          	%{mapped_custom_field_collection}
-
-            //TODO:
-            String csvEmail = get(Fields.In, "%{email_key_field}").getString(r);
-            //logBasic("EMAIL: " + csvEmail) ;
-            //  run the query and print the results out
-            BasicDBObject query = new BasicDBObject("channels.value", csvEmail);
-            DBObject contact = coll.findOne(query);
-
-            if (contact != null){
-              //contact found
-              contactJsonHelper.setValue(outputRow, contact.toString());
-              contactFound.setValue(outputRow, "Y");
-            }
-            else {
-              contactFound.setValue(outputRow, "N");
-            }
-
-            get(Fields.Out, "routingkey").setValue(outputRow, routingkey);
-            // putRow will send the row on to the default output hop.
-          	//
-            putRow(data.outputRowMeta, outputRow);
-
-          	return true;
-          }
-
-          public boolean init(StepMetaInterface stepMetaInterface, StepDataInterface stepDataInterface)
-          {
-          	try {
-              String mongodb_svr = getVariable("MONGODB_SERVER", "");
-              String contactDB = getVariable("CONTACT_DB_NAME", "");
-          	  String tenant_uuid = getVariable("TENANT_UUID", "");
-              int mongodbPort = Integer.parseInt(getVariable("MONGODB_PORT", ""));
-              ArrayList mongoReplicaList = new ArrayList();
-
-              String[] pairs =  mongodb_svr.split(",");
-              for ( int i = 0; i < pairs.length; i++)
-              {
-                ServerAddress node = new ServerAddress(pairs[i]);
-                mongoReplicaList.add(node);
-              }
-
-              //TODO: make host variable
-          		m = new Mongo(mongoReplicaList);
-          		db = m.getDB( contactDB );
-
-          		//TODO: make collection variable
-              coll = db.getCollection(tenant_uuid + "_contacts");
-
-          		//logBasic("=============================================================");
-          		//logBasic("Get contact DBs for lookat. ");
-          		//logBasic("=============================================================");
-           		return parent.initImpl(stepMetaInterface, stepDataInterface);
-            } catch(Exception e) {
-              logError("Error connecting to MongoDB: ", e);
-              return false;
-            }
-          }]]></class_source>
-      </definition>
-    </definitions>
-    %{unique_id_fields}
-    <clear_result_fields>N</clear_result_fields>
-    <info_steps/>
-    <target_steps/>
-    <usage_parameters/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>76</yloc>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    %{fields}
+    <ConcatFields>
+<targetFieldName>csv_record</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>386</xloc>
+      <yloc>148</yloc>
       <draw>Y</draw>
-    </GUI>
-  </step>
+      </GUI>
+    </step>
+
   <step>
     <name>MongoDB Output</name>
     <type>MongoDbOutput</type>
@@ -291,15 +188,15 @@
            <schema_name/>
            </partitioning>
 
-    <mongo_host>&#x24;&#x7b;MONGODB_SERVER&#x7d;</mongo_host>
+    <mongo_host>${MONGODB_SERVER}</mongo_host>
 
-    <mongo_port>&#x24;&#x7b;MONGODB_PORT&#x7d;</mongo_port>
-    <use_all_replica_members>N</use_all_replica_members>
+    <mongo_port>${MONGODB_PORT}</mongo_port>
+    <use_all_replica_members>Y</use_all_replica_members>
     <auth_kerberos>N</auth_kerberos>
 
-    <mongo_db>&#x24;&#x7b;CONTACT_DB_NAME&#x7d;</mongo_db>
+    <mongo_db>${CONTACT_DB_NAME}</mongo_db>
 
-    <mongo_collection>%{mongo_collection}</mongo_collection>
+    <mongo_collection>${IMPORTID}_tmp</mongo_collection>
 
     <batch_insert_size>1000</batch_insert_size>
     <connect_timeout/>
@@ -309,7 +206,7 @@
     <w_timeout/>
     <journaled_writes>N</journaled_writes>
 
-    <truncate>N</truncate>
+    <truncate>Y</truncate>
 
     <update>N</update>
 
@@ -320,435 +217,49 @@
     <modifier_update>N</modifier_update>
     <write_retries>5</write_retries>
     <write_retry_delay>10</write_retry_delay>
-    %{mongo_fields}
-    <cluster_schema/>
+    <mongo_fields>
+      <mongo_field>
+        <incoming_field_name>%{email_key_field}</incoming_field_name>
+        <mongo_doc_path>Key</mongo_doc_path>
+        <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&Update</modifier_policy>
+        <json_field>N</json_field>
+        </mongo_field>
+      <mongo_field>
+        <incoming_field_name>csv_record</incoming_field_name>
+        <mongo_doc_path>csv_record</mongo_doc_path>
+        <use_incoming_field_name_as_mongo_field_name>N</use_incoming_field_name_as_mongo_field_name>
+        <update_match_field>N</update_match_field>
+        <modifier_update_operation>N/A</modifier_update_operation>
+        <modifier_policy>Insert&Update</modifier_policy>
+        <json_field>N</json_field>
+      </mongo_field>
+    </mongo_fields>
+    <mongo_indexes>
+      <mongo_index>
+         <path_to_fields>Key</path_to_fields>
+
+         <drop>N</drop>
+
+         <unique>Y</unique>
+
+         <sparse>N</sparse>
+
+      </mongo_index>
+    </mongo_indexes>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>802</xloc>
-      <yloc>205</yloc>
+      <xloc>631</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
-  %{steps}
-  %{post_custom_object_for_contacts_step}
-  <step><name>Block this step until steps finish for cco</name><type>BlockUntilStepsFinish</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><steps><step><name>MongoDB Output</name><CopyNr>0</CopyNr></step></steps><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>986</xloc><yloc>32</yloc><draw>Y</draw></GUI></step>
-  <step>
-    <name>generate_contact_type</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <field_to_use>contact_type_value</field_to_use>
-    <target_field/>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value/>
-        <target_value>%{contact_type}</target_value>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>435</xloc>
-      <yloc>164</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>generate_import_contact_id_value</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <field_to_use>import_contact_id_value</field_to_use>
-    <target_field/>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value/>
-        <target_value>%{import_id}</target_value>
-      </field>
-    </fields>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>435</xloc>
-      <yloc>164</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>collect error rows</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <cluster_schema/>
-    <remotesteps>
-      <input>   </input>
-      <output>   </output>
-    </remotesteps>
-    <GUI>
-      <xloc>472</xloc>
-      <yloc>369</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-	<step>
-		<name>Convert strings to dates</name>
-		<type>SelectValues</type>
-		<description/>
-		<distribute>Y</distribute>
-		<custom_distribution/>
-		<copies>1</copies>
-		<partitioning>
-		<method>none</method>
-		<schema_name/>
-		</partitioning>
-		<fields>
-			<select_unspecified>N</select_unspecified>
-			<meta>
-				<name>%{birthday}</name>
-				<rename>%{birthday}</rename>
-				<type>Date</type>
-				<length>-2</length>
-				<precision>-2</precision>
-				<conversion_mask>yyyy-dd-mm</conversion_mask>
-				<date_format_lenient>false</date_format_lenient>
-				<date_format_locale/>
-				<date_format_timezone/>
-				<lenient_string_to_number>false</lenient_string_to_number>
-				<encoding/>
-				<decimal_symbol/>
-				<grouping_symbol/>
-				<currency_symbol/>
-				<storage_type/>
-			</meta>
-		</fields>
-		<cluster_schema/>
-		<remotesteps>
-			<input>   </input>
-			<output>   </output>
-		</remotesteps>
-		<GUI>
-			<xloc>234</xloc>
-			<yloc>192</yloc>
-			<draw>Y</draw>
-		</GUI>
-	</step>
-	<step>
-		<name>collect error rows 2</name>
-		<type>Dummy</type>
-		<description/>
-		<distribute>Y</distribute>
-		<custom_distribution/>
-		<copies>1</copies>
-		<partitioning>
-			<method>none</method>
-			<schema_name/>
-		</partitioning>
-		<cluster_schema/>
-		<remotesteps>
-			<input>   </input>
-			<output>   </output>
-		</remotesteps>
-		<GUI>
-			<xloc>373</xloc>
-			<yloc>310</yloc>
-			<draw>Y</draw>
-		</GUI>
-	</step>
-<step><name>Post to list for existing contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>list_msg</body_field><limit>10000</limit><routing>list_routingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>list-member-contact</target_value><routing_value>list-member-contact</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1304</xloc><yloc>120</yloc><draw>Y</draw></GUI></step>
-<step><name>Write to log</name><type>WriteToLog</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><loglevel>log_level_debug</loglevel><displayHeader>Y</displayHeader><limitRows>N</limitRows><limitRowsNumber>0</limitRowsNumber><logmessage>DATA SEND TO QUEUES: </logmessage><fields><field><name>_id</name></field><field><name>channel_email</name></field><field><name>subscribe_routingkey</name></field><field><name>subscribe_msg</name></field><field><name>list_routingkey</name></field><field><name>list_msg</name></field><field><name>import_routingkey</name></field><field><name>import_service_msg</name></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>899</xloc><yloc>414</yloc><draw>Y</draw></GUI></step>
-<step><name>Switch / Case 2</name><type>SwitchCase</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><fieldname>contactFound</fieldname><use_contains>N</use_contains><case_value_type>String</case_value_type><case_value_format/><case_value_decimal/><case_value_group/><default_target_step>InsertClass</default_target_step><cases><case><value>Y</value><target_step>Json Input</target_step></case><case><value>N</value><target_step>Calculate message for new contacts</target_step></case></cases><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>779</xloc><yloc>140</yloc><draw>Y</draw></GUI></step>
-<step><name>Post to update queue</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>import_service_msg</body_field><limit>10000</limit><routing>import_routingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>import.contacts</target_value><routing_value>import.contacts</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1056</xloc><yloc>443</yloc><draw>Y</draw></GUI></step>
-<step><name>Json Input</name><type>JsonInput</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><include>N</include><include_field/><rownum>N</rownum><addresultfile>N</addresultfile><readurl>N</readurl><IsIgnoreEmptyFile>N</IsIgnoreEmptyFile><doNotFailIfNoFile>Y</doNotFailIfNoFile><ignoreMissingPath>N</ignoreMissingPath><rownum_field/><file><name/><filemask/><exclude_filemask/><file_required>N</file_required><include_subfolders>N</include_subfolders></file><fields><field><name>_id</name><path>$._id.$oid</path><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field><field><name>to_field_id</name><path>$.channels[0]._id.$oid</path><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field><field><name>channel_email</name><path>$.channels[0].value</path><type>String</type><format/><currency/><decimal/><group/><length>-1</length><precision>-1</precision><trim_type>none</trim_type><repeat>N</repeat></field></fields><limit>0</limit><IsInFields>Y</IsInFields><IsAFile>N</IsAFile><valueField>contactJson</valueField><shortFileFieldName/><pathFieldName/><hiddenFieldName/><lastModificationTimeFieldName/><uriNameFieldName/><rootUriNameFieldName/><extensionFieldName/><sizeFieldName/><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1200</xloc><yloc>306</yloc><draw>Y</draw></GUI></step>
-<step><name>Write to new log</name><type>WriteToLog</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><loglevel>log_level_debug</loglevel><displayHeader>Y</displayHeader><limitRows>N</limitRows><limitRowsNumber>0</limitRowsNumber><logmessage>NEW CONTACTS:</logmessage><fields><field><name>contact_unique_id</name></field><field><name>subscribe_routingkey</name></field><field><name>subscribe_msg</name></field><field><name>list_routingkey</name></field><field><name>list_msg</name></field></fields><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>611</xloc><yloc>627</yloc><draw>Y</draw></GUI></step>
-<step><name>Post to list for new contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>list_msg</body_field><limit>10000</limit><routing>list_routingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>list.contacts</target_value><routing_value>list.contacts</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>799</xloc><yloc>566</yloc><draw>Y</draw></GUI></step>
-<step><name>Post to subscription for new contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>subscribe_msg</body_field><limit>10000</limit><routing>subscribe_routingkey</routing><target>subscribe-contact</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>subscribe-contact</target_value><routing_value>subscribe-contact</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>427</xloc><yloc>560</yloc><draw>Y</draw></GUI></step>
-<step><name>Block this step until steps finish</name><type>BlockUntilStepsFinish</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><steps><step><name>MongoDB Output</name><CopyNr>0</CopyNr></step></steps><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>619</xloc><yloc>344</yloc><draw>Y</draw></GUI></step>
 
-<step>
-<name>Sort rows</name>
-<type>SortRows</type>
-<description/>
-<distribute>Y</distribute>
-<custom_distribution/>
-<copies>1</copies>
-<partitioning>
-<method>none</method>
-<schema_name/>
-</partitioning>
-<directory>${TMP_FOLDER}</directory>
-<prefix>out</prefix>
-<sort_size>1000000</sort_size>
-<free_memory/>
-<compress>N</compress>
-<compress_variable/>
-<unique_rows>N</unique_rows>
-<fields>
-<field>
-<name>%{email_key_field}</name>
-<ascending>Y</ascending>
-<case_sensitive>N</case_sensitive>
-<presorted>N</presorted>
-</field>
-</fields>
-<cluster_schema/>
-<remotesteps>
-<input></input>
-<output></output>
-</remotesteps>
-<GUI>
-<xloc>283</xloc>
-<yloc>267</yloc>
-<draw>Y</draw>
-</GUI>
-</step>
-<step>
-<name>Unique rows</name>
-<type>Unique</type>
-<description/>
-<distribute>Y</distribute>
-<custom_distribution/>
-<copies>1</copies>
-<partitioning>
-<method>none</method>
-<schema_name/>
-</partitioning>
-<count_rows>N</count_rows>
-<count_field/>
-<reject_duplicate_row>N</reject_duplicate_row>
-<error_description/>
-<fields>
-<field>
-<name>%{email_key_field}</name>
-<case_insensitive>Y</case_insensitive>
-</field>
-</fields>
-<cluster_schema/>
-<remotesteps>
-<input></input>
-<output></output>
-</remotesteps>
-<GUI>
-<xloc>474</xloc>
-<yloc>271</yloc>
-<draw>Y</draw>
-</GUI>
-</step>
-
-<step><name>Calculate message for new contacts</name><type>UserDefinedJavaClass</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><definitions><definition><class_type>TRANSFORM_CLASS</class_type><class_name>Processor</class_name><class_source>
-String contactId;
-
-String subscribe_routingkey = "";
-String subscribe_msg = "";
-String list_routingkey = "";
-String list_msg = "";
-String import_routingkey = "";
-String import_service_msg = "";
-
-public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
-{
-	//String tenant_uuid = "a71fe780-c261-0132-294d-56847afe9799";
-  	String tenant_uuid = getVariable("TENANT_UUID", "");
-
-    // First, get a row from the default input hop
-	//
-	Object[] r = getRow();
-
-    // If the row object is null, we are done processing.
-	//
-	if (r == null) {
-		setOutputDone();
-		return false;
-	}
-
-	// Let's look up parameters only once for performance reason.
-	//
-	if (first) {
-		first=false;
-	}
-
-    // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
-    // enough to handle any new fields you are creating in this step.
-	//
-    Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
-
-	String contactId = get(Fields.In, "contact_unique_id").getString(r);
-
-
-	//String subscriptionIDs = "\"552ce9ab3963ba5bfe000003\"";
-    String subscriptionIDs = getVariable("SUBSCRIPTIONIDS");
-
-	//For subscribe service
-	String firstname = "";
-    String lastname = "";
-
-	String email  = get(Fields.In, "%{email_key_field}").getString(r);
-
-	String to_field_id  = get(Fields.In, "channel_id_0").getString(r);
-
-	subscribe_routingkey = "subscribe-contact";
-	get(Fields.Out, "subscribe_routingkey").setValue(outputRow, subscribe_routingkey);
- 	subscribe_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + contactId + "\",    \"to_field_id\": \"" + to_field_id + "\",    \"email\":\"" + email + "\",    \"first_name\": \"" + firstname + "\",    \"last_name\": \"" + lastname + "\",    \"subscription_ids\": [" + subscriptionIDs + "]}";
-	get(Fields.Out, "subscribe_msg").setValue(outputRow, subscribe_msg);
-
-	//For list_members
-    list_routingkey = "list.contacts";
-	get(Fields.Out, "list_routingkey").setValue(outputRow, list_routingkey);
-    String listIDs = getVariable("LISTIDS");
-	list_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"unique_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
-	get(Fields.Out, "list_msg").setValue(outputRow, list_msg);
-
-	// putRow will send the row on to the default output hop.
-    putRow(data.outputRowMeta, outputRow);
-
-	return true;
-}
-
-</class_source></definition></definitions><fields><field><field_name>subscribe_routingkey</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>subscribe_msg</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>list_routingkey</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>list_msg</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field></fields><clear_result_fields>N</clear_result_fields><info_steps/><target_steps/><usage_parameters/><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>692</xloc><yloc>258</yloc><draw>Y</draw></GUI></step>
-
-<step><name>Calculate update message to queue</name><type>UserDefinedJavaClass</type><description/><distribute>N</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><definitions><definition><class_type>TRANSFORM_CLASS</class_type><class_name>Processor</class_name><class_source>
-String contactId;
-
-String subscribe_routingkey = "";
-String subscribe_msg = "";
-String list_routingkey = "";
-String list_msg = "";
-String import_routingkey = "";
-String import_service_msg = "";
-
-public boolean processRow(StepMetaInterface smi, StepDataInterface sdi) throws KettleException
-{
-	//String tenant_uuid = "a71fe780-c261-0132-294d-56847afe9799";
-  	String tenant_uuid = getVariable("TENANT_UUID", "");
-
-    // First, get a row from the default input hop
-	//
-	Object[] r = getRow();
-
-    // If the row object is null, we are done processing.
-	//
-	if (r == null) {
-		setOutputDone();
-		return false;
-	}
-
-	// Let's look up parameters only once for performance reason.
-	//
-	if (first) {
-		contactId = getParameter("_id");
-		first=false;
-	}
-
-    // It is always safest to call createOutputRow() to ensure that your output row's Object[] is large
-    // enough to handle any new fields you are creating in this step.
-	//
-    Object[] outputRow = createOutputRow(r, data.outputRowMeta.size());
-
-	String contactId = get(Fields.In, "_id").getString(r);
-
-
-	//String subscriptionIDs = "\"552ce9ab3963ba5bfe000003\"";
-    String subscriptionIDs = getVariable("SUBSCRIPTIONIDS");
-
-
-	//For subscribe service
-	String firstname = "";
-    String lastname = "";
-	String channel_email_email_0  = get(Fields.In, "channel_email").getString(r);
-	String to_field_id  = get(Fields.In, "to_field_id").getString(r);
-	subscribe_routingkey = "subscribe-contact";
-	get(Fields.Out, "subscribe_routingkey").setValue(outputRow, subscribe_routingkey);
- 	subscribe_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contactId + "\",    \"to_field_id\": \"" + to_field_id + "\",    \"email\":\"" + channel_email_email_0 + "\",    \"first_name\": \"" + firstname + "\",    \"last_name\": \"" + lastname + "\",    \"subscription_ids\": [" + subscriptionIDs + "]}";
-	get(Fields.Out, "subscribe_msg").setValue(outputRow, subscribe_msg);
-
-
-	//For list_members
-    list_routingkey = "list-member-contact";
-	get(Fields.Out, "list_routingkey").setValue(outputRow, list_routingkey);
-    String listIDs = getVariable("LISTIDS");
-	list_msg = "{    \"tenant_uuid\": \"" + tenant_uuid + "\",    \"contact_id\": \"" + contactId + "\", \"list_ids\": [" + listIDs + "]}";
-	get(Fields.Out, "list_msg").setValue(outputRow, list_msg);
-
-
-	//For import.services
-	String csvFilename = getVariable("CSVFile");
-    import_routingkey = "import.contacts";
-	get(Fields.Out, "import_routingkey").setValue(outputRow, import_service_msg);
-
-	%{output_global_vars}
-  import_service_msg = "{ total_rows: 0, current_row: 0,mapping_id: \"" + csvFilename + "\", data: \"" + %{csv_header_string} + "\"}" ;
-
-	get(Fields.Out, "import_service_msg").setValue(outputRow, import_service_msg);
-
-	// putRow will send the row on to the default output hop.
-    putRow(data.outputRowMeta, outputRow);
-
-	return true;
-}</class_source></definition></definitions><fields><field><field_name>subscribe_routingkey</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>subscribe_msg</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>list_routingkey</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>list_msg</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>import_routingkey</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field><field><field_name>import_service_msg</field_name><field_type>String</field_type><field_length>-1</field_length><field_precision>-1</field_precision></field></fields><clear_result_fields>N</clear_result_fields><info_steps/><target_steps/><usage_parameters/><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1092</xloc><yloc>273</yloc><draw>Y</draw></GUI></step>
-<step><name>Post subscription for existing contacts</name><type>IC AMQP Plugin</type><description/><distribute>Y</distribute><custom_distribution/><copies>1</copies><partitioning><method>none</method><schema_name/></partitioning><transactional>Y</transactional><body_field>subscribe_msg</body_field><limit>10000</limit><routing>subscribe_routingkey</routing><target>import.service</target><mode>producer</mode><uri>amqp://${RABBIT_USER}:${RABBIT_PASSWORD}@${RABBIT_HOST}:5672</uri><username>${RABBIT_USER}</username><password>${RABBIT_PASSWORD}</password><host>${RABBIT_HOST}</host><port>5672</port><vhost>/</vhost><usessl>N</usessl><declare>N</declare><durable>Y</durable><autodel>N</autodel><exclusive>N</exclusive><exchtype>topic</exchtype><binding><line><target_value>subscribe-contact</target_value><routing_value>subscribe-contact</routing_value></line></binding><cluster_schema/><remotesteps><input>   </input><output>   </output></remotesteps><GUI><xloc>1349</xloc><yloc>497</yloc><draw>Y</draw></GUI></step>
   <step_error_handling>
-    <error>
-      <source_step>Data Validator</source_step>
-      <target_step>collect error rows</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename>error_desc</descriptions_valuename>
-      <fields_valuename>error_field</fields_valuename>
-      <codes_valuename>error_code</codes_valuename>
-      <max_errors>-1</max_errors>
-      <max_pct_errors>-1</max_pct_errors>
-      <min_pct_rows>-1</min_pct_rows>
-    </error>
-    <error>
-      <source_step>Convert strings to dates</source_step>
-      <target_step>collect error rows 2</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
-    <error>
-      <source_step>Unique rows</source_step>
-      <target_step>collect error rows 3</target_step>
-      <is_enabled>Y</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </step_error_handling>
-  <slave-step-copy-partition-distribution>
-  </slave-step-copy-partition-distribution>
-  <slave_transformation>N</slave_transformation>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+
 </transformation>
