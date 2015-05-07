@@ -235,6 +235,10 @@
         <name>IMPORTID</name>
         <parameter>import_id</parameter>
       </arg>
+      <arg>
+        <name>MAPPING_ID</name>
+        <parameter>mapping_id</parameter>
+      </arg>
     </lookup>
     <result>
       <name>result</name>
@@ -264,7 +268,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;var strUrl &#x3d; IMPORT_SERVICE_URL &#x2b; &#x22;&#x2f;tenants&#x2f;&#x22; &#x2b; TENANT_UUID &#x2b; &#x22;&#x2f;imports&#x2f;collections&#x2f;&#x22; &#x2b; IMPORTID &#x2b; &#x22;_tmp&#x2f;mapping&#x2f;&#x22; &#x2b; MAPPING_ID &#x2b; &#x22;&#x3f;total_csv_record&#x3d;&#x22; &#x2b; str2num&#x28;TotalRows&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
+        <jsScript_script>&#x2f;&#x2f;Script here&#xd;&#xa;var strUrl &#x3d; IMPORT_SERVICE_URL &#x2b; &#x22;&#x2f;tenants&#x2f;&#x22; &#x2b; TENANT_UUID &#x2b; &#x22;&#x2f;imports&#x2f;collections&#x2f;&#x22; &#x2b; IMPORTID &#x2b; &#x22;_tmp&#x3f;total_csv_record&#x3d;&#x22; &#x2b; str2num&#x28;TotalRows&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>strUrl</name>
         <rename>import_url</rename>
         <type>String</type>
