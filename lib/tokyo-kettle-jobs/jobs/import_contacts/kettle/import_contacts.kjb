@@ -18,7 +18,7 @@
         </parameter>
         <parameter>
             <name>IMPORTID</name>
-            <default_value>5540b30853ac9d0df300019c</default_value>
+            <default_value/>
             <description>Id for current import</description>
         </parameter>
         <parameter>
@@ -38,17 +38,17 @@
         </parameter>
         <parameter>
             <name>KETTLE_FILENAME</name>
-            <default_value>1000000_contacts_dummy.tripolis.vn.ktr</default_value>
+            <default_value/>
             <description>Dynamic kettle file name</description>
         </parameter>
         <parameter>
             <name>LISTIDS</name>
-            <default_value>5547408d53ac9d5d29000002</default_value>
+            <default_value/>
             <description>List IDs for current import job</description>
         </parameter>
         <parameter>
             <name>MAPPING_ID</name>
-            <default_value>Import_99_customfields</default_value>
+            <default_value/>
             <description>Mapping Id</description>
         </parameter>
         <parameter>
@@ -68,12 +68,12 @@
         </parameter>
         <parameter>
             <name>SUBSCRIPTIONIDS</name>
-            <default_value>554740ae53ac9d4b5e000002</default_value>
+            <default_value/>
             <description>Subscription IDS for current import job</description>
         </parameter>
         <parameter>
             <name>TENANT_UUID</name>
-            <default_value>2b66d7a9-8cb5-4802-838a-f1f58869bbf5</default_value>
+            <default_value/>
             <description>Tenant uuid for current import</description>
         </parameter>
         <parameter>
@@ -83,7 +83,7 @@
         </parameter>
         <parameter>
             <name>USERID</name>
-            <default_value>32</default_value>
+            <default_value/>
             <description>UserID for pushmessage API</description>
         </parameter>
     </parameters>
